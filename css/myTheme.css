@@ -1,0 +1,102 @@
+   @import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+   @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+	html,body {
+      margin:0px;
+      padding:0px;
+      width:100%;
+      height:100%;
+      background-color:#bcdcea;
+      color:#454545;
+	  font-family:'Nanum Gothic';
+    }
+	
+	#header {
+	  width:980px;
+	  height:200px;
+	  background-color:rgba(255,255,255,.6);
+	}
+	#header h1{
+	  padding:0;
+	  margin:0;
+	  font-size:55px;
+	  color:rgb(52,152,219);
+	  color:rgb(41,128,185);
+	  font-family:'Hanna';
+	}
+	
+	#header #nav{
+	  list-style:none;
+	  display:table;
+	  margin:0px;
+	  padding:0px;
+	  margin-top:40px;
+	}
+	#header #nav li{
+	  font-size:25px;
+	  //text-align:center;
+	  display:inline-block;
+	  margin-right:25px;
+	  color:rgb(41,128,185);
+	  font-weight:bold;
+	  cursor:pointer;
+	}
+	#header #nav li:hover{
+	  color:#454545;
+	}
+	
+    #cloud-layer1{
+      position:fixed;
+      width:100%;
+      height:100%;
+    }
+    #cloud-layer2{
+      position:fixed;
+      width:100%;
+      height:100%;
+    }
+	.cloud{
+	  position:absolute;
+	  background-image:url('../img/white-cloud.png');
+	}
+    .mdCloud{
+      width:150px;
+      height:80px;
+      background-size:150px auto;
+    }
+    .smCloud{
+       width:75px;
+       height:40px;
+       background-size:75px auto;
+    }
+	
+    #content{
+	   position:relative;
+	   width:980px;
+	   padding-top:150px;
+	   padding-bottom:150px;
+	}
+	
+	.wrap{
+	   margin:0 auto;
+	}
+	
+	.article{
+	   padding:25px;
+	   height:1200px;
+	   background-color:rgba(255,255,255,.6);
+	   margin-bottom:150px;
+	}
+	
+	.article h1{
+	   font-size:40px;
+	   padding:0;
+	   margin:0;
+	   font-family:'Hanna';
+	   color:rgb(41,128,185);
+	}
+	
+	#footer{
+	   position:relative;
+	   display:table;
+	   margin:0 auto;
+	}
