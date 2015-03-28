@@ -82,16 +82,46 @@
 	
 	.article{
 	   padding:25px;
-	   height:1200px;
 	   background-color:rgba(255,255,255,.6);
 	   margin-bottom:150px;
+	}
+	
+	.article .post-list{
+	  list-style:none;
+	  padding:0;
+	  padding-top:15px;
+	}
+	
+	.article .post-list li {
+	  position:relative;
+	  font-size:25px;
+	  cursor:pointer;
+	  font-weight:bold;
+	  margin-bottom:10px;
+	}
+	
+	.article .post-list li a {
+	  position:relative;
+	  padding:10px;
+	  margin:0;
+	  display:block;
+	  background-color:white;
+	  text-decoration:none;
+	  color:#454545;
+	}
+	
+	.article .post-list li a span {
+	}
+	
+	.article .create-date {
+	  padding-top:15px;
+	  font-size:15px;
 	}
 	
 	.article h1{
 	   font-size:40px;
 	   padding:0;
 	   margin:0;
-	   font-family:'Hanna';
 	   color:rgb(41,128,185);
 	}
 	
