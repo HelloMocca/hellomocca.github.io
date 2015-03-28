@@ -91,16 +91,32 @@
 
 
     @-webkit-keyframes toLeft {
-      from{left:110%;}
+      from{}
       to{left:-110%;}
     }
     @keyframes toLeft {
-      from{left:110%}
+      from{}
       to{left:-110%}
     }
 
 
-
+    #content{
+	   position:relative;
+	   width:980px;
+	   outline:1px solid red;
+	   padding-top:150px;
+	   padding-bottom:150px;
+	}
+	
+	.wrap{
+	   margin:0 auto;
+	}
+	
+	.article{
+	   padding:25px;
+	   height:1200px;
+	   background-color:rgba(255,255,255,.5);
+	}
 
   </style>
   <body>
@@ -112,14 +128,19 @@
       <div class="cloud cloud03"></div>
       <div class="cloud cloud04"></div>
     </div>
+	<div id="content" class="wrap">
+	  <div class="article">
+	  </div>
+	</div>
+	<div id="">
+	   <img src="./img/sheep.png">
+	</div>
     <script>
+	  window.addEventListener('scroll',function(){
+	    console.log('scroll');
+	  }, false);
       window.addEventListener('load',setCloudPosition,false);
       var clouds;
-      document.addEventListener('scroll',function(){
-        var cloud;
-        var top;
-
-      },false);
       function setCloudPosition(){
         var cl1 = document.getElementById("cloud-layer1");
         var cl2 = document.getElementById("cloud-layer2");
@@ -131,10 +152,12 @@
           var ele = document.createElement('div');
           ele.setAttribute("class","cloud cloud"+i);
           var top = "top:"+Math.floor(Math.random()*wHeight)+"px";
-          var left = "left:"+Math.floor(Math.random()*100)+"%";
+          //var left = "left:"+Math.floor(Math.random()*100)+"%";
+		  var left = "-webkit-animation-delay:"+Math.floor(Math.random()*40)+"s";
           ele.setAttribute("style",top+";"+left);
           cl1.appendChild(ele);
         }
+		clouds = document.getElementsByClassName('cloud');
       }
     </script>
   </body>
