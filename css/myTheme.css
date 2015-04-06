@@ -89,6 +89,20 @@
 	   background-color:rgba(255,255,255,.6);
 	   margin-bottom:150px;
 	}
+
+    .article .article-title{
+       font-size:25px;
+    }
+
+    .article .date{
+       margin-top:5px;
+       font-size:12px;
+    }
+
+    .article .content p{
+       font-size:15px;
+       line-height:25px;
+    }
 	
 	.article .post-list{
 	  list-style:none;

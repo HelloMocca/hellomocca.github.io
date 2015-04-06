@@ -4,7 +4,14 @@
     <title>FrontEnd Developer: HelloMocca</title>
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=7">
-	<link rel="stylesheet" href="/css/myTheme.css">
+	<link rel="stylesheet" href="../../css/myTheme.css">
+    <style>
+      canvas {
+        position:relative;
+        margin:0 auto;
+        background-color:#ffffff;
+      }
+    </style>
   </head>
   <body>
 	<div id="header" class="wrap">
@@ -28,11 +35,155 @@
     </div>
 	<div id="content" class="wrap">
 	  <div class="article">
+        <h1 class="article-title">Forced-Direct Algorithm으로 네트워크 그래프 구현하기</h1>
+        <div class="date"><span>최종수정일: 2015.04.06</span></div>
+        <div class="content">
+          <p>1991년 Thomas Fruchterman 과 Edward Reingold가 발표한 'Graph Drawing by Force-Directed Placement'에 소개된 알고리즘으로
+             2015년 현재 2700여건 이상의 논문에서 인용되고 있으며 d3js와 R등 다양한 시각화 라이브러리에서 사용되는 대중적인 레이아웃 알고리즘이다.<br/>
+             논문제목에 따라 Force-Directed Algorithm 또는 저자 이름에 따라 Fruchterman-Reingold Algorithm 또는 간단하게 F-R 알고리즘이라고도
+             불리며 Community Structure 분야나 우리에게는 조금 더 익숙한 Social Network 마이닝에서 주로 사용된다.<br/></br/>
+             아래는 F-R 알고리즘을 가지고 간단한 네트워크 시각화를 표현한 것이다.
+          </p>
+          <p>
+            <canvas width=930 height="400"></canvas>
+          </p>
+        </div>
 	  </div>
 	</div>
 	<div id="footer">
-	   <img src="/img/sheep.png">
+	   <img src="../../img/sheep.png">
 	</div>
-	<script src="/js/cloud.js"></script>
+	<script src="../../js/cloud.js"></script>
+    <script>
+        var nodes = [];
+        var edges = [{origin:1,target:0},
+            {origin:2,target:1},
+            {origin:4,target:2},
+            {origin:3,target:7},
+            {origin:2,target:8},
+            {origin:9,target:0},
+            {origin:6,target:5},
+            {origin:5,target:3},
+            {origin:9,target:6},
+            {origin:9,target:5}
+        ];
+        var canvas = document.querySelector("canvas");
+        var context = canvas.getContext("2d");
+        for (var i = 0; i < 10; i++) {
+            nodes.push(new function() {
+                this.name = "node"+i;
+                this.x = i*20;
+                this.y = 10;
+                this.dx = 0;
+                this.dy = 0;
+                this.posX = i*20;
+                this.posY = 10;
+                this.r = 10;
+            });
+        }
+        var coolTime = canvas.width*.1;
+        draw = function() {
+            for (i = 0; i < nodes.length; i++) {
+                nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
+                nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
+                context.beginPath();
+                context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
+                context.fillText("node"+i,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*2);
+                context.closePath();
+                context.fill();
+            }
+            for (i = 0; i < edges.length; i++) {
+                nd1 = nodes[edges[i].origin];
+                nd2 = nodes[edges[i].target];
+                context.beginPath();
+                context.moveTo(nd1.posX, nd1.posY);
+                context.lineTo(nd2.posX, nd2.posY);
+                context.closePath();
+                context.stroke();
+            }
+        };
+
+        update = function() {
+            if(coolTime < 0.0001) return;
+            context.clearRect(0,0,canvas.width, canvas.height);
+            var nd1, nd2;
+            var i,r;
+            //var k = Math.sqrt(canvas.width*canvas.height/nodes.length);
+            var k = 50;
+            var ex, ey, er;
+            aForce = function(er) {return er*er /k};
+            rForce = function(er) {return (k*k)/er};
+            for (i = 0; i < nodes.length; i++) {
+                nodes[i].dx = 0;
+                nodes[i].dy = 0;
+            }
+
+            //attractive
+            for(i = 0; i < edges.length; i++) {
+                nd1 = nodes[edges[i].origin];
+                nd2 = nodes[edges[i].target];
+                ex = nd1.x - nd2.x;
+                ey = nd1.y - nd2.y;
+                er = Math.sqrt(ex*ex + ey*ey);
+                if(er === 0) er = 0.0001;
+                fa = aForce(er);
+                nd1.dx -= ex/er*fa;
+                nd1.dy -= ey/er*fa;
+                nd2.dx += ex/er*fa;
+                nd2.dy += ey/er*fa;
+            }
+
+            //repulsive
+            for (i = 0; i < nodes.length-1; i++) {
+                nd1 = nodes[i];
+                for (r = i+1; r < nodes.length; r++){
+                    nd2 = nodes[r];
+                    ex = nd1.x - nd2.x;
+                    ey = nd1.y - nd2.y;
+                    er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
+                    if(er === 0) er = 0.0001;
+                    erw = er - (nd1.r + nd2.r);
+                    if (erw < 0) {
+                        frep = rForce(er/(nd1.r + nd2.r));
+                        nd1.dx += ex/er*frep;
+                        nd1.dy += ey/er*frep;
+                        nd2.dx -= ex/er*frep;
+                        nd2.dy -= ey/er*frep;
+                    }
+
+                    frep = rForce(er);
+                    nd1.dx += ex/er*frep;
+                    nd1.dy += ey/er*frep;
+                    nd2.dx -= ex/er*frep;
+                    nd2.dy -= ey/er*frep;
+                }
+            }
+
+            //toCenter
+            for (i = 0; i < nodes.length; i++) {
+                node = nodes[i];
+                ex = canvas.width/2 - node.x;
+                ey = canvas.height/2 - node.y;
+                er = Math.sqrt(ex*ex + ey*ey);
+                if(er === 0) er = 0.0001;
+                fa = aForce(er);
+                node.dx += ex/er*fa;
+                node.dy += ey/er*fa;
+            }
+
+            //apply
+            for (i = 0; i < nodes.length; i++) {
+              er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
+              nodes[i].x += nodes[i].dx / er * Math.min(er, coolTime);
+              nodes[i].y += nodes[i].dy / er * Math.min(er, coolTime);
+            }
+            coolTime = coolTime *.95;
+
+            draw();
+
+            window.requestAFrame(update);
+        };
+        update();
+    </script>
   </body>
 </html>
