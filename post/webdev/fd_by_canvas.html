@@ -3,7 +3,7 @@
   <head>
     <title>FrontEnd Developer: HelloMocca</title>
     <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=7">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
 	<link rel="stylesheet" href="../../css/myTheme.css">
     <style>
       canvas {
@@ -16,7 +16,7 @@
   <body>
 	<div id="header" class="wrap">
 	  <div style="padding:25px">
-	    <h1>안녕모카의 로스팅머신</h1>
+	    <h1><a href="/">안녕모카의 로스팅머신</a></h1>
 		<ul id="nav">
 			<li>일상</li>
 			<li>웹 개발</li>
@@ -28,24 +28,143 @@
     <div id="cloud-layer1">
     </div>
     <div id="cloud-layer2">
-      <div class="cloud cloud01"></div>
-      <div class="cloud cloud02"></div>
-      <div class="cloud cloud03"></div>
-      <div class="cloud cloud04"></div>
     </div>
 	<div id="content" class="wrap">
 	  <div class="article">
         <h1 class="article-title">Forced-Direct Algorithm으로 네트워크 그래프 구현하기</h1>
-        <div class="date"><span>최종수정일: 2015.04.06</span></div>
+        <div class="date"><span>최종수정일: 2015.04.07</span></div>
         <div class="content">
-          <p>1991년 Thomas Fruchterman 과 Edward Reingold가 발표한 'Graph Drawing by Force-Directed Placement'에 소개된 알고리즘으로
+          <p>
+             1991년 Thomas Fruchterman 과 Edward Reingold가 발표한 'Graph Drawing by Force-Directed Placement'에 소개된 알고리즘으로
              2015년 현재 2700여건 이상의 논문에서 인용되고 있으며 d3js와 R등 다양한 시각화 라이브러리에서 사용되는 대중적인 레이아웃 알고리즘이다.<br/>
              논문제목에 따라 Force-Directed Algorithm 또는 저자 이름에 따라 Fruchterman-Reingold Algorithm 또는 간단하게 F-R 알고리즘이라고도
              불리며 Community Structure 분야나 우리에게는 조금 더 익숙한 Social Network 마이닝에서 주로 사용된다.<br/></br/>
-             아래는 F-R 알고리즘을 가지고 간단한 네트워크 시각화를 표현한 것이다.
+             아래는 F-R 알고리즘을 가지고 간단한 네트워크 시각화를 표현한 것이다.<br/>
+
           </p>
           <p>
             <canvas width=930 height="400"></canvas>
+            <span class='warn'>(Canvas API를 사용했기 때문에 IE10이하에서는 보이지 않습니다.)</span>
+          </p>
+          <p>
+            알고리즘은 다음과 같이 크게 세부분으로 나눌 수 있다.
+          </p>
+          <ol>
+            <li>노드끼리 밀어내는 힘(repulsive force)에 의한 변위를 계산하는 부분.</li>
+            <li>edge로 연결된 노드끼리 당기는 힘(attractive force)에 의한 변위를 계산하는 부분.</li>
+            <li>위의 과정에서 구해진 변위를 실제 노드의 포지션에 적용하는 부분.</li>
+          </ol>
+          <h2>Step1: Repulsive Forces</h2>
+          <p>
+            F-R 알고리즘에서 각 노드들은 서로 밀어냄으로써 노드끼리 겹치지 않도록 하고 분석에 용이하도록 최적의 간격을 유지한다.<br/>
+            노드 사이의 거리는 <a href="http://en.wikipedia.org/wiki/Euclidean_distance">Euclidean Distance</a>로 계산하며 노드 사이의 거리가 멀어질 수록 변위또한 작아진다.<br/>
+          </p>
+          <pre class="source-viewer">
+              <span class="fc">for</span> (i = 0; i < nodes.length-1; i++) {
+                nd1 = nodes[i];
+                <span class="fc">for</span> (r = i+1; r < nodes.length; r++) {
+                  nd2 = nodes[r];
+                  ex = nd1.x - nd2.x;
+                  ey = nd1.y - nd2.y;
+                  er = Math.sqrt(ex*ex + ey*ey); <span class="dc">//euclidean distance</span>
+                  <span class="fc">if</span> (er === 0) er = 0.0001;
+                  fr = rForce(er);
+                  nd1.dx += ex/er*fr;
+                  nd1.dy += ey/er*fr;
+                  nd2.dx -= ex/er*fr;
+                  nd2.dy -= ey/er*fr;
+                }
+              }
+          </pre>
+          <p>
+            여기에서 사용되는 rForce() 는 아래와 같이 구한다.
+          </p>
+          <pre class="source-viewer">
+            rForce = <span class="fc">function</span>(er) {
+              <span class="fc">return</span> (k*k)/er;
+            };
+          </pre>
+          <p>
+            코드를 보면 k 라는 정체불명의 값이 있는데, 논문에서 k 는 프레임의 넓이(가로 * 세로)를 총 노드의 개수로 나눈 값의 제곱근을 상수 C를 곱한 값에 해당한다.<br/>
+            말로 표현하니 복잡한데 수식을 보면 아래와 같다.
+          </p>
+          <p>
+            <img src=''>
+          </p>
+          <p>
+            <i>k</i> 의 목적은 노드에 작용하는 힘의 크기를 결정하는데 있다.<br/> <i>k</i> 가 커질수록 노드끼리의 간격이 늘어나고 <i>k</i> 가 작아질수록 노드끼리의 간격이 좁아진다. <br/>
+            <i>k</i> 의 값을 구하는데는 <i>C</i> 의 값의 영향이 큰데, 이는 <i>C</i> 를 정하는 방법을 실험적인(experimentally) 방법, 즉, 여러번 돌려보고 최적의 값을 찾아서 사용하기 때문이다. <br/>
+            개인적으로는 이렇게 할 바에 차라리 <i>k</i> 를 상수로 결정하여 사용하는 방법도 나쁘지 않을 것 같다.<br/>
+            이 코드에서는 <i>k</i> 상수를 50 으로 정의하였다.<br/>
+          </p>
+
+          <h2>Step2: Attractive Forces</h2>
+          <p>
+            이 부분에서는 edge로 연결된 노드끼리 서로 당기는 힘에의한 변위를 계산한다. 이론적으로는 이 과정에서 최종 변위가 결정된다.<br/>
+            edge set은 노드의 쌍으로 구성되어 있으며 edge set을 순회하면서 두 노드의 변위를 계산한다.<br/>
+          </p>
+          <pre class="source-viewer">
+            <span class="fc">for</span> (i = 0; i < edges.length; i++) {
+              nd1 = nodes[edges[i].origin];
+              nd2 = nodes[edges[i].target];
+              ex = nd1.x - nd2.x;
+              ey = nd1.y - nd2.y;
+              er = Math.sqrt(ex*ex + ey*ey);
+              <span class="fc">if</span> (er === 0) er = 0.0001;
+              fa = aForce(er);
+              nd1.dx -= ex/er*fa;
+              nd1.dy -= ey/er*fa;
+              nd2.dx += ex/er*fa;
+              nd2.dy += ey/er*fa;
+            }
+          </pre>
+          <p>
+            한가지 놓친점이 있는데 er이 0임을 체크하는 이유는 변위를 계산하는 과정에서 er을 분모로 삼기때문이다.<br/>
+            aForce() 는 아래와 같다.
+          </p>
+          <pre class="source-viewer">
+            aForce = <span class="fc">function</span>(er) {
+              <span class="fc">return</span> (er*er)/k;
+            };
+          </pre>
+
+          <h2>Step3: Central Forces</h2>
+          <p>
+            이 단계는 논문에는 나오지 않지만 그래프를 중앙에 위치시키기 위해 추가하였다. 아마 F-R을 보완하는 수많은 서브 알고리즘 중에 이런 방식을 사용하는
+            알고리즘이 있을지도 모르지만 아직까진 보지못했다.<br/>
+            원리는 간단하다. 중앙에 가상의 노드가 있다고 생각하고 이 노드가 모든 노드를 당긴다면 모든 노드는 자연스럽게 중앙으로 모이게 된다.<br/>
+            당기는 변위를 계산하는 방법은 Attractive Force 를 계산하는 것을 응용하면 된다.<br/>
+          </p>
+          <pre class="source-viewer">
+            <span class="fc">for</span> (i = 0; i < nodes.length; i++) {
+              node = nodes[i];
+              ex = canvas.width/2 - node.x;
+              ey = canvas.height/2 - node.y;
+              er = Math.sqrt(ex*ex + ey*ey);
+              <span class="fc">if</span> (er === 0) er = 0.0001;
+              fa = aForce(er);
+              node.dx += ex/er*fa;
+              node.dy += ey/er*fa;
+            }
+          </pre>
+
+          <h2>Step4: Apply</h2>
+          <p>
+            이 단계는 최종적으로 변위를 결정해서 실제 노드 위치에 적용한다.
+          </p>
+          <pre class="source-viewer">
+            <span class="fc">for</span> (i = 0; i < nodes.length; i++) {
+              er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
+              nodes[i].x += nodes[i].dx / er * Math.min(er, cooling);
+              nodes[i].y += nodes[i].dy / er * Math.min(er, cooling);
+            }
+            cooling = cooling *.95;
+          </pre>
+          <p>
+            위에서 사용된 루틴은 결과적으로 변위의 최대치를 제어하여 변위가 급격하게 변하는 것을 방지한다.<br/>
+            Math.min()의 값이 크면 클수록 적용되는 변위의 값도 커지게 되는데 cooling 을 사용함으로써 er의 값이 너무 큰 경우를 막는것이다.<br/>
+            논문에서 cooling은 프레임의 길이의 1/10 로 초기화하여 매 루프마다 0으로 수렴하도록 한다.<br/>
+            이 소스에서는 매번 cooling 값에 0.95를 곱해주는 방법을 사용하였다.<br/>
           </p>
         </div>
 	  </div>
@@ -56,7 +175,8 @@
 	<script src="../../js/cloud.js"></script>
     <script>
         var nodes = [];
-        var edges = [{origin:1,target:0},
+        var edges = [
+            {origin:1,target:0},
             {origin:2,target:1},
             {origin:4,target:2},
             {origin:3,target:7},
@@ -70,41 +190,41 @@
         var canvas = document.querySelector("canvas");
         var context = canvas.getContext("2d");
         for (var i = 0; i < 10; i++) {
-            nodes.push(new function() {
-                this.name = "node"+i;
-                this.x = i*20;
-                this.y = 10;
-                this.dx = 0;
-                this.dy = 0;
-                this.posX = i*20;
-                this.posY = 10;
-                this.r = 10;
-            });
+          nodes.push(new function() {
+            this.name = "node"+i;
+            this.x = i*20;
+            this.y = 10;
+            this.dx = 0;
+            this.dy = 0;
+            this.posX = i*20;
+            this.posY = 10;
+            this.r = 10;
+          });
         }
-        var coolTime = canvas.width*.1;
+        var cooling = canvas.width*.1;
         draw = function() {
             for (i = 0; i < nodes.length; i++) {
-                nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
-                nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
-                context.beginPath();
-                context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
-                context.fillText("node"+i,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*2);
-                context.closePath();
-                context.fill();
+              nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
+              nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
+              context.beginPath();
+              context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
+              context.fillText(nodes[i].name,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*2);
+              context.closePath();
+              context.fill();
             }
             for (i = 0; i < edges.length; i++) {
-                nd1 = nodes[edges[i].origin];
-                nd2 = nodes[edges[i].target];
-                context.beginPath();
-                context.moveTo(nd1.posX, nd1.posY);
-                context.lineTo(nd2.posX, nd2.posY);
-                context.closePath();
-                context.stroke();
+              nd1 = nodes[edges[i].origin];
+              nd2 = nodes[edges[i].target];
+              context.beginPath();
+              context.moveTo(nd1.posX, nd1.posY);
+              context.lineTo(nd2.posX, nd2.posY);
+              context.closePath();
+              context.stroke();
             }
         };
 
         update = function() {
-            if(coolTime < 0.0001) return;
+            if(cooling < 0.0001) return;
             context.clearRect(0,0,canvas.width, canvas.height);
             var nd1, nd2;
             var i,r;
@@ -114,73 +234,62 @@
             aForce = function(er) {return er*er /k};
             rForce = function(er) {return (k*k)/er};
             for (i = 0; i < nodes.length; i++) {
-                nodes[i].dx = 0;
-                nodes[i].dy = 0;
-            }
-
-            //attractive
-            for(i = 0; i < edges.length; i++) {
-                nd1 = nodes[edges[i].origin];
-                nd2 = nodes[edges[i].target];
-                ex = nd1.x - nd2.x;
-                ey = nd1.y - nd2.y;
-                er = Math.sqrt(ex*ex + ey*ey);
-                if(er === 0) er = 0.0001;
-                fa = aForce(er);
-                nd1.dx -= ex/er*fa;
-                nd1.dy -= ey/er*fa;
-                nd2.dx += ex/er*fa;
-                nd2.dy += ey/er*fa;
+              nodes[i].dx = 0;
+              nodes[i].dy = 0;
             }
 
             //repulsive
             for (i = 0; i < nodes.length-1; i++) {
-                nd1 = nodes[i];
-                for (r = i+1; r < nodes.length; r++){
-                    nd2 = nodes[r];
-                    ex = nd1.x - nd2.x;
-                    ey = nd1.y - nd2.y;
-                    er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
-                    if(er === 0) er = 0.0001;
-                    erw = er - (nd1.r + nd2.r);
-                    if (erw < 0) {
-                        frep = rForce(er/(nd1.r + nd2.r));
-                        nd1.dx += ex/er*frep;
-                        nd1.dy += ey/er*frep;
-                        nd2.dx -= ex/er*frep;
-                        nd2.dy -= ey/er*frep;
-                    }
-
-                    frep = rForce(er);
-                    nd1.dx += ex/er*frep;
-                    nd1.dy += ey/er*frep;
-                    nd2.dx -= ex/er*frep;
-                    nd2.dy -= ey/er*frep;
-                }
+              nd1 = nodes[i];
+              for (r = i+1; r < nodes.length; r++){
+                nd2 = nodes[r];
+                ex = nd1.x - nd2.x;
+                ey = nd1.y - nd2.y;
+                er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
+                if(er === 0) er = 0.0001;
+                fr = rForce(er);
+                nd1.dx += ex/er*fr;
+                nd1.dy += ey/er*fr;
+                nd2.dx -= ex/er*fr;
+                nd2.dy -= ey/er*fr;
+              }
             }
 
-            //toCenter
+            //attractive
+            for(i = 0; i < edges.length; i++) {
+              nd1 = nodes[edges[i].origin];
+              nd2 = nodes[edges[i].target];
+              ex = nd1.x - nd2.x;
+              ey = nd1.y - nd2.y;
+              er = Math.sqrt(ex*ex + ey*ey);
+              if(er === 0) er = 0.0001;
+              fa = aForce(er);
+              nd1.dx -= ex/er*fa;
+              nd1.dy -= ey/er*fa;
+              nd2.dx += ex/er*fa;
+              nd2.dy += ey/er*fa;
+            }
+
+            //Central
             for (i = 0; i < nodes.length; i++) {
-                node = nodes[i];
-                ex = canvas.width/2 - node.x;
-                ey = canvas.height/2 - node.y;
-                er = Math.sqrt(ex*ex + ey*ey);
-                if(er === 0) er = 0.0001;
-                fa = aForce(er);
-                node.dx += ex/er*fa;
-                node.dy += ey/er*fa;
+              node = nodes[i];
+              ex = canvas.width/2 - node.x;
+              ey = canvas.height/2 - node.y;
+              er = Math.sqrt(ex*ex + ey*ey);
+              if(er === 0) er = 0.0001;
+              fa = aForce(er);
+              node.dx += ex/er*fa;
+              node.dy += ey/er*fa;
             }
 
             //apply
             for (i = 0; i < nodes.length; i++) {
               er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
-              nodes[i].x += nodes[i].dx / er * Math.min(er, coolTime);
-              nodes[i].y += nodes[i].dy / er * Math.min(er, coolTime);
+              nodes[i].x += nodes[i].dx / er * Math.min(er, cooling);
+              nodes[i].y += nodes[i].dy / er * Math.min(er, cooling);
             }
-            coolTime = coolTime *.95;
-
+            cooling = cooling *.95;
             draw();
-
             window.requestAFrame(update);
         };
         update();

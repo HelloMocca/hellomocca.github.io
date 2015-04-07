@@ -1,8 +1,8 @@
    @import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
    @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 	html,body {
-      margin:0px;
-      padding:0px;
+      margin:0;
+      padding:0;
       width:100%;
       height:100%;
       background-color:#bcdcea;
@@ -21,10 +21,13 @@
 	  padding:0;
 	  margin:0;
 	  font-size:55px;
-	  color:rgb(52,152,219);
 	  color:rgb(41,128,185);
 	  font-family:'Hanna';
 	}
+    #header h1 a{
+      text-decoration: none;
+      color:rgb(41,128,185);
+    }
 	
 	#header #nav{
 	  list-style:none;
@@ -91,7 +94,11 @@
 	}
 
     .article .article-title{
-       font-size:25px;
+       font-size:35px;
+    }
+
+    .article h2{
+        color:rgb(41,128,185);
     }
 
     .article .date{
@@ -102,6 +109,40 @@
     .article .content p{
        font-size:15px;
        line-height:25px;
+    }
+
+    .article .content .warn{
+      color: #d23c3c;
+      font-size:12px;
+    }
+
+    .article ol{
+      font-size:13px;
+      line-height:20px;
+      margin:0;
+      padding-top:10px;
+      padding-bottom:10px;
+    }
+
+    .article .source-viewer{
+      background-color: #0d1222;
+      color: #dee7e7;
+      font-size:13px;
+      line-height:16px;
+      padding:15px;
+      font-family:'consolas';
+    }
+
+    .article a{
+      color: #3d64ff;
+    }
+
+    .article .source-viewer .dc{
+      color: #64d964;
+    }
+
+    .article .source-viewer .fc{
+      color: #ff620a;
     }
 	
 	.article .post-list{
