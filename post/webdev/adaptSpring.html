@@ -31,13 +31,86 @@
     </div>
 	<div id="content" class="wrap">
 	  <div class="article">
-        <h1 class="article-title">Breakout 구현</h1>
-        <div class="date"><span>최종수정일: 2015.04.13</span></div>
+        <h1 class="article-title">기존프로젝트에 Spring Framework 적용하기</h1>
+        <div class="date"><span>최종수정일: 2015.04.20</span></div>
         <div class="content">
-            <canvas width=500 height=500 id='screen'></canvas>
-            <div id="keyinfo">
-                방향키로 조작, Space로 게임 시작
-            </div>
+            <h2>Step 1: Dependency에 추가하기</h2>
+            <p>
+               웹 프로젝트의 pom.xml에 Spring Framework 에 대한 Dependency를 추가한다.
+            </p>
+            <pre class="source-viewer">
+                <'dependency>
+                    <'groupId>org.springframework<'/groupId>
+                    <'artifactId>spring-webmvc<'/artifactId>
+                    <'version>4.1.6.RELEASE<'/version>
+                <'/dependency>
+            </pre>
+            <p>
+                이후에 메이븐을 빌드하면 Spring Framework와 함께 이와 관련된 라이브러리들이 함께 추가되는데 이는 Maven의 '의존성전이' 때문이다.
+            </p>
+            <h2>Spring Framework 설정 파일 작성</h2>
+            <p>
+                web.xml에 최초로 접근하는 서블릿인 dispatcherServlet을 추가하고 매핑한다.
+            </p>
+            <pre class="source-viewer">
+                <'servlet>
+                    <'servlet-name>mocca<'/servlet-name>
+                    <'servlet-class>org.springframework.web.servlet.DispatcherServlet<'/servlet-class>
+                <'/servlet>
+
+                <'servlet-mapping>
+                    <'servlet-name>mocca<'/servlet-name>
+                    <'url-pattern>/<'/url-pattern>
+                <'/servlet-mapping>
+            </pre>
+            <p>
+                웹 컨테이너 실행시 WEB-INF/{servlet-name}-servlet.xml 에서 스프링 MVC와 관련된 설정을 찾는다.
+                따라서 WEB-INF/ 에 {servlet-name}-servlet.xml, 이번 예제에서는 mocca-servlet.xml 이란 파일을 생성하게된다.
+                Eclipse에 스프링지원 플러그인인 STS가 설치되어 있다면 New File에서 Spring Bean Configuration File 을 선택한다.
+                추가하는 과정에서 context와 mvc 그리고 p 네임스페이스를 추가한다.
+                그리고 다음과 같이 설정값을 추가한다.
+            </p>
+            <pre class="source-viewer"><!--
+                <?xml version="1.0" encoding="UTF-8"?>
+                <beans xmlns="http://www.springframework.org/schema/beans"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:context="http://www.springframework.org/schema/context"
+                       xmlns:mvc="http://www.springframework.org/schema/mvc"
+                       xmlns:p="http://www.springframework.org/schema/p"
+                       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+                    <context:component-scan base-package="net.mocca.web" />
+                    <mvc:annotation-driven />
+                    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+                          p:prefix="/"
+                          p:suffix=".jsp/" />
+                </beans>-->
+            </pre>
+            <h2>Step3: Controller 생성</h2>
+            <p>
+                Spring MVC 설정을 완료했으니 이제 Controller를 만들어서 시험해본다.
+                위에서 base-package를 net.mocca.web 으로 선언했으므로 net.mocca.web package를 만들고 그안에 index.jsp를 띄워주는 HomeController를
+                다음과 같이 작성한다.
+            </p>
+            <pre class="source-viewer">
+                package net.mocca.web;
+
+                import org.springframework.stereotype.Controller;
+                import org.springframework.web.bind.annotation.RequestMapping;
+
+                //Controller 어노테이션 선언
+                @Controller
+                public class HomeController {
+
+                    //매핑 url 을 "/"로 선언. 디폴트 method는 GET이다.
+                    @RequestMapping("/")
+                    public String getHome(){
+                        return "index";
+                    }
+                }
+            </pre>
         </div>
 	  </div>
 	</div>
@@ -45,191 +118,5 @@
 	   <img src="../../img/sheep.png">
 	</div>
 	<script src="../../js/cloud.js"></script>
-    <script>
-        (function() {
-            var Canvas = null;
-            var Context = null;
-            var Game = null;
-            var onboard = true;
-            var ball = {x: 250, y: 400, vx: 0, vy: 0};
-            var board = {x: 200, y: 410};
-            var tempbrick = null;
-            var remainBricks = 0;
-
-            function brick(_x, _y, _color) {
-                this.x = _x;
-                this.y = _y;
-                this.color = _color;
-                this.isBreak = false;
-            }
-
-            var bricks = [];
-            var color = ["rgb(22,160,134)", "rgb(53,152,220)", "rgb(156,89,184)", "rgb(241,196,15)", "rgb(233,76,61)"];
-
-
-            function init() {
-                /* 게임 초기화 */
-                Canvas = document.getElementById('screen');
-                Context = Canvas.getContext('2d');
-
-                /* brick 생성 */
-                for (var r = 0; r < 5; r++) {
-                    for (var c = 0; c < 5; c++) {
-                        tempbrick = new brick(100 * c, 20 * r, color[r]);
-                        bricks.push(tempbrick);
-                        /* 배열변수 bricks에 push */
-                    }
-                }
-
-                /* key 이벤트 리스너 생성 */
-                window.addEventListener('keydown', keyEvent, false);
-                window.addEventListener('keyup', keyupEvent, false);
-
-                /* 루프 생성 : 초당(1000ms) 60프레임 */
-                Game = setInterval(update, 1000 / 60);
-            }
-
-            function update() {
-                /* 플레이어 이동위치 갱신 */
-                if (mleft) {
-                    if (board.x >= 0) { //화면을 벗어날 수 없음
-                        if (onboard) {
-                            ball.x -= 15;
-                        }
-                        board.x -= 15;
-                    }
-                }
-                if (mright) {
-                    if (board.x + 100 <= 500) { //화면을 벗어날 수 없음
-                        if (onboard) {
-                            ball.x += 15;
-                        }
-                        board.x += 15;
-                    }
-                }
-
-                /* 공의 이동위치 갱신 */
-                ball.x += ball.vx;
-                ball.y += ball.vy;
-
-
-                /* 충돌 체크 */
-                collision();
-
-                /* 화면 그리기 */
-                draw();
-
-                /* 게임 클리어 체크 */
-                remainBricks = 0;
-                for (var i = 0; i < bricks.length; i++) {
-                    if (bricks[i].isBreak) remainBricks++;
-                }
-                if (remainBricks == bricks.length) {
-                    alert("Game Clear!");
-                    clearInterval(Game);
-                }
-            }
-
-            function draw() {
-                Context.clearRect(0, 0, 500, 500);
-                /* 플레이어 그리기 */
-                Context.fillStyle = "white";
-                Context.beginPath();
-                Context.arc(ball.x, ball.y, 10, 0, Math.PI * 2, false);
-                Context.closePath();
-                Context.fill();
-                Context.fillRect(board.x, board.y, 100, 10);
-
-                /* 벽돌 그리기 */
-                for (var i = 0; i < bricks.length; i++) {
-                    if (bricks[i].isBreak == false) {
-                        Context.fillStyle = bricks[i].color;
-                        Context.fillRect(bricks[i].x, bricks[i].y, 100, 20);
-                        Context.strokeRect(bricks[i].x, bricks[i].y, 100, 20);
-                    }
-                }
-            }
-
-            function collision() {
-                /* 벽과 충돌 */
-                if (ball.y - 10 <= 0) {
-                    ball.vy = -(ball.vy);
-                }
-                if (ball.x - 10 <= 0 || ball.x + 10 >= 500) {
-                    ball.vx = -(ball.vx);
-                }
-                /* 플레이어와 충돌 */
-                if (ball.y + 10 == board.y) {
-                    if (board.x <= ball.x + 10 && ball.x - 10 <= board.x + 100) {
-                        ball.vy = -(ball.vy);
-                    }
-                }
-
-                /* die */
-                if (ball.y > 520) {
-                    ball.vy = 0;
-                    ball.vx = 0;
-                    ball.x = board.x + 50;
-                    ball.y = board.y - 10;
-                    onboard = true;
-                }
-                /* brick */
-                for (var i = 0; i < bricks.length; i++) {
-                    if (bricks[i].isBreak == false) {
-                        /*상하면 충돌*/
-                        if (bricks[i].x <= ball.x && ball.x <= bricks[i].x + 100) {
-                            if ((bricks[i].y + 20 >= ball.y - 10 && bricks[i].y <= ball.y - 10) || (bricks[i].y <= ball.y + 10 && ball.y <= bricks[i].y + 20)) {
-                                bricks[i].isBreak = true;
-                                ball.vy = -(ball.vy);
-                            }
-                        }
-                        /*측면 충돌*/
-                        if (bricks[i].y <= ball.y && ball.y <= bricks[i].y + 20) {
-                            if ((bricks[i].x <= ball.x + 10 && bricks[i].x + 50 >= ball.x + 10) || (bricks[i].x + 100 >= ball.x - 10 && bricks[i].x + 50 <= ball.x - 10)) {
-                                bricks[i].isBreak = true;
-                                ball.vx = -(ball.vx);
-                            }
-                        }
-                    }
-                }
-            }
-
-
-            var mleft = false;
-            var mright = false;
-
-            function keyEvent(e) {
-                switch (e.keyCode) { /* 키 코드에 따라 구별*/
-                    case 32:
-                        e.preventDefault();
-                        if (onboard) { /* space로 시작 */
-                            ball.vy = -6;
-                            ball.vx = 6;
-                            onboard = false;
-                        }
-                        break;
-                    case 37:
-                        mleft = true;
-                        break; /* 좌 */
-                    case 39:
-                        mright = true;
-                        break; /* 우 */
-                }
-            }
-
-            function keyupEvent(e) {
-                switch (e.keyCode) {  /* 키 코드에 따라 구별*/
-                    case 37:
-                        mleft = false;
-                        break; /* 좌 */
-                    case 39:
-                        mright = false;
-                        break; /* 우 */
-                }
-            }
-
-            init();
-        })();
-    </script>
   </body>
 </html>
