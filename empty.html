@@ -34,5 +34,21 @@
 	   <img src="/img/sheep.png">
 	</div>
 	<script src="/js/cloud.js"></script>
+    <script>
+        (function(){
+            A = [7,6,6,8,1,2,8,6];
+            m = 0;
+            l = A.length;
+            for(i = 0; i < l - 2; i+=2) {
+                for(r = i+2; r < l; r+=2) {
+                    console.log("i:"+i,", r:"+r);
+                    m = Math.max(Math.abs(A[r]-A[i]) ,Math.abs(A[r+1]-A[i+1]), m);
+                }
+            }
+
+
+            console.log(m);
+        })();
+    </script>
   </body>
 </html>

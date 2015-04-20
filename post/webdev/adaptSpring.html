@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>FrontEnd Developer: HelloMocca</title>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<link rel="stylesheet" href="../../css/myTheme.css">
+    <style>
+      canvas {
+        position:relative;
+        margin:0 auto;
+        background-color:black;
+      }
+    </style>
+  </head>
+  <body>
+	<div id="header" class="wrap">
+	  <div style="padding:25px">
+	    <h1><a href="/">안녕모카의 로스팅머신</a></h1>
+		<ul id="nav">
+			<li>일상</li>
+			<li>웹 개발</li>
+			<li>컴퓨터과학</li>
+			<li>디자인</li>
+		</ul>
+	  </div>
+	</div>
+    <div id="cloud-layer1">
+    </div>
+    <div id="cloud-layer2">
+    </div>
+	<div id="content" class="wrap">
+	  <div class="article">
+        <h1 class="article-title">Breakout 구현</h1>
+        <div class="date"><span>최종수정일: 2015.04.13</span></div>
+        <div class="content">
+            <canvas width=500 height=500 id='screen'></canvas>
+            <div id="keyinfo">
+                방향키로 조작, Space로 게임 시작
+            </div>
+        </div>
+	  </div>
+	</div>
+	<div id="footer">
+	   <img src="../../img/sheep.png">
+	</div>
+	<script src="../../js/cloud.js"></script>
+    <script>
+        (function() {
+            var Canvas = null;
+            var Context = null;
+            var Game = null;
+            var onboard = true;
+            var ball = {x: 250, y: 400, vx: 0, vy: 0};
+            var board = {x: 200, y: 410};
+            var tempbrick = null;
+            var remainBricks = 0;
+
+            function brick(_x, _y, _color) {
+                this.x = _x;
+                this.y = _y;
+                this.color = _color;
+                this.isBreak = false;
+            }
+
+            var bricks = [];
+            var color = ["rgb(22,160,134)", "rgb(53,152,220)", "rgb(156,89,184)", "rgb(241,196,15)", "rgb(233,76,61)"];
+
+
+            function init() {
+                /* 게임 초기화 */
+                Canvas = document.getElementById('screen');
+                Context = Canvas.getContext('2d');
+
+                /* brick 생성 */
+                for (var r = 0; r < 5; r++) {
+                    for (var c = 0; c < 5; c++) {
+                        tempbrick = new brick(100 * c, 20 * r, color[r]);
+                        bricks.push(tempbrick);
+                        /* 배열변수 bricks에 push */
+                    }
+                }
+
+                /* key 이벤트 리스너 생성 */
+                window.addEventListener('keydown', keyEvent, false);
+                window.addEventListener('keyup', keyupEvent, false);
+
+                /* 루프 생성 : 초당(1000ms) 60프레임 */
+                Game = setInterval(update, 1000 / 60);
+            }
+
+            function update() {
+                /* 플레이어 이동위치 갱신 */
+                if (mleft) {
+                    if (board.x >= 0) { //화면을 벗어날 수 없음
+                        if (onboard) {
+                            ball.x -= 15;
+                        }
+                        board.x -= 15;
+                    }
+                }
+                if (mright) {
+                    if (board.x + 100 <= 500) { //화면을 벗어날 수 없음
+                        if (onboard) {
+                            ball.x += 15;
+                        }
+                        board.x += 15;
+                    }
+                }
+
+                /* 공의 이동위치 갱신 */
+                ball.x += ball.vx;
+                ball.y += ball.vy;
+
+
+                /* 충돌 체크 */
+                collision();
+
+                /* 화면 그리기 */
+                draw();
+
+                /* 게임 클리어 체크 */
+                remainBricks = 0;
+                for (var i = 0; i < bricks.length; i++) {
+                    if (bricks[i].isBreak) remainBricks++;
+                }
+                if (remainBricks == bricks.length) {
+                    alert("Game Clear!");
+                    clearInterval(Game);
+                }
+            }
+
+            function draw() {
+                Context.clearRect(0, 0, 500, 500);
+                /* 플레이어 그리기 */
+                Context.fillStyle = "white";
+                Context.beginPath();
+                Context.arc(ball.x, ball.y, 10, 0, Math.PI * 2, false);
+                Context.closePath();
+                Context.fill();
+                Context.fillRect(board.x, board.y, 100, 10);
+
+                /* 벽돌 그리기 */
+                for (var i = 0; i < bricks.length; i++) {
+                    if (bricks[i].isBreak == false) {
+                        Context.fillStyle = bricks[i].color;
+                        Context.fillRect(bricks[i].x, bricks[i].y, 100, 20);
+                        Context.strokeRect(bricks[i].x, bricks[i].y, 100, 20);
+                    }
+                }
+            }
+
+            function collision() {
+                /* 벽과 충돌 */
+                if (ball.y - 10 <= 0) {
+                    ball.vy = -(ball.vy);
+                }
+                if (ball.x - 10 <= 0 || ball.x + 10 >= 500) {
+                    ball.vx = -(ball.vx);
+                }
+                /* 플레이어와 충돌 */
+                if (ball.y + 10 == board.y) {
+                    if (board.x <= ball.x + 10 && ball.x - 10 <= board.x + 100) {
+                        ball.vy = -(ball.vy);
+                    }
+                }
+
+                /* die */
+                if (ball.y > 520) {
+                    ball.vy = 0;
+                    ball.vx = 0;
+                    ball.x = board.x + 50;
+                    ball.y = board.y - 10;
+                    onboard = true;
+                }
+                /* brick */
+                for (var i = 0; i < bricks.length; i++) {
+                    if (bricks[i].isBreak == false) {
+                        /*상하면 충돌*/
+                        if (bricks[i].x <= ball.x && ball.x <= bricks[i].x + 100) {
+                            if ((bricks[i].y + 20 >= ball.y - 10 && bricks[i].y <= ball.y - 10) || (bricks[i].y <= ball.y + 10 && ball.y <= bricks[i].y + 20)) {
+                                bricks[i].isBreak = true;
+                                ball.vy = -(ball.vy);
+                            }
+                        }
+                        /*측면 충돌*/
+                        if (bricks[i].y <= ball.y && ball.y <= bricks[i].y + 20) {
+                            if ((bricks[i].x <= ball.x + 10 && bricks[i].x + 50 >= ball.x + 10) || (bricks[i].x + 100 >= ball.x - 10 && bricks[i].x + 50 <= ball.x - 10)) {
+                                bricks[i].isBreak = true;
+                                ball.vx = -(ball.vx);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            var mleft = false;
+            var mright = false;
+
+            function keyEvent(e) {
+                switch (e.keyCode) { /* 키 코드에 따라 구별*/
+                    case 32:
+                        e.preventDefault();
+                        if (onboard) { /* space로 시작 */
+                            ball.vy = -6;
+                            ball.vx = 6;
+                            onboard = false;
+                        }
+                        break;
+                    case 37:
+                        mleft = true;
+                        break; /* 좌 */
+                    case 39:
+                        mright = true;
+                        break; /* 우 */
+                }
+            }
+
+            function keyupEvent(e) {
+                switch (e.keyCode) {  /* 키 코드에 따라 구별*/
+                    case 37:
+                        mleft = false;
+                        break; /* 좌 */
+                    case 39:
+                        mright = false;
+                        break; /* 우 */
+                }
+            }
+
+            init();
+        })();
+    </script>
+  </body>
+</html>
