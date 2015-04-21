@@ -38,13 +38,13 @@
             <p>
                웹 프로젝트의 pom.xml에 Spring Framework 에 대한 Dependency를 추가한다.
             </p>
-            <pre class="source-viewer">
-                <'dependency>
-                    <'groupId>org.springframework<'/groupId>
-                    <'artifactId>spring-webmvc<'/artifactId>
-                    <'version>4.1.6.RELEASE<'/version>
-                <'/dependency>
-            </pre>
+            <xmp class="source-viewer">
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                    <version>4.1.6.RELEASE</version>
+                </dependency>
+            </xmp>
             <p>
                 이후에 메이븐을 빌드하면 Spring Framework와 함께 이와 관련된 라이브러리들이 함께 추가되는데 이는 Maven의 '의존성전이' 때문이다.
             </p>
@@ -53,7 +53,6 @@
                 web.xml에 최초로 접근하는 서블릿인 dispatcherServlet을 추가하고 매핑한다.
             </p>
             <xmp class="source-viewer">
-
                 <servlet>
                     <servlet-name>mocca</servlet-name>
                     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -63,7 +62,6 @@
                     <servlet-name>mocca</servlet-name>
                     <url-pattern>/</url-pattern>
                 </servlet-mapping>
-
             </xmp>
             <p>
                 웹 컨테이너 실행시 WEB-INF/{servlet-name}-servlet.xml 에서 스프링 MVC와 관련된 설정을 찾는다.
@@ -72,7 +70,7 @@
                 추가하는 과정에서 context와 mvc 그리고 p 네임스페이스를 추가한다.
                 그리고 다음과 같이 설정값을 추가한다.
             </p>
-            <pre class="source-viewer"><!--
+            <xmp class="source-viewer">
                 <?xml version="1.0" encoding="UTF-8"?>
                 <beans xmlns="http://www.springframework.org/schema/beans"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -88,8 +86,8 @@
                     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
                           p:prefix="/"
                           p:suffix=".jsp/" />
-                </beans>-->
-            </pre>
+                </beans>
+            </xmp>
             <p>
                 context:component-scan 은 Controller또는 Bean등을 찾을 때 base-package에 등록된 클래스들만 고려한다는 것이다.
                 mvc:annotation-driven은 annotation 설정을 사용한다는 것이다.
@@ -128,14 +126,14 @@
                 서버를 실행해서 페이지에 들어가보면 css 나 javascript 등 리소스들을 불러올 수 없는 것을 볼 수 있다.
                 이에 대한 설정을 위에서 만들었던 {servlet-name}-servlet.xml 에서 해줄 수 있다.
             </p>
-            <pre class="source-viewer">
+            <xmp class="source-viewer">
                 <span class="dc">//이미지 리소스</span>
-                >mvc:resources location="/img/" mapping="/img/**"  />
+                <mvc:resources location="/img/" mapping="/img/**"  />
                 <span class="dc">//스타일시트 리소스</span>
-                >mvc:resources location="/css/" mapping="/css/**"  />
+                <mvc:resources location="/css/" mapping="/css/**"  />
                 <span class="dc">//자바스크립트 리소스</span>
-                >mvc:resources location="/js/" mapping="/js/**"  />
-            </pre>
+                <mvc:resources location="/js/" mapping="/js/**"  />
+            </xmp>
             <p>
                 이렇게 설정한 이후 서버를 재시작하고 페이지에 접근하면 모든 리소스가 제대로 로딩되는 것을 확인할 수 있다.
             </p>
