@@ -52,8 +52,7 @@
             <p>
                 web.xml에 최초로 접근하는 서블릿인 dispatcherServlet을 추가하고 매핑한다.
             </p>
-            <pre>
-            <code class="source-viewer">
+            <xmp class="source-viewer">
 
                 <servlet>
                     <servlet-name>mocca</servlet-name>
@@ -65,8 +64,7 @@
                     <url-pattern>/</url-pattern>
                 </servlet-mapping>
 
-            </code>
-            </pre>
+            </xmp>
             <p>
                 웹 컨테이너 실행시 WEB-INF/{servlet-name}-servlet.xml 에서 스프링 MVC와 관련된 설정을 찾는다.
                 따라서 WEB-INF/ 에 {servlet-name}-servlet.xml, 이번 예제에서는 mocca-servlet.xml 이란 파일을 생성하게된다.
