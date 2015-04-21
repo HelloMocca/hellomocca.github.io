@@ -48,7 +48,7 @@
             <p>
                 이후에 메이븐을 빌드하면 Spring Framework와 함께 이와 관련된 라이브러리들이 함께 추가되는데 이는 Maven의 '의존성전이' 때문이다.
             </p>
-            <h2>Spring Framework 설정 파일 작성</h2>
+            <h2>Step 2: Spring Framework 설정 파일 작성</h2>
             <p>
                 web.xml에 최초로 접근하는 서블릿인 dispatcherServlet을 추가하고 매핑한다.
             </p>
@@ -88,7 +88,14 @@
                           p:suffix=".jsp/" />
                 </beans>-->
             </pre>
-            <h2>Step3: Controller 생성</h2>
+            <p>
+                context:component-scan 은 Controller또는 Bean등을 찾을 때 base-package에 등록된 클래스들만 고려한다는 것이다.
+                mvc:annotation-driven은 annotation 설정을 사용한다는 것이다.
+                viewResolver는 리소스에 대한 매핑을 수행하는데 Servlet(이제는 Controller에 해당하겠지만)에서 문자열을 리턴하면 자동으로 prefix로 설정된 경로에서
+                해당 문자열과 suffix를 조합하여 그 파일로 클라이언트에 응답하게 된다. 예를 들어 Controller가 index라는 문자열을 리턴하게 되면 /index.jsp 를 클라이언트로 응답하게된다.
+                여기서 유의할 점은 페이지는 클라이언트에게 redirect요청을 보내는 것이 아닌 forward 하기 때문에 클라이언트상의 url은 변하지 않는다는 것이다.
+            </p>
+            <h2>Step 3: Controller 생성</h2>
             <p>
                 Spring MVC 설정을 완료했으니 이제 Controller를 만들어서 시험해본다.
                 위에서 base-package를 net.mocca.web 으로 선언했으므로 net.mocca.web package를 만들고 그안에 index.jsp를 띄워주는 HomeController를
@@ -114,6 +121,37 @@
             <p>
                 이제 서버를 실행해서 테스트해본다.
             </p>
+            <h2>Step 4: javascript / css 등 리소스 경로 설정</h2>
+            <p>
+                서버를 실행해서 페이지에 들어가보면 css 나 javascript 등 리소스들을 불러올 수 없는 것을 볼 수 있다.
+                이에 대한 설정을 위에서 만들었던 {servlet-name}-servlet.xml 에서 해줄 수 있다.
+            </p>
+            <pre class="source-viewer">
+                <span class="dc">//이미지 리소스</span>
+                >mvc:resources location="/img/" mapping="/img/**"  />
+                <span class="dc">//스타일시트 리소스</span>
+                >mvc:resources location="/css/" mapping="/css/**"  />
+                <span class="dc">//자바스크립트 리소스</span>
+                >mvc:resources location="/js/" mapping="/js/**"  />
+            </pre>
+            <p>
+                이렇게 설정한 이후 서버를 재시작하고 페이지에 접근하면 모든 리소스가 제대로 로딩되는 것을 확인할 수 있다.
+            </p>
+            <h2>선택과정: 페이지를 접근할때 url로 접근하지 못하도록 하게 설정</h2>
+            <p>
+                기존에 개발한 서버에서는 localhost:8080/index.jsp 로 접근해도 메인 페이지에 접근할 수 있다.
+                이는 서버에서 webapp 하위의 경로를 localhost:8080 하위의 경로와 매핑해서 자동으로 파일을 응답해주기 때문이다.
+                단 유일하게 webapp/WEB-INF 는 접근하지 못하는데, 이는 서블릿스펙을 구현할때 WEB-INF 하위의 자원은 클라이언트에서 직접적으로
+                접근할 수 없도록 정해져 있기 때문이다. 따라서 보안상 접근을 못하도록 하고 싶은 파일은 WEB-INF 하위로 옮겨주면 된다.
+            </p>
+            <p>
+                예를 들어 방금 개발한 index.jsp를 WEB-INF 하위로 옮겨본다..
+                그리고 localhost:8080/index.jsp 또는 localhost:8080/ 으로 접근해보면 페이지를 찾을 수 없는 것을 볼 수 있다.
+                WEB-INF 페이지에 접근하기 위해서는 WEB-INF 파일의 ViewResolver 설정을 다음과 같이 변경해준다.
+            </p>
+            <pre class="source-viewer">
+                p:prefix="WEB-INF/"
+            </pre>
         </div>
 	  </div>
 	</div>
