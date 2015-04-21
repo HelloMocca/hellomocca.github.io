@@ -144,6 +144,10 @@
     .article .source-viewer .fc{
       color: #ff620a;
     }
+
+    .article .source-viewer .an{
+      color: #47e4ea;
+    }
 	
 	.article .post-list{
 	  list-style:none;
