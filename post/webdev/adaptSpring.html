@@ -107,12 +107,12 @@
                 import org.springframework.stereotype.Controller;
                 import org.springframework.web.bind.annotation.RequestMapping;
 
-                //Controller 어노테이션 선언
-                @Controller
+                <span class="dc">//Controller 어노테이션 선언</span>
+                <span class="an">@Controller</span>
                 public class HomeController {
 
-                    //매핑 url 을 "/"로 선언. 디폴트 method는 GET이다.
-                    @RequestMapping("/")
+                    <span class="dc">//매핑 url 을 "/"로 선언. 디폴트 method는 GET이다.</span>
+                    <span class="an">@RequestMapping("/")</span>
                     public String getHome(){
                         return "index";
                     }
