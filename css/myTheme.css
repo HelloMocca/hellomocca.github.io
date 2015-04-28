@@ -193,3 +193,8 @@
 	   display:table;
 	   margin:0 auto;
 	}
+
+    xmp {
+        display:inline-block;
+        margin:0;
+    }

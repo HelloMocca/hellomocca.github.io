@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>FrontEnd Developer: HelloMocca</title>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<link rel="stylesheet" href="../../css/myTheme.css">
+    <style>
+      canvas {
+        position:relative;
+        margin:0 auto;
+        background-color:black;
+      }
+    </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  </head>
+  <body>
+	<div id="header" class="wrap">
+	  <div style="padding:25px">
+	    <h1><a href="/">안녕모카의 로스팅머신</a></h1>
+	  </div>
+	</div>
+    <div id="cloud-layer1">
+    </div>
+    <div id="cloud-layer2">
+    </div>
+	<div id="content" class="wrap">
+	  <div class="article">
+        <h1 class="article-title"> AngularJS 시작하기: 기초적인 사용법</h1>
+        <div class="date"><span>최종수정일: 2015.04.28</span></div>
+        <div ng-app="myApp" class="content">
+          <h2>Angular App 선언</h2>
+            <pre class="source-viewer">
+                <xmp><html></xmp>
+                    <xmp><body</xmp><span class="fc"> ng-app=</span><span class="dc">"myApp"</span><xmp>></xmp>
+                        <xmp>이제 이곳은 Angular가 지배합니다.</xmp>
+                    <xmp></body></xmp>
+                <xmp></html></xmp>
+            </pre>
+            <pre class="source-viewer">
+                var angularApp = <span class="fc">angular.module</span>(<span class="dc">"myApp"</span>, []);
+            </pre>
+          <h2>Controller 생성</h2>
+          <p>
+            AngularJS에서는 하나 이상의 Controller가 DOM을 조작합니다.<br/>
+            일단 위에서 만든 angularApp에 새로운 Controller를 추가합니다.
+          </p>
+          <pre class="source-viewer">
+            angularApp.controller(<span class="dc">"basicController"</span>, <span class="fc">function</span>($scope){
+              <span class="dc">//아직 아무것도 하지 않습니다.</span>
+            });
+          </pre>
+          <p> 그리고 담당할 엘레멘트에 Controller를 선언합니다.</p>
+          <pre class="source-viewer">
+            <xmp><div</xmp><span class="fc"> ng-controller=</span><span class="dc">"basicController"</span><xmp>></xmp>
+
+            <xmp></div></xmp>
+          </pre>
+          <p> ng-controller, ng-app 과 같은 것을 Directive라고 합니다.<br/>
+              Directive 는 ng-app, ng-controller, ng-init 등 기본적으로 제공되는 Directive가 있고 추가적으로 만들수도 있습니다.</p>
+          <h2>ng-model과 바인딩</h2>
+            <pre class="source-viewer">
+                <xmp><input type="text"</xmp> <span class="fc">ng-model=</span><span class="dc">"username"</span> <xmp>placeholder="enter your name"></xmp>
+                <xmp><hr></xmp>
+                <xmp><h2></xmp>Hello <span class="dc"><xmp>{</xmp>{username}<xmp>}</xmp></span>!</h2></xmp>
+                <xmp><h3></xmp>My name is <span class="dc"><xmp>{</xmp>{username}<xmp>}</xmp></span>!</h3></xmp>
+            </pre>
+            <p >
+                <div ng-controller="basicController">
+                <input type="text" ng-model="username" placeholder="enter your name">
+                <hr>
+                <h3>Hello {{username}}!</h3>
+                <h3>My name is {{username}}!</h3>
+                <button ng-click="username = 'github'">input username = "github"</button>
+                </div>
+            </p>
+          <h2>ng-repeat</h2>
+            <pre class="source-viewer">
+
+                <xmp><ul</xmp><span class="fc"> ng-controller=</span><span class="dc">"repeatController"</span><xmp>></xmp>
+                   <xmp><li</xmp><span class="fc"> ng-repeat=</span><span class="dc">"job in jobs"</span><xmp>></xmp><span class="dc"><xmp>{</xmp>{job.name}<xmp>}</xmp></span>
+                       <xmp><div></xmp><span class="dc">{{ job.duty }<xmp>}</xmp></span><xmp></div></xmp>
+                   <xmp></li></xmp>
+                <xmp></ul></xmp>
+                <xmp><script></xmp>
+                    angular.module('myApp', []).controller(<span class="dc">'repeatController'</span>, <span class="fc">function</span>($scope){
+                        $scope.jobs = [
+                            { name : '경찰관' , duty: '시민을 보호합니다.'},
+                            { name : '소방관' , duty: '화재를 진압합니다.'},
+                            { name : '학생', duty: '매점에 갑니다.'}
+                        ];
+                    });
+                <xmp></script></xmp>
+            </pre>
+          <ul ng-controller="repeatController">
+              <li ng-repeat="job in jobs">{{job.name}}
+                  <div>" {{ job.duty }}"</div>
+              </li>
+          </ul>
+          <h2>ng-if</h2>
+            <p>이런 데이터가 있습니다.</p>
+          <xmp class="source-viewer">
+               $scope.users = [
+                 { name : 'Brown', gender: 'Men'},
+                 { name : 'Lisa', gender: 'Women'},
+                 { name : 'John', gender: 'Men'}
+               ];
+          </xmp>
+            <p> ng-if 를 활용해 성별에 따라 다르게 출력하도록 합니다.</p>
+          <xmp class="source-viewer">
+              <ul ng-controller="ifController">
+                  <li ng-repeat="user in users">
+                      <span>{{user.name}}</span>
+                      <div ng-if="user.gender == 'Men'">
+                          <div>남자</div>
+                      </div>
+                      <div ng-if="user.gender == 'Women'">
+                          <div>여자</div>
+                      </div>
+                  </li>
+              </ul>
+          </xmp>
+          <ul ng-controller="ifController">
+            <li ng-repeat="user in users">
+                <span>{{user.name}}</span>
+                <div ng-if="user.gender == 'Men'">
+                    <div>남자</div>
+                </div>
+                <div ng-if="user.gender == 'Women'">
+                    <div>여자</div>
+                </div>
+            </li>
+          </ul>
+        </div>
+	  </div>
+	</div>
+	<div id="footer">
+	   <img src="../../img/sheep.png">
+	</div>
+	<script src="../../js/cloud.js"></script>
+    <script>
+        angular.module('myApp', [])
+                .controller('basicController', function($scope){
+                   $scope.username;
+
+                   $scope.event = {};
+                   $scope.doClick = function(){
+                       alert("doClick");
+                       $scope.username = "github";
+                   }
+
+                }).controller('repeatController', function($scope){
+                    $scope.jobs = [
+                        { name : '경찰관' , duty: '시민을 보호합니다.'},
+                        { name : '소방관' , duty: '화재를 진압합니다.'},
+                        { name : '학생', duty: '매점에 갑니다.'}
+                    ];
+                }).controller('ifController', function($scope){
+                    $scope.users = [
+                        { name : 'Brown', gender: 'Men'},
+                        { name : 'Lisa', gender: 'Women'},
+                        { name : 'John', gender: 'Men'}
+                    ];
+                });
+    </script>
+  </body>
+</html>
