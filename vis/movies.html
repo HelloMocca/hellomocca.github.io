@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>movie reivew similarity</title>
+    <style>
+        html,body {
+           margin:0;padding:0;
+        }
+        .nodeCanvas {
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="800"></canvas>
+<script>
+var data = null;
+window.addEventListener('load',function(){
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function(){
+        if (req.readyState == 4) {
+            if (req.status == 200) {
+                data = JSON.parse(req.responseText).movies;
+                console.log(data);
+                getSimilarityMatrix();
+                initNodes();
+                makeEdge();
+                update();
+            }
+        }
+    };
+    req.open("get","reviewScore.json",false);
+    req.send();
+});
+
+var moviesSimArray = [];
+function getSimilarityMatrix() {
+    for (var i = 0; i < data.length; i++) {
+        //each Movies
+        var prop;
+        var a = [];
+        for (var x = 0; x < data[i].children.length; x++) {
+            prop = data[i].children[x];
+            a.push( (prop.positive + prop.negative) / (data[i].positive + data[i].negative) );
+        }
+
+        var sim = [];
+        for (var r = 0; r < data.length; r++) {
+            var result = 0;
+            var b = [];
+            for (var y = 0; y < data[r].children.length; y++) {
+                prop = data[r].children[y];
+                b.push( (prop.positive + prop.negative) / (data[r].positive + data[r].negative) );
+            }
+            var aVector = 0;
+            var bVector = 0;
+            for (var z = 0; z < a.length; z++) {
+                aVector += a[z] * a[z];
+                bVector += b[z] * b[z];
+                result += (a[z] * b[z]);
+            }
+            aVector = Math.sqrt(aVector);
+            bVector = Math.sqrt(bVector);
+            result = Math.floor((result / (aVector * bVector)) * 100);
+            sim.push(result / 100);
+        }
+        moviesSimArray.push(sim);
+    }
+}
+
+var edges = [];
+function makeEdge() {
+    var origin;
+    var target;
+    for (var i = 0; i < moviesSimArray.length; i++) {
+        origin = i;
+        for (var r = i+1; r < moviesSimArray[i].length; r++) {
+            target = r;
+            if (moviesSimArray[i][r] >= .9) {
+                edges.push({origin: i, target: r});
+            }
+        }
+    }
+    console.log("num of Edge :"+edges.length);
+}
+
+const degree360 = Math.PI*2;
+function initNodes() {
+    var nodeCanvas;
+    var ctx;
+    for (var i = 0; i < data.length; i++) {
+        nodes.push(new function() {
+            this.name = data[i].name;
+            this.x = i*20;
+            this.y = 10;
+            this.dx = 0;
+            this.dy = 0;
+            this.posX = i*20;
+            this.posY = 10;
+            this.r = 10;
+        });
+        nodeCanvas = document.createElement("canvas");
+        nodeCanvas.setAttribute("id", "node_"+i);
+        nodeCanvas.setAttribute("class","nodeCanvas");
+        nodeCanvas.setAttribute("width","100");
+        nodeCanvas.setAttribute("height","100");
+        document.body.appendChild(nodeCanvas);
+        nodeCanvas = document.querySelector("#node_"+i);
+        ctx = nodeCanvas.getContext("2d");
+        ctx.lineWidth = 2;
+        var NumOfProp = data[i].children.length;
+        var total = data[i].positive + data[i].negative;
+        var x = nodeCanvas.clientWidth/2;
+        var y = nodeCanvas.clientHeight/2;
+        for (var r = 0; r < NumOfProp; r++) {
+            var thisPositive = data[i].children[r].positive;
+            var thisNegative = data[i].children[r].negative;
+            ctx.beginPath();
+            ctx.lineWidth = 35 * ( (thisPositive + thisNegative)/ total);
+            ctx.arc(x, y, 25, (degree360/NumOfProp) * r, (degree360/NumOfProp) * (r+1), false);
+            if (thisPositive < thisNegative) {
+                ctx.strokeStyle = "rgba(204,61,61,"+ (thisNegative / (thisPositive+thisNegative))+")";
+            } else {
+                ctx.strokeStyle = "rgba(47,157,39,"+ (thisPositive / (thisPositive+thisNegative))+")";
+            }
+            ctx.stroke();
+        }
+    }
+}
+
+var nodes = [];
+var canvas = document.querySelector("canvas");
+var context = canvas.getContext("2d");
+var cooling = canvas.width*.1;
+draw = function() {
+    var nodeCanvas;
+    for (i = 0; i < nodes.length; i++) {
+        nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
+        nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
+        context.beginPath();
+        context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
+        context.fillText(nodes[i].name,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*4);
+        context.closePath();
+        context.fill();
+        nodeCanvas = document.querySelector("#node_"+i);
+        nodeCanvas.style.left = (nodes[i].posX - nodeCanvas.clientWidth/2 ) + "px";
+        nodeCanvas.style.top = (nodes[i].posY - nodeCanvas.clientHeight/2) + "px";
+    }
+    context.lineWidth = .2;
+    for (i = 0; i < edges.length; i++) {
+        nd1 = nodes[edges[i].origin];
+        nd2 = nodes[edges[i].target];
+        context.beginPath();
+        context.moveTo(nd1.posX, nd1.posY);
+        context.lineTo(nd2.posX, nd2.posY);
+        context.closePath();
+        context.stroke();
+    }
+};
+
+update = function() {
+    if(cooling < 0.0001) return;
+    context.clearRect(0,0,canvas.width, canvas.height);
+    var nd1, nd2;
+    var i,r;
+    //var k = Math.sqrt(canvas.width*canvas.height/nodes.length);
+    var k = 50;
+    var ex, ey, er;
+    aForce = function(er) {return er*er /k};
+    rForce = function(er) {return (k*k)/er};
+    for (i = 0; i < nodes.length; i++) {
+        nodes[i].dx = 0;
+        nodes[i].dy = 0;
+    }
+
+    //repulsive
+    for (i = 0; i < nodes.length-1; i++) {
+        nd1 = nodes[i];
+        for (r = i+1; r < nodes.length; r++){
+            nd2 = nodes[r];
+            ex = nd1.x - nd2.x;
+            ey = nd1.y - nd2.y;
+            er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
+            if(er === 0) er = 0.0001;
+            fr = rForce(er);
+            nd1.dx += ex/er*fr*50;
+            nd1.dy += ey/er*fr*50;
+            nd2.dx -= ex/er*fr*50;
+            nd2.dy -= ey/er*fr*50;
+        }
+    }
+
+    //attractive
+    for(i = 0; i < edges.length; i++) {
+        nd1 = nodes[edges[i].origin];
+        nd2 = nodes[edges[i].target];
+        ex = nd1.x - nd2.x;
+        ey = nd1.y - nd2.y;
+        er = Math.sqrt(ex*ex + ey*ey);
+        if(er === 0) er = 0.0001;
+        fa = aForce(er);
+        nd1.dx -= ex/er*fa;
+        nd1.dy -= ey/er*fa;
+        nd2.dx += ex/er*fa;
+        nd2.dy += ey/er*fa;
+    }
+
+    //Central
+    for (i = 0; i < nodes.length; i++) {
+        node = nodes[i];
+        ex = canvas.width/2 - node.x;
+        ey = canvas.height/2 - node.y;
+        er = Math.sqrt(ex*ex + ey*ey);
+        if(er === 0) er = 0.0001;
+        fa = aForce(er);
+        node.dx += ex/er*fa;
+        node.dy += ey/er*fa;
+    }
+
+    //apply
+    for (i = 0; i < nodes.length; i++) {
+        er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
+        nodes[i].x += nodes[i].dx / er * Math.min(er, cooling);
+        nodes[i].y += nodes[i].dy / er * Math.min(er, cooling);
+    }
+    cooling = cooling *.95;
+    draw();
+    window.requestAFrame(update);
+};
+
+window.requestAFrame = (function () {
+    return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+                // if all else fails, use setTimeout
+            function (callback) {
+                return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
+            };
+})();
+</script>
+</body>
+</html>

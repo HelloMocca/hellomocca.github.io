@@ -1,0 +1,11007 @@
+{"movies":[
+{
+"name":"7광구",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":7,
+"negative":2
+}
+,		{
+"name":"연출" ,
+"positive":1,
+"negative":11
+}
+,		{
+"name":"구성" ,
+"positive":0,
+"negative":7
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":8,
+"negative":23
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":27,
+"negative":254
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":28,
+"negative":257
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":119,
+"negative":35
+}
+,		{
+"name":"배우" ,
+"positive":31,
+"negative":3
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":15,
+"negative":2
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"조연" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":15,
+"negative":4
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":187,
+"negative":48
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":5,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"씬" ,
+"positive":10,
+"negative":2
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"그래픽" ,
+"positive":6,
+"negative":5
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":1
+}
+],
+"positive":33,
+"negative":11
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":16,
+"negative":99
+}
+,		{
+"name":"내용" ,
+"positive":10,
+"negative":36
+}
+,		{
+"name":"소재" ,
+"positive":8,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":1,
+"negative":8
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":1,
+"negative":6
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":2,
+"negative":15
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"주제" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":42,
+"negative":172
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":3,
+"negative":0
+}
+],
+"positive":301,
+"negative":511
+},{
+"name":"26년",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"연출" ,
+"positive":14,
+"negative":35
+}
+,		{
+"name":"구성" ,
+"positive":21,
+"negative":20
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":6
+}
+,		{
+"name":"연출력" ,
+"positive":2,
+"negative":7
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":38,
+"negative":70
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":278,
+"negative":689
+}
+,		{
+"name":"작품" ,
+"positive":4,
+"negative":8
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":1
+}
+],
+"positive":282,
+"negative":698
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":394,
+"negative":25
+}
+,		{
+"name":"배우" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":48,
+"negative":5
+}
+,		{
+"name":"대사" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"조연" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":7,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":458,
+"negative":33
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"장면" ,
+"positive":4,
+"negative":5
+}
+,		{
+"name":"씬" ,
+"positive":13,
+"negative":1
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":7,
+"negative":4
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":1,
+"negative":0
+}
+],
+"positive":30,
+"negative":14
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":56,
+"negative":24
+}
+,		{
+"name":"내용" ,
+"positive":71,
+"negative":38
+}
+,		{
+"name":"소재" ,
+"positive":44,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":2,
+"negative":21
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":5,
+"negative":58
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":33,
+"negative":8
+}
+,		{
+"name":"마무리" ,
+"positive":2,
+"negative":6
+}
+,		{
+"name":"주제" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":2,
+"negative":3
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":228,
+"negative":162
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":3,
+"negative":8
+}
+],
+"positive":5,
+"negative":9
+}
+],
+"positive":1041,
+"negative":986
+},{
+"name":"감기",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":8,
+"negative":5
+}
+,		{
+"name":"구성" ,
+"positive":4,
+"negative":5
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":16,
+"negative":12
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":49,
+"negative":94
+}
+,		{
+"name":"작품" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":14,
+"negative":1
+}
+],
+"positive":63,
+"negative":95
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":218,
+"negative":8
+}
+,		{
+"name":"배우" ,
+"positive":4,
+"negative":2
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연기력" ,
+"positive":28,
+"negative":2
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":258,
+"negative":14
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"씬" ,
+"positive":17,
+"negative":1
+}
+,		{
+"name":"볼거리" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":1,
+"negative":0
+}
+],
+"positive":28,
+"negative":2
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":51,
+"negative":28
+}
+,		{
+"name":"내용" ,
+"positive":25,
+"negative":9
+}
+,		{
+"name":"소재" ,
+"positive":18,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":12,
+"negative":9
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":6,
+"negative":7
+}
+,		{
+"name":"엔딩" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":3,
+"negative":3
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":127,
+"negative":64
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":2,
+"negative":1
+}
+],
+"positive":494,
+"negative":188
+},{
+"name":"고지전",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":17,
+"negative":5
+}
+,		{
+"name":"구성" ,
+"positive":8,
+"negative":4
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연출력" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":29,
+"negative":13
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":86,
+"negative":57
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":88,
+"negative":57
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":197,
+"negative":8
+}
+,		{
+"name":"배우" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":14,
+"negative":3
+}
+,		{
+"name":"대사" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":234,
+"negative":12
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":9,
+"negative":2
+}
+,		{
+"name":"장면" ,
+"positive":9,
+"negative":2
+}
+,		{
+"name":"씬" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":3,
+"negative":0
+}
+],
+"positive":32,
+"negative":4
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":79,
+"negative":12
+}
+,		{
+"name":"내용" ,
+"positive":26,
+"negative":9
+}
+,		{
+"name":"소재" ,
+"positive":12,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":2,
+"negative":6
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"주제" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":133,
+"negative":35
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":2,
+"negative":0
+}
+],
+"positive":5,
+"negative":0
+}
+],
+"positive":521,
+"negative":121
+},{
+"name":"내가살인범이다",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":19,
+"negative":26
+}
+,		{
+"name":"구성" ,
+"positive":21,
+"negative":5
+}
+,		{
+"name":"편집" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"연출력" ,
+"positive":3,
+"negative":4
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":49,
+"negative":38
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":98,
+"negative":46
+}
+,		{
+"name":"작품" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":100,
+"negative":46
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":384,
+"negative":14
+}
+,		{
+"name":"배우" ,
+"positive":20,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":48,
+"negative":3
+}
+,		{
+"name":"대사" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":10,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":466,
+"negative":19
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":9,
+"negative":7
+}
+,		{
+"name":"씬" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":27,
+"negative":11
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":222,
+"negative":20
+}
+,		{
+"name":"내용" ,
+"positive":63,
+"negative":7
+}
+,		{
+"name":"소재" ,
+"positive":50,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":25,
+"negative":10
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"결말" ,
+"positive":10,
+"negative":6
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":45,
+"negative":3
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":5
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":4
+}
+,		{
+"name":"주제" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":8,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":442,
+"negative":60
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":0
+}
+],
+"positive":1084,
+"negative":174
+},{
+"name":"다크나이트라이즈",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":36,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":20,
+"negative":6
+}
+,		{
+"name":"구성" ,
+"positive":21,
+"negative":1
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":4
+}
+,		{
+"name":"연출력" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":83,
+"negative":11
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":129,
+"negative":80
+}
+,		{
+"name":"작품" ,
+"positive":9,
+"negative":2
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"스케일" ,
+"positive":22,
+"negative":0
+}
+],
+"positive":160,
+"negative":83
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":43,
+"negative":1
+}
+,		{
+"name":"배우" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":3,
+"negative":3
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"조연" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":73,
+"negative":7
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":11,
+"negative":4
+}
+,		{
+"name":"씬" ,
+"positive":19,
+"negative":1
+}
+,		{
+"name":"볼거리" ,
+"positive":8,
+"negative":2
+}
+,		{
+"name":"분위기" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":1,
+"negative":0
+}
+],
+"positive":55,
+"negative":10
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":84,
+"negative":36
+}
+,		{
+"name":"내용" ,
+"positive":25,
+"negative":13
+}
+,		{
+"name":"소재" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":12,
+"negative":24
+}
+,		{
+"name":"이야기" ,
+"positive":3,
+"negative":4
+}
+,		{
+"name":"결말" ,
+"positive":39,
+"negative":17
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":18,
+"negative":7
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":7,
+"negative":2
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":198,
+"negative":111
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"사운드" ,
+"positive":8,
+"negative":1
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":13,
+"negative":2
+}
+],
+"positive":582,
+"negative":224
+},{
+"name":"도가니",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":2,
+"negative":4
+}
+,		{
+"name":"구성" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":6,
+"negative":6
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":48,
+"negative":25
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":49,
+"negative":26
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":51,
+"negative":2
+}
+,		{
+"name":"배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":59,
+"negative":2
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"씬" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":1
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":5,
+"negative":1
+}
+,		{
+"name":"내용" ,
+"positive":7,
+"negative":2
+}
+,		{
+"name":"소재" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"이야기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":18,
+"negative":8
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":0
+}
+],
+"positive":134,
+"negative":43
+},{
+"name":"도둑들",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":7,
+"negative":3
+}
+,		{
+"name":"연출" ,
+"positive":10,
+"negative":8
+}
+,		{
+"name":"구성" ,
+"positive":32,
+"negative":12
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"연출력" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":52,
+"negative":27
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":120,
+"negative":112
+}
+,		{
+"name":"작품" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":12,
+"negative":2
+}
+],
+"positive":136,
+"negative":114
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":366,
+"negative":29
+}
+,		{
+"name":"배우" ,
+"positive":55,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":49,
+"negative":2
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":47,
+"negative":9
+}
+,		{
+"name":"대사" ,
+"positive":5,
+"negative":3
+}
+,		{
+"name":"조연" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":96,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":9,
+"negative":1
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":639,
+"negative":50
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":7,
+"negative":4
+}
+,		{
+"name":"씬" ,
+"positive":23,
+"negative":2
+}
+,		{
+"name":"볼거리" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":47,
+"negative":8
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":172,
+"negative":105
+}
+,		{
+"name":"내용" ,
+"positive":45,
+"negative":59
+}
+,		{
+"name":"소재" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":15,
+"negative":20
+}
+,		{
+"name":"이야기" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":1,
+"negative":19
+}
+,		{
+"name":"엔딩" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":15,
+"negative":2
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":8,
+"negative":2
+}
+,		{
+"name":"설정" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":6
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":8,
+"negative":5
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":272,
+"negative":224
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":0
+}
+],
+"positive":1146,
+"negative":423
+},{
+"name":"돈크라이마미",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"연출" ,
+"positive":6,
+"negative":26
+}
+,		{
+"name":"구성" ,
+"positive":4,
+"negative":6
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":8
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":14,
+"negative":45
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":69,
+"negative":72
+}
+,		{
+"name":"작품" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":72,
+"negative":72
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":261,
+"negative":77
+}
+,		{
+"name":"배우" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":21,
+"negative":8
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":4,
+"negative":6
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":292,
+"negative":96
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"씬" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":7,
+"negative":5
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":27,
+"negative":48
+}
+,		{
+"name":"내용" ,
+"positive":63,
+"negative":15
+}
+,		{
+"name":"소재" ,
+"positive":106,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":3,
+"negative":21
+}
+,		{
+"name":"이야기" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":15
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":1,
+"negative":5
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":6
+}
+,		{
+"name":"주제" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":217,
+"negative":113
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":2
+}
+],
+"positive":602,
+"negative":333
+},{
+"name":"리얼스틸",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"구성" ,
+"positive":6,
+"negative":2
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":8,
+"negative":4
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":72,
+"negative":38
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":73,
+"negative":38
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":29,
+"negative":0
+}
+,		{
+"name":"배우" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":39,
+"negative":1
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":5,
+"negative":1
+}
+,		{
+"name":"씬" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":3,
+"negative":1
+}
+],
+"positive":35,
+"negative":3
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":38,
+"negative":66
+}
+,		{
+"name":"내용" ,
+"positive":16,
+"negative":29
+}
+,		{
+"name":"소재" ,
+"positive":15,
+"negative":3
+}
+,		{
+"name":"전개" ,
+"positive":1,
+"negative":10
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":5,
+"negative":14
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":83,
+"negative":130
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":3,
+"negative":0
+}
+],
+"positive":241,
+"negative":176
+},{
+"name":"마이웨이",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":15,
+"negative":4
+}
+,		{
+"name":"구성" ,
+"positive":5,
+"negative":2
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":23,
+"negative":8
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":69,
+"negative":54
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":35,
+"negative":0
+}
+],
+"positive":105,
+"negative":54
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":82,
+"negative":4
+}
+,		{
+"name":"배우" ,
+"positive":9,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":10,
+"negative":1
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"캐스팅" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":108,
+"negative":10
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":20,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":16,
+"negative":0
+}
+,		{
+"name":"씬" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":11,
+"negative":0
+}
+],
+"positive":61,
+"negative":0
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":44,
+"negative":58
+}
+,		{
+"name":"내용" ,
+"positive":16,
+"negative":19
+}
+,		{
+"name":"소재" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":5,
+"negative":9
+}
+,		{
+"name":"이야기" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"결말" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주제" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":77,
+"negative":96
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":0
+}
+],
+"positive":375,
+"negative":168
+},{
+"name":"박수건달",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":13,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":3,
+"negative":5
+}
+,		{
+"name":"구성" ,
+"positive":6,
+"negative":5
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":22,
+"negative":11
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":103,
+"negative":68
+}
+,		{
+"name":"작품" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":107,
+"negative":68
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":432,
+"negative":5
+}
+,		{
+"name":"배우" ,
+"positive":35,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":35,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":56,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":583,
+"negative":6
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":2,
+"negative":5
+}
+,		{
+"name":"씬" ,
+"positive":6,
+"negative":3
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":10,
+"negative":9
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":34,
+"negative":54
+}
+,		{
+"name":"내용" ,
+"positive":18,
+"negative":20
+}
+,		{
+"name":"소재" ,
+"positive":21,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":4,
+"negative":17
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":1,
+"negative":8
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":7,
+"negative":2
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"설정" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":4
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":95,
+"negative":112
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":1
+}
+],
+"positive":818,
+"negative":207
+},{
+"name":"설국열차",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":85,
+"negative":4
+}
+,		{
+"name":"연출" ,
+"positive":83,
+"negative":21
+}
+,		{
+"name":"구성" ,
+"positive":35,
+"negative":19
+}
+,		{
+"name":"편집" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"연출력" ,
+"positive":30,
+"negative":4
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":234,
+"negative":51
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":304,
+"negative":194
+}
+,		{
+"name":"작품" ,
+"positive":10,
+"negative":4
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":7,
+"negative":0
+}
+],
+"positive":321,
+"negative":198
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":233,
+"negative":30
+}
+,		{
+"name":"배우" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":1,
+"negative":4
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":47,
+"negative":5
+}
+,		{
+"name":"대사" ,
+"positive":1,
+"negative":5
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":9,
+"negative":2
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"인물" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"출연" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":4
+}
+],
+"positive":312,
+"negative":58
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":46,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":18,
+"negative":18
+}
+,		{
+"name":"씬" ,
+"positive":28,
+"negative":2
+}
+,		{
+"name":"볼거리" ,
+"positive":12,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":13,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":9,
+"negative":7
+}
+,		{
+"name":"화면" ,
+"positive":5,
+"negative":1
+}
+,		{
+"name":"비주얼" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":11,
+"negative":2
+}
+,		{
+"name":"그래픽" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":27,
+"negative":0
+}
+],
+"positive":175,
+"negative":33
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":215,
+"negative":67
+}
+,		{
+"name":"내용" ,
+"positive":106,
+"negative":43
+}
+,		{
+"name":"소재" ,
+"positive":71,
+"negative":4
+}
+,		{
+"name":"전개" ,
+"positive":32,
+"negative":39
+}
+,		{
+"name":"이야기" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"결말" ,
+"positive":54,
+"negative":287
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":13,
+"negative":5
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":5,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":30,
+"negative":10
+}
+,		{
+"name":"원작" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":50
+}
+,		{
+"name":"주제" ,
+"positive":13,
+"negative":1
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":5,
+"negative":12
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":9,
+"negative":5
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":564,
+"negative":527
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"사운드" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":2,
+"negative":3
+}
+],
+"positive":1608,
+"negative":870
+},{
+"name":"소원",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"구성" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":15,
+"negative":1
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":46,
+"negative":15
+}
+,		{
+"name":"작품" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":48,
+"negative":15
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":115,
+"negative":3
+}
+,		{
+"name":"배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":13,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":130,
+"negative":3
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"씬" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":2,
+"negative":1
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":10,
+"negative":5
+}
+,		{
+"name":"내용" ,
+"positive":13,
+"negative":6
+}
+,		{
+"name":"소재" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"이야기" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":27,
+"negative":17
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":3,
+"negative":0
+}
+],
+"positive":225,
+"negative":37
+},{
+"name":"숨바꼭질",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":3,
+"negative":3
+}
+,		{
+"name":"연출" ,
+"positive":21,
+"negative":8
+}
+,		{
+"name":"구성" ,
+"positive":12,
+"negative":11
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":5,
+"negative":2
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":41,
+"negative":24
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":42,
+"negative":120
+}
+,		{
+"name":"작품" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":42,
+"negative":120
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":441,
+"negative":8
+}
+,		{
+"name":"배우" ,
+"positive":18,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":88,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":551,
+"negative":13
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":4,
+"negative":4
+}
+,		{
+"name":"씬" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":13,
+"negative":5
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":86,
+"negative":46
+}
+,		{
+"name":"내용" ,
+"positive":24,
+"negative":15
+}
+,		{
+"name":"소재" ,
+"positive":52,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":6,
+"negative":7
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":1,
+"negative":17
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":4,
+"negative":5
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":5,
+"negative":3
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":14
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":186,
+"negative":114
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":0
+}
+],
+"positive":833,
+"negative":276
+},{
+"name":"신세계",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":4,
+"negative":2
+}
+,		{
+"name":"연출" ,
+"positive":24,
+"negative":16
+}
+,		{
+"name":"구성" ,
+"positive":35,
+"negative":3
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"연출력" ,
+"positive":7,
+"negative":2
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":70,
+"negative":26
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":141,
+"negative":60
+}
+,		{
+"name":"작품" ,
+"positive":7,
+"negative":1
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":148,
+"negative":61
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":892,
+"negative":26
+}
+,		{
+"name":"배우" ,
+"positive":65,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":12,
+"negative":4
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":88,
+"negative":3
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":24,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":8,
+"negative":2
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1093,
+"negative":37
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":7,
+"negative":6
+}
+,		{
+"name":"씬" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":9,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"배경" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":3,
+"negative":0
+}
+],
+"positive":41,
+"negative":9
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":178,
+"negative":33
+}
+,		{
+"name":"내용" ,
+"positive":39,
+"negative":19
+}
+,		{
+"name":"소재" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":13,
+"negative":6
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":11,
+"negative":16
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":36,
+"negative":5
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":4
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"주제" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":9,
+"negative":2
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":304,
+"negative":90
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":0
+}
+],
+"positive":1657,
+"negative":223
+},{
+"name":"써니",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":8,
+"negative":1
+}
+,		{
+"name":"구성" ,
+"positive":10,
+"negative":3
+}
+,		{
+"name":"편집" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":26,
+"negative":4
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":97,
+"negative":45
+}
+,		{
+"name":"작품" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":1
+}
+],
+"positive":101,
+"negative":46
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":69,
+"negative":2
+}
+,		{
+"name":"배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":83,
+"negative":2
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"씬" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":15,
+"negative":2
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":27,
+"negative":7
+}
+,		{
+"name":"내용" ,
+"positive":24,
+"negative":9
+}
+,		{
+"name":"소재" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"이야기" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":2,
+"negative":32
+}
+,		{
+"name":"엔딩" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":14
+}
+,		{
+"name":"주제" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":72,
+"negative":70
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":8,
+"negative":0
+}
+],
+"positive":305,
+"negative":124
+},{
+"name":"아이언맨3",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":5,
+"negative":1
+}
+,		{
+"name":"구성" ,
+"positive":7,
+"negative":5
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":14,
+"negative":6
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":44,
+"negative":29
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":9,
+"negative":0
+}
+],
+"positive":54,
+"negative":29
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":24,
+"negative":0
+}
+,		{
+"name":"배우" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":35,
+"negative":2
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":14,
+"negative":2
+}
+,		{
+"name":"장면" ,
+"positive":7,
+"negative":5
+}
+,		{
+"name":"씬" ,
+"positive":25,
+"negative":3
+}
+,		{
+"name":"볼거리" ,
+"positive":12,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":3,
+"negative":0
+}
+],
+"positive":70,
+"negative":12
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":73,
+"negative":50
+}
+,		{
+"name":"내용" ,
+"positive":25,
+"negative":20
+}
+,		{
+"name":"소재" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":3,
+"negative":10
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"결말" ,
+"positive":1,
+"negative":5
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"설정" ,
+"positive":5,
+"negative":3
+}
+,		{
+"name":"원작" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":118,
+"negative":98
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":1
+}
+],
+"positive":3,
+"negative":1
+}
+],
+"positive":294,
+"negative":148
+},{
+"name":"어벤져스",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"구성" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":15,
+"negative":0
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":53,
+"negative":48
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":13,
+"negative":0
+}
+],
+"positive":67,
+"negative":48
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":20,
+"negative":3
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":19,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":14,
+"negative":3
+}
+,		{
+"name":"씬" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":21,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":19,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":6,
+"negative":0
+}
+],
+"positive":90,
+"negative":6
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":34,
+"negative":77
+}
+,		{
+"name":"내용" ,
+"positive":10,
+"negative":39
+}
+,		{
+"name":"소재" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":1,
+"negative":5
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":51,
+"negative":131
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":0
+}
+],
+"positive":244,
+"negative":188
+},{
+"name":"월드워Z",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":22,
+"negative":7
+}
+,		{
+"name":"구성" ,
+"positive":11,
+"negative":3
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":7,
+"negative":3
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":41,
+"negative":13
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":67,
+"negative":55
+}
+,		{
+"name":"작품" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":43,
+"negative":1
+}
+],
+"positive":113,
+"negative":56
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":71,
+"negative":2
+}
+,		{
+"name":"배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":14,
+"negative":1
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":91,
+"negative":3
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":12,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":8,
+"negative":9
+}
+,		{
+"name":"씬" ,
+"positive":14,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":4,
+"negative":2
+}
+,		{
+"name":"분위기" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":3,
+"negative":0
+}
+],
+"positive":57,
+"negative":14
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":64,
+"negative":46
+}
+,		{
+"name":"내용" ,
+"positive":22,
+"negative":23
+}
+,		{
+"name":"소재" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":30,
+"negative":9
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":35,
+"negative":187
+}
+,		{
+"name":"엔딩" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"설정" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"마무리" ,
+"positive":6,
+"negative":67
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":170,
+"negative":343
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":3,
+"negative":0
+}
+],
+"positive":6,
+"negative":1
+}
+],
+"positive":478,
+"negative":430
+},{
+"name":"웜바디스",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":10,
+"negative":3
+}
+,		{
+"name":"구성" ,
+"positive":11,
+"negative":2
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":24,
+"negative":5
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":161,
+"negative":33
+}
+,		{
+"name":"작품" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":161,
+"negative":33
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":62,
+"negative":2
+}
+,		{
+"name":"배우" ,
+"positive":7,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":9,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":105,
+"negative":3
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":11,
+"negative":13
+}
+,		{
+"name":"씬" ,
+"positive":29,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":9,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":1,
+"negative":0
+}
+],
+"positive":69,
+"negative":14
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":23,
+"negative":35
+}
+,		{
+"name":"내용" ,
+"positive":16,
+"negative":16
+}
+,		{
+"name":"소재" ,
+"positive":46,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":21,
+"negative":8
+}
+,		{
+"name":"이야기" ,
+"positive":5,
+"negative":2
+}
+,		{
+"name":"결말" ,
+"positive":4,
+"negative":9
+}
+,		{
+"name":"엔딩" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":8,
+"negative":2
+}
+,		{
+"name":"원작" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"주제" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":138,
+"negative":76
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":20,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":1,
+"negative":0
+}
+],
+"positive":26,
+"negative":0
+}
+],
+"positive":523,
+"negative":131
+},{
+"name":"은밀하게위대하게",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":24,
+"negative":46
+}
+,		{
+"name":"구성" ,
+"positive":16,
+"negative":22
+}
+,		{
+"name":"편집" ,
+"positive":1,
+"negative":9
+}
+,		{
+"name":"연출력" ,
+"positive":5,
+"negative":8
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":47,
+"negative":86
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":264,
+"negative":313
+}
+,		{
+"name":"작품" ,
+"positive":8,
+"negative":1
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":272,
+"negative":314
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":809,
+"negative":61
+}
+,		{
+"name":"배우" ,
+"positive":38,
+"negative":3
+}
+,		{
+"name":"캐릭터" ,
+"positive":9,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"연기력" ,
+"positive":119,
+"negative":8
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"조연" ,
+"positive":12,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":172,
+"negative":6
+}
+,		{
+"name":"목소리" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"등장인물" ,
+"positive":4,
+"negative":0
+}
+],
+"positive":1189,
+"negative":81
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":10,
+"negative":12
+}
+,		{
+"name":"씬" ,
+"positive":28,
+"negative":3
+}
+,		{
+"name":"볼거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":13,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":4,
+"negative":4
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":16,
+"negative":2
+}
+,		{
+"name":"배경" ,
+"positive":8,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":83,
+"negative":22
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":154,
+"negative":87
+}
+,		{
+"name":"내용" ,
+"positive":126,
+"negative":65
+}
+,		{
+"name":"소재" ,
+"positive":19,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":23,
+"negative":43
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"결말" ,
+"positive":6,
+"negative":67
+}
+,		{
+"name":"엔딩" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"시나리오" ,
+"positive":8,
+"negative":5
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"설정" ,
+"positive":5,
+"negative":2
+}
+,		{
+"name":"원작" ,
+"positive":83,
+"negative":7
+}
+,		{
+"name":"마무리" ,
+"positive":2,
+"negative":11
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":3,
+"negative":4
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":438,
+"negative":299
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":1
+}
+],
+"positive":3,
+"negative":3
+}
+],
+"positive":2032,
+"negative":805
+},{
+"name":"천안함프로젝트",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":0,
+"negative":4
+}
+,		{
+"name":"연출" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"구성" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연출력" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":2,
+"negative":6
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":11,
+"negative":236
+}
+,		{
+"name":"작품" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":11,
+"negative":238
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":0
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":0,
+"negative":3
+}
+,		{
+"name":"장면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"씬" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":4
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"내용" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"소재" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"이야기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":3
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":1
+}
+],
+"positive":0,
+"negative":2
+}
+],
+"positive":14,
+"negative":253
+},{
+"name":"최종병기활",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":2,
+"negative":3
+}
+,		{
+"name":"연출" ,
+"positive":19,
+"negative":6
+}
+,		{
+"name":"구성" ,
+"positive":6,
+"negative":1
+}
+,		{
+"name":"편집" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":34,
+"negative":11
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":62,
+"negative":47
+}
+,		{
+"name":"작품" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":1,
+"negative":5
+}
+],
+"positive":67,
+"negative":52
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":250,
+"negative":11
+}
+,		{
+"name":"배우" ,
+"positive":10,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"연기력" ,
+"positive":23,
+"negative":3
+}
+,		{
+"name":"대사" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"조연" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":290,
+"negative":18
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":9,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":6,
+"negative":4
+}
+,		{
+"name":"씬" ,
+"positive":7,
+"negative":1
+}
+,		{
+"name":"볼거리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":4,
+"negative":0
+}
+],
+"positive":37,
+"negative":7
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":66,
+"negative":76
+}
+,		{
+"name":"내용" ,
+"positive":26,
+"negative":24
+}
+,		{
+"name":"소재" ,
+"positive":26,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":28,
+"negative":18
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":8
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"시나리오" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"주제" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":155,
+"negative":136
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":14,
+"negative":0
+}
+],
+"positive":597,
+"negative":224
+},{
+"name":"퀵",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"구성" ,
+"positive":4,
+"negative":1
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":6,
+"negative":1
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":31,
+"negative":51
+}
+,		{
+"name":"작품" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":3,
+"negative":0
+}
+],
+"positive":34,
+"negative":51
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":39,
+"negative":7
+}
+,		{
+"name":"배우" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":2,
+"negative":3
+}
+,		{
+"name":"연기력" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"대사" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":57,
+"negative":11
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"씬" ,
+"positive":6,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"그래픽" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":13,
+"negative":5
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":17,
+"negative":17
+}
+,		{
+"name":"내용" ,
+"positive":10,
+"negative":21
+}
+,		{
+"name":"소재" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"전개" ,
+"positive":2,
+"negative":4
+}
+,		{
+"name":"이야기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":0,
+"negative":4
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":35,
+"negative":53
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":2,
+"negative":0
+}
+],
+"positive":147,
+"negative":121
+},{
+"name":"타워",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":3,
+"negative":2
+}
+,		{
+"name":"연출" ,
+"positive":6,
+"negative":7
+}
+,		{
+"name":"구성" ,
+"positive":5,
+"negative":3
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출력" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":15,
+"negative":12
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":95,
+"negative":70
+}
+,		{
+"name":"작품" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":7,
+"negative":0
+}
+],
+"positive":102,
+"negative":72
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":282,
+"negative":10
+}
+,		{
+"name":"배우" ,
+"positive":18,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":47,
+"negative":3
+}
+,		{
+"name":"대사" ,
+"positive":2,
+"negative":6
+}
+,		{
+"name":"조연" ,
+"positive":7,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":14,
+"negative":3
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":376,
+"negative":25
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":9,
+"negative":2
+}
+,		{
+"name":"장면" ,
+"positive":7,
+"negative":5
+}
+,		{
+"name":"씬" ,
+"positive":20,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"화면" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":31,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":1,
+"negative":0
+}
+],
+"positive":80,
+"negative":8
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":62,
+"negative":161
+}
+,		{
+"name":"내용" ,
+"positive":28,
+"negative":47
+}
+,		{
+"name":"소재" ,
+"positive":12,
+"negative":2
+}
+,		{
+"name":"전개" ,
+"positive":5,
+"negative":22
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":4
+}
+,		{
+"name":"결말" ,
+"positive":2,
+"negative":16
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":6,
+"negative":8
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":5
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":4
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":0,
+"negative":10
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":1,
+"negative":2
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":120,
+"negative":281
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":1,
+"negative":0
+}
+],
+"positive":694,
+"negative":398
+},{
+"name":"트랜스포머3",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연출" ,
+"positive":2,
+"negative":2
+}
+,		{
+"name":"구성" ,
+"positive":4,
+"negative":8
+}
+,		{
+"name":"편집" ,
+"positive":2,
+"negative":16
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":8,
+"negative":26
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":27,
+"negative":53
+}
+,		{
+"name":"작품" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":18,
+"negative":0
+}
+],
+"positive":47,
+"negative":53
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":4,
+"negative":3
+}
+,		{
+"name":"배우" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"캐릭터" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":6,
+"negative":6
+}
+,		{
+"name":"연기력" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"목소리" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":2,
+"negative":0
+}
+],
+"positive":20,
+"negative":12
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":46,
+"negative":1
+}
+,		{
+"name":"장면" ,
+"positive":7,
+"negative":7
+}
+,		{
+"name":"씬" ,
+"positive":11,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":16,
+"negative":7
+}
+,		{
+"name":"분위기" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":50,
+"negative":1
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":11,
+"negative":0
+}
+],
+"positive":150,
+"negative":16
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":68,
+"negative":182
+}
+,		{
+"name":"내용" ,
+"positive":18,
+"negative":53
+}
+,		{
+"name":"소재" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":2,
+"negative":15
+}
+,		{
+"name":"이야기" ,
+"positive":1,
+"negative":3
+}
+,		{
+"name":"결말" ,
+"positive":0,
+"negative":9
+}
+,		{
+"name":"엔딩" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":1,
+"negative":4
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"원작" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":1,
+"negative":4
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":94,
+"negative":272
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":2,
+"negative":0
+}
+],
+"positive":321,
+"negative":379
+},{
+"name":"해리포터와죽음의성물-2부",
+"children":[
+{
+"name":"감독",
+"children":[
+{
+"name":"감독" ,
+"positive":2,
+"negative":1
+}
+,		{
+"name":"연출" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"구성" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"편집" ,
+"positive":0,
+"negative":2
+}
+,		{
+"name":"연출력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"흡입력" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":6,
+"negative":4
+}
+,	{
+"name":"영화",
+"children":[
+{
+"name":"영화" ,
+"positive":36,
+"negative":16
+}
+,		{
+"name":"작품" ,
+"positive":1,
+"negative":1
+}
+,		{
+"name":"전체적" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스케일" ,
+"positive":3,
+"negative":2
+}
+],
+"positive":40,
+"negative":19
+}
+,	{
+"name":"배우",
+"children":[
+{
+"name":"연기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐릭터" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"주인공" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기력" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"대사" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"조연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"캐스팅" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"목소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스타일" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"출연" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"더빙" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"여배우" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"연기자" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"역할" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":1
+}
+,	{
+"name":"영상",
+"children":[
+{
+"name":"영상" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"장면" ,
+"positive":2,
+"negative":11
+}
+,		{
+"name":"씬" ,
+"positive":10,
+"negative":0
+}
+,		{
+"name":"볼거리" ,
+"positive":3,
+"negative":1
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"분위기" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"표현" ,
+"positive":4,
+"negative":0
+}
+,		{
+"name":"화면" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"비주얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"배경" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"그래픽" ,
+"positive":3,
+"negative":0
+}
+,		{
+"name":"분장" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"비쥬얼" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"영상미" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":24,
+"negative":13
+}
+,	{
+"name":"스토리",
+"children":[
+{
+"name":"스토리" ,
+"positive":23,
+"negative":7
+}
+,		{
+"name":"내용" ,
+"positive":12,
+"negative":9
+}
+,		{
+"name":"소재" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"전개" ,
+"positive":3,
+"negative":4
+}
+,		{
+"name":"이야기" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"결말" ,
+"positive":4,
+"negative":6
+}
+,		{
+"name":"엔딩" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"시나리오" ,
+"positive":1,
+"negative":0
+}
+,		{
+"name":"개연성" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"줄거리" ,
+"positive":2,
+"negative":0
+}
+,		{
+"name":"설정" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"원작" ,
+"positive":5,
+"negative":0
+}
+,		{
+"name":"마무리" ,
+"positive":7,
+"negative":2
+}
+,		{
+"name":"주제" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사건" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"짜임새" ,
+"positive":0,
+"negative":1
+}
+,		{
+"name":"내용전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리라인" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"각본" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리전개" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"등장인물" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"스토리구성" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":61,
+"negative":29
+}
+,	{
+"name":"음향",
+"children":[
+{
+"name":"음향" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"노래" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"소리" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"사운드" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"멜로디" ,
+"positive":0,
+"negative":0
+}
+,		{
+"name":"곡" ,
+"positive":0,
+"negative":0
+}
+],
+"positive":0,
+"negative":0
+}
+],
+"positive":131,
+"negative":66
+}
+]}
