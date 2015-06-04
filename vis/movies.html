@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>movie reivew similarity</title>
+    <title>movie review similarity</title>
     <style>
         html,body {
            margin:0;padding:0;
@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-<canvas id="canvas" width="1200" height="800"></canvas>
+<canvas id="canvas" width="2400" height="2000"></canvas>
 <script>
 var data = null;
 window.addEventListener('load',function(){
@@ -31,7 +31,7 @@ window.addEventListener('load',function(){
             }
         }
     };
-    req.open("get","reviewScore.json",false);
+    req.open("get","data.json",false);
     req.send();
 });
 
@@ -119,7 +119,7 @@ function makeEdge() {
             if (moviesSimArray[i][r] >= .9) {
                 edges.push({origin: i, target: r});
                 if (polaritySimArray[i][r] >= .9) {
-                    polarityEdges.push({origin:i, target: r});
+                    edges.push({origin:i, target: r});
                 }
             }
         }
@@ -160,7 +160,7 @@ function initNodes() {
             var thisNegative = data[i].children[r].negative;
             ctx.beginPath();
             ctx.lineWidth = 35 * ( (thisPositive + thisNegative)/ total);
-            ctx.arc(x, y, 25, (degree360/NumOfProp) * r, (degree360/NumOfProp) * (r+1), false);
+            ctx.arc(x, y, 15+(ctx.lineWidth/2), (degree360/NumOfProp) * r, (degree360/NumOfProp) * (r+1), false);
             if (thisPositive < thisNegative) {
                 ctx.strokeStyle = "rgba(204,61,61,"+ (thisNegative / (thisPositive+thisNegative))+")";
             } else {
@@ -242,10 +242,10 @@ update = function() {
         er = Math.sqrt(ex*ex + ey*ey);
         if(er === 0) er = 0.0001;
         fa = aForce(er);
-        nd1.dx -= ex/er*fa;
-        nd1.dy -= ey/er*fa;
-        nd2.dx += ex/er*fa;
-        nd2.dy += ey/er*fa;
+        nd1.dx -= ex/er*fa/2;
+        nd1.dy -= ey/er*fa/2;
+        nd2.dx += ex/er*fa/2;
+        nd2.dy += ey/er*fa/2;
     }
 
     for(i = 0; i < polarityEdges.length; i++) {
