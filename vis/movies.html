@@ -24,6 +24,7 @@ window.addEventListener('load',function(){
                 data = JSON.parse(req.responseText).movies;
                 console.log(data);
                 getSimilarityMatrix();
+                getPolarityMatrix();
                 initNodes();
                 makeEdge();
                 update();
@@ -69,20 +70,61 @@ function getSimilarityMatrix() {
     }
 }
 
+var polaritySimArray = [];
+function getPolarityMatrix() {
+    for (var i = 0; i < data.length; i++) {
+        var prop;
+        var a =[];
+        for (var x = 0; x < data[i].children.length; x++) {
+            prop = data[i].children[x];
+            a.push( (prop.positive / prop.positive+prop.negative) );
+            a.push( (prop.negative / prop.positive+prop.negative) );
+        }
+
+        var sim = [];
+        for(var r = 0; r < data.length; r++) {
+            var result = 0;
+            var b = [];
+            for (var y = 0; y < data[r].children.length; y++) {
+                prop = data[r].children[y];
+                b.push( (prop.positive / prop.positive+prop.negative) );
+                b.push( (prop.positive / prop.positive+prop.negative) );
+            }
+            var aVector = 0;
+            var bVector = 0;
+            for (var z = 0; z < a.length; z++) {
+                aVector += a[z] * a[z];
+                bVector += b[z] * b[z];
+                result += (a[z] * b[z]);
+            }
+            aVector = Math.sqrt(aVector);
+            bVector = Math.sqrt(bVector);
+            result = Math.floor((result /(aVector * bVector))*100);
+            sim.push(result/100);
+        }
+        polaritySimArray.push(sim);
+    }
+}
+
 var edges = [];
+var polarityEdges = [];
 function makeEdge() {
+    edges = [];
     var origin;
     var target;
-    for (var i = 0; i < moviesSimArray.length; i++) {
+    for (var i = 0; i < polaritySimArray.length; i++) {
         origin = i;
-        for (var r = i+1; r < moviesSimArray[i].length; r++) {
+        for (var r = i+1; r < polaritySimArray[i].length; r++) {
             target = r;
             if (moviesSimArray[i][r] >= .9) {
                 edges.push({origin: i, target: r});
+                if (polaritySimArray[i][r] >= .9) {
+                    polarityEdges.push({origin:i, target: r});
+                }
             }
         }
     }
-    console.log("num of Edge :"+edges.length);
+    console.log("num of pEdge :"+edges.length);
 }
 
 const degree360 = Math.PI*2;
@@ -147,7 +189,7 @@ draw = function() {
         nodeCanvas.style.left = (nodes[i].posX - nodeCanvas.clientWidth/2 ) + "px";
         nodeCanvas.style.top = (nodes[i].posY - nodeCanvas.clientHeight/2) + "px";
     }
-    context.lineWidth = .2;
+    context.lineWidth = .05;
     for (i = 0; i < edges.length; i++) {
         nd1 = nodes[edges[i].origin];
         nd2 = nodes[edges[i].target];
@@ -195,6 +237,20 @@ update = function() {
     for(i = 0; i < edges.length; i++) {
         nd1 = nodes[edges[i].origin];
         nd2 = nodes[edges[i].target];
+        ex = nd1.x - nd2.x;
+        ey = nd1.y - nd2.y;
+        er = Math.sqrt(ex*ex + ey*ey);
+        if(er === 0) er = 0.0001;
+        fa = aForce(er);
+        nd1.dx -= ex/er*fa;
+        nd1.dy -= ey/er*fa;
+        nd2.dx += ex/er*fa;
+        nd2.dy += ey/er*fa;
+    }
+
+    for(i = 0; i < polarityEdges.length; i++) {
+        nd1 = nodes[polarityEdges[i].origin];
+        nd2 = nodes[polarityEdges[i].target];
         ex = nd1.x - nd2.x;
         ey = nd1.y - nd2.y;
         er = Math.sqrt(ex*ex + ey*ey);
