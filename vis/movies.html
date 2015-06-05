@@ -17,23 +17,35 @@
 <div style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px; background-color:rgba(244,244,244,.5)">
     <canvas width="200" height="200" id="legends" style="outline:1px solid #ccc; margin:25px;"></canvas>
 </div>
+<div style="position:absolute; z-index:998; width:200px; left:0; top:0; height:150px; outline:1px solid #ccc;" >
+  <span id="mName">영화이름</span>
+</div>
 <script>
 var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
 
-
 var data = null;
+var selectedMovie = null;
 function drawLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
-    for(var i = 0; i < data[0].children.length; i++){
+    var i;
+    ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
+    for(i = 0; i < data[0].children.length; i++) {
         ctx.beginPath();
         ctx.strokeStyle = color[i];
-        ctx.lineWidth = 50;
+        if (selectedMovie === null) {
+            ctx.lineWidth = 50;
+        } else {
+            var total = data[selectedMovie].positive + data[selectedMovie].negative;
+            var thisPositive = data[selectedMovie].children[i].positive;
+            var thisNegative = data[selectedMovie].children[i].negative;
+            ctx.lineWidth = 80 * ( (thisPositive + thisNegative) / total) ;
+        }
         ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 60, (degree360/data[0].children.length)*i, (degree360/data[0].children.length)*(i+1), false);
         ctx.stroke();
     }
     ctx.textBaseline = "bottom";
-    for(var i = 0; i < data[0].children.length; i++){
+    for(i = 0; i < data[0].children.length; i++){
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
         ctx.rotate(((degree360/data[0].children.length) * i)+120);
@@ -59,7 +71,7 @@ window.addEventListener('load',function(){
             }
         }
     };
-    req.open("get","data.json",false);
+    req.open("get","reviewScore.json",false);
     req.send();
 });
 
@@ -179,7 +191,8 @@ function initNodes() {
         nodeCanvas = document.querySelector("#node_"+i);
         nodeCanvas.addEventListener('click',function(){
             var id = this.id.split('_')[1];
-            console.log(data[id].name);
+            selectedMovie = id;
+            drawLegends();
         });
         ctx = nodeCanvas.getContext("2d");
         ctx.lineWidth = 2;
