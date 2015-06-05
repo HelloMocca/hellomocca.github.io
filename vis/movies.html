@@ -25,33 +25,60 @@ var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
 
 var data = null;
 var selectedMovie = null;
-function drawLegends() {
+var legendDrawTimer;
+var initLegend = true;
+var legendLoop = 0;
+var targetWidth = [0,0,0,0,0,0];
+var currWidth = [0,0,0,0,0,0];
+function updateLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
+    if (initLegend) {
+        ctx.lineWidth = 1;
+        legendLoop = 0;
+        currWidth = [0,0,0,0,0,0];
+    }
     var i;
     ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
     for(i = 0; i < data[0].children.length; i++) {
         ctx.beginPath();
         ctx.strokeStyle = color[i];
         if (selectedMovie === null) {
-            ctx.lineWidth = 50;
+            if(initLegend) targetWidth = [50,50,50,50,50,50];
+            currWidth[i] += targetWidth[i]/20;
+            ctx.lineWidth = currWidth[i];
         } else {
             var total = data[selectedMovie].positive + data[selectedMovie].negative;
             var thisPositive = data[selectedMovie].children[i].positive;
             var thisNegative = data[selectedMovie].children[i].negative;
-            ctx.lineWidth = 80 * ( (thisPositive + thisNegative) / total) ;
+            if (initLegend) targetWidth[i] = 80*((thisPositive + thisNegative) / total);
+            currWidth[i] += targetWidth[i]/20;
+            ctx.lineWidth = currWidth[i];
         }
-        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 60, (degree360/data[0].children.length)*i, (degree360/data[0].children.length)*(i+1), false);
+        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 40+(ctx.lineWidth/2), (degree360/data[0].children.length)*i, (degree360/data[0].children.length)*(i+1), false);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "grey";
+        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 90,  (degree360/data[0].children.length)*i + (Math.PI/180 * 2),  (degree360/data[0].children.length)*(i+1) - + (Math.PI/180 * 2), false);
         ctx.stroke();
     }
-    ctx.textBaseline = "bottom";
+    ctx.textBaseline = "middle";
     for(i = 0; i < data[0].children.length; i++){
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
-        ctx.rotate(((degree360/data[0].children.length) * i)+120);
+        ctx.rotate((((degree360/data[0].children.length) * i) + (degree360/data[0].children.length /2)));
         ctx.fillText(data[0].children[i].name,50,0);
         ctx.restore();
     }
+    legendLoop++;
+    if(initLegend) initLegend = false;
+    if (legendLoop === 20) {
+        initLegend = true;
+        legendLoop = 0;
+        return;
+    }
+    legendDrawTimer = setTimeout(updateLegends,1000/60);
 }
 
 window.addEventListener('load',function(){
@@ -61,7 +88,7 @@ window.addEventListener('load',function(){
         if (req.readyState == 4) {
             if (req.status == 200) {
                 data = JSON.parse(req.responseText).movies;
-                drawLegends();
+                updateLegends();
                 console.log(data);
                 getSimilarityMatrix();
                 getPolarityMatrix();
@@ -192,7 +219,7 @@ function initNodes() {
         nodeCanvas.addEventListener('click',function(){
             var id = this.id.split('_')[1];
             selectedMovie = id;
-            drawLegends();
+            updateLegends();
         });
         ctx = nodeCanvas.getContext("2d");
         ctx.lineWidth = 2;
@@ -224,6 +251,7 @@ var cooling = canvas.width*.1;
 draw = function() {
     var nodeCanvas;
     var prop;
+    var i;
     context.lineWidth = .05;
     for (i = 0; i < polarityEdges.length; i++) {
         nd1 = nodes[polarityEdges[i].origin];
