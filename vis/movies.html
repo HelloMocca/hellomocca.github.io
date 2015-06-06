@@ -19,12 +19,27 @@
             left:0;
             top:0;
         }
+
+        #infoPanel h1 {
+            padding:0;
+            margin:0 0 0 25px;
+            font-size:25px;
+        }
+
+        #infoPanel {
+            background-color:rgba(244,244,244,.5)
+        }
+
+        #infoPanel:hover {
+            background-color:white;
+        }
     </style>
 </head>
 <body>
 <canvas id="canvas" width="2400" height="2000"></canvas>
-<div style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px; background-color:rgba(244,244,244,.5)">
-    <canvas width="200" height="200" id="legends" style="outline:1px solid #ccc; margin:25px;"></canvas>
+<div id="infoPanel" style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px;">
+    <canvas width="200" height="200" id="legends" style="margin:25px 25px 10px 25px;"></canvas>
+    <h1>영화이름</h1>
 </div><!--
 <div style="position:absolute; z-index:998; width:200px; left:0; top:0; height:150px; outline:1px solid #ccc;" >
   <span id="mName">영화이름</span>
@@ -43,11 +58,15 @@ var numOfMovie = 0;
 var numOfProperty = 0;
 function updateLegends() {
     var legend = document.querySelector("#legends");
+    document.querySelector("#infoPanel h1").innerHTML = "";
     var ctx = legend.getContext('2d');
     if (initLegend) {
         ctx.lineWidth = 1;
         legendLoop = 0;
         currWidth = [0,0,0,0,0,0];
+    }
+    if (selectedMovie !== null) {
+        document.querySelector("#infoPanel h1").innerHTML = selectedMovie.name;
     }
     var i;
     ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
@@ -62,7 +81,7 @@ function updateLegends() {
             var total = selectedMovie.positive + selectedMovie.negative;
             var thisPositive = selectedMovie.children[i].positive;
             var thisNegative = selectedMovie.children[i].negative;
-            if (initLegend) targetWidth[i] = 80*((thisPositive + thisNegative) / total);
+            if (initLegend) targetWidth[i] = 60*((thisPositive + thisNegative) / total);
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
         }
@@ -80,7 +99,7 @@ function updateLegends() {
                 ctx.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
             }
         }
-        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 90,  (degree360/numOfProperty)*i + (Math.PI/180 * 2),  (degree360/numOfProperty)*(i+1) - (Math.PI/180 * 2), false);
+        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 95,  (degree360/numOfProperty)*i + (Math.PI/180 * 2),  (degree360/numOfProperty)*(i+1) - (Math.PI/180 * 2), false);
         ctx.stroke();
     }
     ctx.textBaseline = "middle";
@@ -127,7 +146,7 @@ window.addEventListener('load',function(){
                     beginOffsetY = e.y;
                     beforePositionX = document.querySelector('#canvas').offsetLeft;
                     beforePositionY = document.querySelector('#canvas').offsetTop;
-                });
+                },false);
                 document.addEventListener('mousemove', function(e){
                    if (mDown) {
                        dragging = true;
@@ -136,18 +155,37 @@ window.addEventListener('load',function(){
                        document.querySelector('#canvas').style.left = beforePositionX+moveOffsetX+"px";
                        document.querySelector('#canvas').style.top = beforePositionY+moveOffsetY+"px";
                    }
-                });
+                },false);
                 document.addEventListener('mouseup', function(e){
                     if(dragging){
                       mDown = false;
                       dragging = false;
                     } else {
                         mDown = false;
-                        if (e.target.className == "nodeCanvas") return;
+                    }
+                },false);
+                document.querySelector('#canvas').addEventListener('click',function(e){
+                    var node;
+                    var ex,ey;
+                    var i;
+                    for (i = 0; i < nodes.length; i++) {
+                        node = nodes[i];
+                        ex = e.offsetX - node.posX;
+                        ey = e.offsetY - node.posY;
+                        er = Math.sqrt(ex * ex + ey * ey);
+                        if (er < outerRadius) {
+                            selectedMovie = data[i];
+                            updateLegends();
+                            draw();
+                            break;
+                        }
+                    }
+                    if (i === nodes.length) {
                         selectedMovie = null;
                         updateLegends();
+                        draw();
                     }
-                })
+                },false);
             }
         }
     };
@@ -262,17 +300,17 @@ function initNodes() {
             this.posY = 10;
             this.r = 10;
         });
-        nodeCanvas = document.createElement("canvas");
-        nodeCanvas.setAttribute("id", "node_"+i);
-        nodeCanvas.setAttribute("class","nodeCanvas");
-        nodeCanvas.setAttribute("width","100");
-        nodeCanvas.setAttribute("height","100");
-        document.body.appendChild(nodeCanvas);
-        nodeCanvas = document.querySelector("#node_"+i);
-        nodeCanvas.addEventListener('click',function(e){
-            selectedMovie = data[this.id.split('_')[1]];
-            updateLegends();
-        });
+//        nodeCanvas = document.createElement("canvas");
+//        nodeCanvas.setAttribute("id", "node_"+i);
+//        nodeCanvas.setAttribute("class","nodeCanvas");
+//        nodeCanvas.setAttribute("width","100");
+//        nodeCanvas.setAttribute("height","100");
+//        document.body.appendChild(nodeCanvas);
+//        nodeCanvas = document.querySelector("#node_"+i);
+//        nodeCanvas.addEventListener('click',function(e){
+//            selectedMovie = data[this.id.split('_')[1]];
+//            updateLegends();
+//        });
 //        ctx = nodeCanvas.getContext("2d");
 //        ctx.lineWidth = 2;
 //        var total = data[i].positive + data[i].negative;
@@ -302,20 +340,30 @@ function initNodes() {
 }
 
 var nodes = [];
-var canvas = document.querySelector("canvas");
+var canvas = document.querySelector("#canvas");
 var context = canvas.getContext("2d");
 var cooling = canvas.width*.1;
 var innerRadius = 15;
-var outerRadius = 40;
+var outerRadius = 50;
 var innerLineWidth = 35;
 var outerLineWidth = 5;
 var textCondition = 50;
 draw = function() {
-    var nodeCanvas;
-    var prop;
-    var i;
+    context.clearRect(0,0,canvas.width, canvas.height);
+    context.save();
+    context.strokeStyle = "black";
     context.lineWidth = .05;
+    var i;
     for (i = 0; i < polarityEdges.length; i++) {
+        if (selectedMovie !== null) {
+            if (selectedMovie.name === nodes[polarityEdges[i].origin].name || selectedMovie.name === nodes[polarityEdges[i].target].name) {
+                context.strokeStyle = "red";
+                context.lineWidth = 1;
+            } else {
+                context.strokeStyle = "black";
+                context.lineWidth = .05;
+            }
+        }
         nd1 = nodes[polarityEdges[i].origin];
         nd2 = nodes[polarityEdges[i].target];
         context.beginPath();
@@ -325,6 +373,15 @@ draw = function() {
         context.stroke();
     }
     for (i = 0; i < edges.length; i++) {
+        if (selectedMovie !== null) {
+            if (selectedMovie.name === nodes[edges[i].origin].name || selectedMovie.name === nodes[edges[i].target].name) {
+                context.strokeStyle = "red";
+                context.lineWidth = 1;
+            } else {
+                context.strokeStyle = "black";
+                context.lineWidth = .05;
+            }
+        }
         nd1 = nodes[edges[i].origin];
         nd2 = nodes[edges[i].target];
         context.beginPath();
@@ -333,6 +390,7 @@ draw = function() {
         context.closePath();
         context.stroke();
     }
+    context.restore();
     for (i = 0; i < nodes.length; i++) {
         nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
         nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
@@ -365,21 +423,14 @@ draw = function() {
         context.textAlign = "center";
 
         context.fillText(nodes[i].name,nodes[i].posX, nodes[i].posY+nodes[i].r+textCondition);
-//        if (prop.positive < prop.negative) {
-//          context.fillStyle = "rgba(204,61,61,"+ (prop.negative / (prop.positive+prop.negative))+")";
-//        } else {
-//          context.fillStyle = "rgba(47,157,39,"+ (prop.positive / (prop.positive+prop.negative))+")";
-//        }
-//        context.fill();
-        nodeCanvas = document.querySelector("#node_" + i);
-        nodeCanvas.style.left = (nodes[i].posX - nodeCanvas.clientWidth / 2 ) + "px";
-        nodeCanvas.style.top = (nodes[i].posY - nodeCanvas.clientHeight / 2) + "px";
+//        nodeCanvas = document.querySelector("#node_" + i);
+//        nodeCanvas.style.left = (nodes[i].posX - nodeCanvas.clientWidth / 2 ) + "px";
+//        nodeCanvas.style.top = (nodes[i].posY - nodeCanvas.clientHeight / 2) + "px";
     }
 };
 
 update = function() {
     if(cooling < 0.0001) return;
-    context.clearRect(0,0,canvas.width, canvas.height);
     var nd1, nd2;
     var i,r;
     var k = Math.sqrt(canvas.width*canvas.height/nodes.length);
@@ -400,7 +451,7 @@ update = function() {
             ex = nd1.x - nd2.x;
             ey = nd1.y - nd2.y;
             er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
-            if(er === 0) er = 0.0001;
+            if (er === 0) er = 0.0001;
             fr = rForce(er);
             nd1.dx += ex/er*fr;
             nd1.dy += ey/er*fr;
@@ -410,14 +461,13 @@ update = function() {
     }
 
     //attractive
-
     for(i = 0; i < edges.length; i++) {
         nd1 = nodes[edges[i].origin];
         nd2 = nodes[edges[i].target];
         ex = nd1.x - nd2.x;
         ey = nd1.y - nd2.y;
         er = Math.sqrt(ex*ex + ey*ey);
-        if(er === 0) er = 0.0001;
+        if (er === 0) er = 0.0001;
         fa = aForce(er);
         nd1.dx -= ex/er*fa;
         nd1.dy -= ey/er*fa;
@@ -431,7 +481,7 @@ update = function() {
         ex = nd1.x - nd2.x;
         ey = nd1.y - nd2.y;
         er = Math.sqrt(ex*ex + ey*ey);
-        if(er === 0) er = 0.0001;
+        if (er === 0) er = 0.0001;
         fa = aForce(er);
         nd1.dx -= ex/er*fa;
         nd1.dy -= ey/er*fa;
@@ -445,7 +495,7 @@ update = function() {
         ex = canvas.width/2 - node.x;
         ey = canvas.height/2 - node.y;
         er = Math.sqrt(ex*ex + ey*ey);
-        if(er === 0) er = 0.0001;
+        if (er === 0) er = 0.0001;
         fa = aForce(er);
         node.dx += ex/er*fa;
         node.dy += ey/er*fa;
