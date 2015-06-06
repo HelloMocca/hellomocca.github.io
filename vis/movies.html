@@ -33,12 +33,43 @@
         #infoPanel:hover {
             background-color:white;
         }
+
+        #polaritylegend {
+            list-style:none;
+            margin:0;
+            padding:0;
+            margin-left:5px;
+            display:table;
+            background-color:white;
+            margin-top:10px;
+        }
+        #polaritylegend li{
+            display:inline-block;
+            float:left;
+            width:22px;
+            height:10px;
+            outline:1px solid grey;
+            font-size:8px;
+        }
     </style>
 </head>
 <body>
 <canvas id="canvas" width="2400" height="2000"></canvas>
 <div id="infoPanel" style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px;">
-    <canvas width="200" height="200" id="legends" style="margin:25px 25px 10px 25px;"></canvas>
+    <ul id="polaritylegend">
+        <li style="background-color:rgba(255,0,0,1)">-1</li>
+        <li style="background-color:rgba(255,0,0,.8)"></li>
+        <li style="background-color:rgba(255,0,0,.6)">-0.6</li>
+        <li style="background-color:rgba(255,0,0,.4)"></li>
+        <li style="background-color:rgba(255,0,0,.2)">-0.2</li>
+        <li style="background-color:rgba(255,0,0,0)"></li>
+        <li style="background-color:rgba(0,51,153,.2)">0.2</li>
+        <li style="background-color:rgba(0,51,153,.4)"></li>
+        <li style="background-color:rgba(0,51,153,.6); color:white;">0.6</li>
+        <li style="background-color:rgba(0,51,153,.8)"></li>
+        <li style="background-color:rgba(0,51,153,1); color:white;">1</li>
+    </ul>
+    <canvas width="200" height="200" id="legends" style="margin:10px 25px 10px 25px;"></canvas>
     <h1>영화이름</h1>
 </div><!--
 <div style="position:absolute; z-index:998; width:200px; left:0; top:0; height:150px; outline:1px solid #ccc;" >
@@ -46,6 +77,7 @@
 </div>-->
 <script>
 var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
+var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(0,51,153,.2)', 'rgba(0,51,153,.5)', 'rgba(0,51,153,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
 var canvas;
@@ -110,7 +142,7 @@ function updateLegends() {
         ctx.lineWidth = 5;
 
         //drawPolarity
-        if (selectedMovie === null) ctx.strokeStyle = "grey";
+        if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
         else {
             if (thisPositive > thisNegative) {
                ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
