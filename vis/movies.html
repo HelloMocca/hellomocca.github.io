@@ -46,7 +46,25 @@
 </div>-->
 <script>
 var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
-
+const degree360 = Math.PI*2;
+var nodes = [];
+var canvas;
+var context;
+var cooling;
+var innerRadius = 15;
+var outerRadius = 50;
+var innerLineWidth = 35;
+var outerLineWidth = 5;
+var textCondition = 50;
+var edges = [];
+var polarityEdges = [];
+var polaritySimArray = [];
+var moviesSimArray = [];
+var mDown = false;
+var dragging = false;
+var beginOffsetX, beginOffsetY;
+var moveOffsetX, moveOffsetY;
+var beforePositionX, beforePositionY;
 var data = null;
 var selectedMovie = null;
 var legendDrawTimer;
@@ -121,12 +139,10 @@ function updateLegends() {
     legendDrawTimer = setTimeout(updateLegends,1000/60);
 }
 
-var mDown = false;
-var dragging = false;
-var beginOffsetX, beginOffsetY;
-var moveOffsetX, moveOffsetY;
-var beforePositionX, beforePositionY;
 window.addEventListener('load',function(){
+    canvas = document.querySelector("#canvas");
+    context = canvas.getContext('2d');
+    cooling = canvas.width *.1;
     var req = new XMLHttpRequest();
     req.onreadystatechange = function(){
         if (req.readyState == 4) {
@@ -193,7 +209,6 @@ window.addEventListener('load',function(){
     req.send();
 });
 
-var moviesSimArray = [];
 function getSimilarityMatrix() {
     for (var i = 0; i < numOfMovie; i++) {
         //each Movies
@@ -228,7 +243,6 @@ function getSimilarityMatrix() {
     }
 }
 
-var polaritySimArray = [];
 function getPolarityMatrix() {
     for (var i = 0; i < numOfMovie; i++) {
         var prop;
@@ -264,8 +278,6 @@ function getPolarityMatrix() {
     }
 }
 
-var edges = [];
-var polarityEdges = [];
 function makeEdge() {
     edges = [];
     var origin;
@@ -285,10 +297,7 @@ function makeEdge() {
     console.log("num of pEdge :"+edges.length);
 }
 
-const degree360 = Math.PI*2;
 function initNodes() {
-    var nodeCanvas;
-    var ctx;
     for (var i = 0; i < data.length; i++) {
         nodes.push(new function() {
             this.name = data[i].name;
@@ -300,54 +309,9 @@ function initNodes() {
             this.posY = 10;
             this.r = 10;
         });
-//        nodeCanvas = document.createElement("canvas");
-//        nodeCanvas.setAttribute("id", "node_"+i);
-//        nodeCanvas.setAttribute("class","nodeCanvas");
-//        nodeCanvas.setAttribute("width","100");
-//        nodeCanvas.setAttribute("height","100");
-//        document.body.appendChild(nodeCanvas);
-//        nodeCanvas = document.querySelector("#node_"+i);
-//        nodeCanvas.addEventListener('click',function(e){
-//            selectedMovie = data[this.id.split('_')[1]];
-//            updateLegends();
-//        });
-//        ctx = nodeCanvas.getContext("2d");
-//        ctx.lineWidth = 2;
-//        var total = data[i].positive + data[i].negative;
-//        var x = nodeCanvas.clientWidth/2;
-//        var y = nodeCanvas.clientHeight/2;
-//        for (var r = 0; r < numOfProperty; r++) {
-//            var thisPositive = data[i].children[r].positive;
-//            var thisNegative = data[i].children[r].negative;
-//            ctx.beginPath();
-//            ctx.lineWidth = 35 * ( (thisPositive + thisNegative)/ total);
-//            ctx.arc(x, y, 15+(ctx.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
-//            ctx.strokeStyle = color[r];
-//            ctx.stroke();
-//
-//            //drawPolarity
-//            ctx.lineWidth = 5;
-//            ctx.beginPath();
-//            ctx.arc(x, y, 40, (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
-//            if (thisPositive > thisNegative) {
-//              ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-//            } else {
-//              ctx.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
-//            }
-//            ctx.stroke();
-//        }
     }
 }
 
-var nodes = [];
-var canvas = document.querySelector("#canvas");
-var context = canvas.getContext("2d");
-var cooling = canvas.width*.1;
-var innerRadius = 15;
-var outerRadius = 50;
-var innerLineWidth = 35;
-var outerLineWidth = 5;
-var textCondition = 50;
 draw = function() {
     context.clearRect(0,0,canvas.width, canvas.height);
     context.save();
