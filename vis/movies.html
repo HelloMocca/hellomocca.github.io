@@ -9,6 +9,7 @@
             width:100%;
             height:100%;
             overflow:hidden;
+            background-color:rgb(60,69,80);
         }
         #canvas {
             position:absolute;
@@ -48,7 +49,7 @@
     </style>
 </head>
 <body>
-<canvas id="canvas" width="2400" height="2000"></canvas>
+<canvas id="canvas" width="1400" height="900"></canvas>
 <div id="infoPanel" style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px;">
     <ul id="polaritylegend">
         <li style="background-color:rgba(255,0,0,1)">-1</li>
@@ -71,13 +72,14 @@
 </div>-->
 <script>
 var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
+color = ['#B37AF7','#9FD646','#6BD1D7','#E97820','#EE8DEE','#ECBA33'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(0,51,153,.2)', 'rgba(0,51,153,.5)', 'rgba(0,51,153,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
 var canvas;
 var context;
 var cooling;
-var pointRadius = 10;
+var pointRadius = 5;
 var innerRadius = 15;
 var outerRadius = 50;
 var innerLineWidth = 35;
@@ -126,7 +128,10 @@ function updateLegends() {
             var total = selectedMovie.positive + selectedMovie.negative;
             var thisPositive = selectedMovie.children[i].positive;
             var thisNegative = selectedMovie.children[i].negative;
-            if (initLegend) targetWidth[i] = 60*((thisPositive + thisNegative) / total);
+            if (initLegend){
+                targetWidth[i] = 60*((thisPositive + thisNegative) / total);
+                if(targetWidth[i]<= 0) targetWidth[i] = 1;
+            }
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
         }
@@ -138,6 +143,7 @@ function updateLegends() {
         //drawPolarity
         if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
         else {
+            ctx.strokeStyle = "#fff";
             if (thisPositive > thisNegative) {
                ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
             } else {
@@ -251,7 +257,7 @@ function zoomin() {
     if(zoomrate > 1.2) zoomrate = 1.2;
     zoomlevel += 2;
     if(zoomlevel > 0) zoomlevel = 0;
-    pointRadius = 10 + zoomlevel;
+    pointRadius = 5 + zoomlevel;
     if(pointRadius < 1) pointRadius = 1;
     innerRadius = 15 + zoomlevel;
     //if(innerRadius < 2) innerRadius = 2;
@@ -269,7 +275,7 @@ function zoomout() {
     console.log(zoomrate);
     zoomlevel -= 2;
     if(zoomlevel < -35) zoomlevel = -35;
-    pointRadius = 10 + zoomlevel;
+    pointRadius = 5 + zoomlevel;
     if(pointRadius < 1) pointRadius = 1;
     innerRadius = 15 + zoomlevel;
     //if(innerRadius < 2) innerRadius = 2;
@@ -364,13 +370,17 @@ function makeEdge() {
     var target;
     for (var i = 0; i < polaritySimArray.length; i++) {
         origin = i;
+        edgenum = 0;
         for (var r = i+1; r < polaritySimArray[i].length; r++) {
             target = r;
             if (moviesSimArray[i][r] >= .9) {
-                edges.push({origin: i, target: r});
-                if (polaritySimArray[i][r] >= .9) {
-                    polarityEdges.push({origin:i, target: r});
-                }
+                //if (edgenum < 3) {
+                    edges.push({origin: i, target: r, value: moviesSimArray[i][r]});
+               // }
+                edgenum++;
+//                if (polaritySimArray[i][r] >= .9) {
+//                    polarityEdges.push({origin:i, target: r});
+//                }
             }
         }
     }
@@ -388,6 +398,7 @@ function initNodes() {
             this.posX = i*20;
             this.posY = 10;
             this.r = 10;
+            this.active = true;
         });
     }
 }
@@ -396,21 +407,33 @@ draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.strokeStyle = "black";
+    context.strokeStyle = "#fff";
     context.lineWidth = .05;
+    context.globalAlpha = 1;
+    if (selectedMovie !== null) {
+        for(i = 0; i < nodes.length; i++) {
+            nodes[i].active = false;
+        }
+    } else {
+        for(i = 0; i < nodes.length; i++) {
+            nodes[i].active = true;
+        }
+    }
     var i,nd1,nd2;
     for (i = 0; i < polarityEdges.length; i++) {
+        nd1 = nodes[polarityEdges[i].origin];
+        nd2 = nodes[polarityEdges[i].target];
         if (selectedMovie !== null) {
-            if (selectedMovie.name === nodes[polarityEdges[i].origin].name || selectedMovie.name === nodes[polarityEdges[i].target].name) {
-                context.strokeStyle = "red";
+            if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
+                context.strokeStyle = "#fff";
                 context.lineWidth = .5;
+                nd1.active = true;
+                nd2.active = true;
             } else {
-                context.strokeStyle = "black";
+                context.strokeStyle = "#fff";
                 context.lineWidth = .05;
             }
         }
-        nd1 = nodes[polarityEdges[i].origin];
-        nd2 = nodes[polarityEdges[i].target];
         context.beginPath();
         context.moveTo(zoomXcalc(nd1.posX),zoomYcalc(nd1.posY));
         context.lineTo(zoomXcalc(nd2.posX),zoomYcalc(nd2.posY));
@@ -418,17 +441,19 @@ draw = function() {
         context.stroke();
     }
     for (i = 0; i < edges.length; i++) {
+        nd1 = nodes[edges[i].origin];
+        nd2 = nodes[edges[i].target];
         if (selectedMovie !== null) {
-            if (selectedMovie.name === nodes[edges[i].origin].name || selectedMovie.name === nodes[edges[i].target].name) {
-                context.strokeStyle = "red";
+            if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
+                context.strokeStyle = "#fff";
                 context.lineWidth = .5;
+                nd1.active = true;
+                nd2.active = true;
             } else {
-                context.strokeStyle = "black";
+                context.strokeStyle = "#fff";
                 context.lineWidth = .05;
             }
         }
-        nd1 = nodes[edges[i].origin];
-        nd2 = nodes[edges[i].target];
         context.beginPath();
         context.moveTo(zoomXcalc(nd1.posX), zoomYcalc(nd1.posY));
         context.lineTo(zoomXcalc(nd2.posX), zoomYcalc(nd2.posY));
@@ -436,34 +461,38 @@ draw = function() {
         context.stroke();
     }
     for (i = 0; i < nodes.length; i++) {
+        if(nodes[i].active) context.globalAlpha = 1;
+        else context.globalAlpha = .2;
         nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
         nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
         x = zoomXcalc(nodes[i].posX);
         y = zoomYcalc(nodes[i].posY);
         context.beginPath();
         context.arc(x, y, pointRadius, 0, Math.PI * 2, false);
-        context.fillStyle = "#454545";
+        context.fillStyle = "#fff";
         context.fill();
         var total = data[i].positive + data[i].negative;
-        for (var r = 0; r < numOfProperty; r++) {
+        for (var r = 0; r < data[i].children.length; r++) {
             var thisPositive = data[i].children[r].positive;
             var thisNegative = data[i].children[r].negative;
             context.beginPath();
-            context.lineWidth = innerLineWidth * ( (thisPositive + thisNegative) / total);
+            var linewidth = innerLineWidth * ( (thisPositive + thisNegative) / total);
+            if (linewidth <= 0) linewidth = 0.001;
+            context.lineWidth = linewidth;
             context.arc(x, y, innerRadius+(context.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
             context.strokeStyle = color[r];
             context.stroke();
 
             //drawPolarity
-            context.lineWidth = outerLineWidth;
-            context.beginPath();
-            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
-            if (thisPositive > thisNegative) {
-                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-            } else {
-                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
-            }
-            context.stroke();
+//            context.lineWidth = outerLineWidth;
+//            context.beginPath();
+//            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
+//            if (thisPositive > thisNegative) {
+//                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
+//            } else {
+//                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
+//            }
+//            context.stroke();
         }
         context.font  = "12px sans-serif";
         context.textAlign = "center";
