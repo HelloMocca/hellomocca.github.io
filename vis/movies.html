@@ -83,8 +83,8 @@ var nodes = [];
 var canvas;
 var context;
 var cooling;
-var pointRadius = 5;
-var innerRadius = 15;
+var pointRadius = 1;
+var innerRadius = 1;
 var outerRadius = 50;
 var innerLineWidth = 35;
 var outerLineWidth = 5;
@@ -122,29 +122,48 @@ function updateLegends() {
     }
     var i;
     ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
+    var propMaxValue = 0;
+    var thisPositive, thisNegative, total;
+    if (selectedMovie !== null) {
+        for (i = 0; i < data[0].children.length; i++) {
+            total = selectedMovie.positive + selectedMovie.negative;
+            thisPositive = selectedMovie.children[i].positive;
+            thisNegative = selectedMovie.children[i].negative;
+            if (propMaxValue < ((thisPositive + thisNegative) / total)) {
+                propMaxValue = (thisPositive + thisNegative) / total;
+            }
+        }
+    }
     for(i = 0; i < data[0].children.length; i++) {
         ctx.beginPath();
         ctx.strokeStyle = color[i];
         if (selectedMovie === null) {
-            if(initLegend) targetWidth = [50,50,50,50,50,50];
+            if(initLegend) targetWidth = [65,65,65,65,65,65];
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
         } else {
-            var total = selectedMovie.positive + selectedMovie.negative;
-            var thisPositive = selectedMovie.children[i].positive;
-            var thisNegative = selectedMovie.children[i].negative;
+            total = selectedMovie.positive + selectedMovie.negative;
+            thisPositive = selectedMovie.children[i].positive;
+            thisNegative = selectedMovie.children[i].negative;
             if (initLegend){
-                targetWidth[i] = 60*((thisPositive + thisNegative) / total);
+                targetWidth[i] = 65*(((thisPositive + thisNegative) / total) / propMaxValue  );
                 if(targetWidth[i]<= 0) targetWidth[i] = 1;
             }
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
         }
-        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 40+(ctx.lineWidth/2), (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
+        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 1+(ctx.lineWidth/2), (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
         ctx.stroke();
+
+        if (selectedMovie !== null) {
+            for (var r = 0; r < selectedMovie.children[i].length; r++) {
+                ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 10, ((degree360/numOfProperty)*i)  ,((degree360/numOfProperty)*i)   ,false);
+                ctx.stroke();
+            }
+        }
+
         ctx.beginPath();
         ctx.lineWidth = 5;
-
         //drawPolarity
         if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
         else {
@@ -164,7 +183,7 @@ function updateLegends() {
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
         ctx.rotate((((degree360/numOfProperty) * i) + (degree360/numOfProperty /2)));
         ctx.font = "13px sans-serif";
-        ctx.fillText(data[0].children[i].name,50,0);
+        ctx.fillText(data[0].children[i].name,20,0);
         ctx.restore();
     }
     legendLoop++;
@@ -417,8 +436,8 @@ draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.strokeStyle = "#454545";
-    context.lineWidth = .2;
+    context.strokeStyle = "#181818";
+    context.lineWidth = .05;
     context.globalAlpha = 1;
     if (selectedMovie !== null) {
         for(i = 0; i < nodes.length; i++) {
@@ -435,12 +454,12 @@ draw = function() {
         nd2 = nodes[polarityEdges[i].target];
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                context.strokeStyle = "#454545";
-                context.lineWidth = .2;
+                context.strokeStyle = "#181818";
+                context.lineWidth = .05;
                 nd1.active = true;
                 nd2.active = true;
             } else {
-                context.strokeStyle = "#454545";
+                context.strokeStyle = "#181818";
                 context.lineWidth = .05;
             }
         }
@@ -455,12 +474,12 @@ draw = function() {
         nd2 = nodes[edges[i].target];
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                context.strokeStyle = "#454545";
-                context.lineWidth = .2;
+                context.strokeStyle = "#181818";
+                context.lineWidth = .05;
                 nd1.active = true;
                 nd2.active = true;
             } else {
-                context.strokeStyle = "#454545";
+                context.strokeStyle = "#181818";
                 context.lineWidth = .05;
             }
         }
