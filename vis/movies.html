@@ -161,9 +161,6 @@ function updateLegends() {
         if (selectedMovie !== null) {
             var dep2 = selectedMovie.children[i].children;
             for (r = 0; r < dep2.length; r++) {
-
-            }
-            for (r = 0; r < dep2.length; r++) {
                 var basicrad = (degree360/numOfProperty) / dep2.length;
                 var lw = targetWidth[i]*(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative);
                 if (lw === 0) lw = 1;
@@ -475,8 +472,8 @@ draw = function() {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
                 context.strokeStyle = "#181818";
                 context.lineWidth = .05;
-                nd1.active = true;
-                nd2.active = true;
+                //nd1.active = true;
+                //nd2.active = true;
             } else {
                 context.strokeStyle = "#181818";
                 context.lineWidth = .05;
@@ -495,8 +492,8 @@ draw = function() {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
                 context.strokeStyle = "#181818";
                 context.lineWidth = .05;
-                nd1.active = true;
-                nd2.active = true;
+                //nd1.active = true;
+                //nd2.active = true;
             } else {
                 context.strokeStyle = "#181818";
                 context.lineWidth = .05;
@@ -513,8 +510,9 @@ draw = function() {
         var isSelected = false;
         if (selectedMovie !== null) {
             if (selectedMovie.name === nodes[i].name){
-                focusValue = 70;
+                focusValue = 50;
                 isSelected = true;
+                nodes[i].active = true;
             }
         }
         if (nodes[i].active) {
@@ -540,11 +538,20 @@ draw = function() {
             var linewidth = (nodes[i].r+focusValue) *( (thisPositive + thisNegative) / propMaxValue) ;
             if (linewidth <= 0) linewidth = 0.001;
             context.lineWidth = linewidth;
-            context.arc(x, y, (context.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
+            context.arc(x, y, context.lineWidth/2, (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
             context.strokeStyle = color[r];
             context.stroke();
             if (isSelected) {
-
+                var dep2 = selectedMovie.children[r].children;
+                for (var v = 0; v < dep2.length; v++) {
+                    var basicrad = (degree360/numOfProperty) / dep2.length;
+                    var lw = linewidth*(dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative);
+                    if (lw === 0) lw = 1;
+                    context.lineWidth = lw;
+                    context.beginPath();
+                    context.arc(x, y, 50+innerLineWidth+(context.lineWidth/2), ((degree360/numOfProperty)*r)+(basicrad * v), ((degree360/numOfProperty)*r)+(basicrad * (v+1)), false);
+                    context.stroke();
+                }
             }
             //drawPolarity
 //            context.lineWidth = outerLineWidth;
@@ -560,7 +567,6 @@ draw = function() {
         context.font  = "12px sans-serif";
         context.textAlign = "center";
         context.textBaseline= "middle";
-        //context.fillText(nodes[i].name,x, y+outerRadius+focusValue+15);
         context.fillText(nodes[i].name,x,y);
         //draw SelectedMovie
 //        if (selectedMovie != null) {
