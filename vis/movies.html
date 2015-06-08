@@ -15,11 +15,12 @@
         #canvas {
             position:absolute;
             left:0;
+            display:block;
             top:0;
         }
         #infoPanel h1 {
             padding:0;
-            margin:0 0 0 25px;
+            margin:0 0 0 10px;
             font-size:25px;
         }
         #infoPanel {
@@ -37,9 +38,9 @@
             margin-left:5px;
             display:table;
             background-color:white;
-            margin-top:10px;
         }
-        #polaritylegend li{
+
+        #polaritylegend li {
             display:inline-block;
             float:left;
             width:22px;
@@ -50,8 +51,11 @@
     </style>
 </head>
 <body>
-<canvas id="canvas" width="1400" height="900"></canvas>
+<canvas id="canvas"></canvas>
 <div id="infoPanel" style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px;">
+    <h2 style="font-size:40px; margin:10px;">Opinion Analyzer</h2>
+
+    <canvas width="200" height="200" id="legends" style="margin:10px 25px 10px 25px;"></canvas>
     <ul id="polaritylegend">
         <li style="background-color:rgba(255,0,0,1)">-1</li>
         <li style="background-color:rgba(255,0,0,.8)"></li>
@@ -65,8 +69,7 @@
         <li style="background-color:rgba(0,51,153,.8)"></li>
         <li style="background-color:rgba(0,51,153,1); color:white;">1</li>
     </ul>
-    <canvas width="200" height="200" id="legends" style="margin:10px 25px 10px 25px;"></canvas>
-    <h1>영화이름</h1>
+    <h1 style="margin-top:10px;">영화이름</h1>
 </div><!--
 <div style="position:absolute; z-index:998; width:200px; left:0; top:0; height:150px; outline:1px solid #ccc;" >
   <span id="mName">영화이름</span>
@@ -93,7 +96,8 @@ var moviesSimArray = [];
 var mDown = false;
 var dragging = false;
 var beginOffsetX, beginOffsetY;
-var moveOffsetX, moveOffsetY;
+var moveOffsetX = 0; var moveOffsetY = 0;
+var transitOffsetX = 0; var transitOffsetY = 0;
 var beforePositionX, beforePositionY;
 var data = null;
 var selectedMovie = null;
@@ -175,6 +179,8 @@ function updateLegends() {
 
 window.addEventListener('load',function(){
     canvas = document.querySelector("#canvas");
+    console.log(canvas.width = document.body.clientWidth);
+    console.log(canvas.height = document.body.clientHeight);
     context = canvas.getContext('2d');
     cooling = canvas.width *.1;
     var req = new XMLHttpRequest();
@@ -192,24 +198,25 @@ window.addEventListener('load',function(){
                 update();
                 document.addEventListener('mousedown', function(e){
                     mDown = true;
-                    beginOffsetX = e.x;
-                    beginOffsetY = e.y;
-                    beforePositionX = document.querySelector('#canvas').offsetLeft;
-                    beforePositionY = document.querySelector('#canvas').offsetTop;
+                    beginOffsetX = e.offsetX;
+                    beginOffsetY = e.offsetY;
                 },false);
                 document.addEventListener('mousemove', function(e){
                    if (mDown) {
                        dragging = true;
-                       moveOffsetX = e.x - beginOffsetX;
-                       moveOffsetY = e.y - beginOffsetY;
-                       document.querySelector('#canvas').style.left = beforePositionX+moveOffsetX+"px";
-                       document.querySelector('#canvas').style.top = beforePositionY+moveOffsetY+"px";
+                       moveOffsetX = e.offsetX - beginOffsetX;
+                       moveOffsetY = e.offsetY - beginOffsetY;
+                       draw();
                    }
                 },false);
                 document.addEventListener('mouseup', function(e){
                     if(dragging){
                       mDown = false;
                       dragging = false;
+                        transitOffsetX += moveOffsetX;
+                        transitOffsetY += moveOffsetY;
+                        moveOffsetX = 0;
+                        moveOffsetY = 0;
                     } else {
                         mDown = false;
                     }
@@ -220,8 +227,8 @@ window.addEventListener('load',function(){
                     var i;
                     for (i = 0; i < nodes.length; i++) {
                         node = nodes[i];
-                        ex = e.offsetX - zoomXcalc(node.posX);
-                        ey = e.offsetY - zoomYcalc(node.posY);
+                        ex = e.offsetX -( zoomXcalc(node.posX) + moveOffsetX + transitOffsetX );
+                        ey = e.offsetY -( zoomYcalc(node.posY) + moveOffsetY + transitOffsetY );
                         er = Math.sqrt(ex * ex + ey * ey);
                         if (er < outerRadius) {
                             selectedMovie = data[i];
@@ -404,12 +411,14 @@ function initNodes() {
     }
 }
 
+
+var focusValue = 0;
 draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
     context.strokeStyle = "#454545";
-    context.lineWidth = .05;
+    context.lineWidth = .2;
     context.globalAlpha = 1;
     if (selectedMovie !== null) {
         for(i = 0; i < nodes.length; i++) {
@@ -427,17 +436,17 @@ draw = function() {
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
                 context.strokeStyle = "#454545";
-                context.lineWidth = 1;
+                context.lineWidth = .2;
                 nd1.active = true;
                 nd2.active = true;
             } else {
                 context.strokeStyle = "#454545";
-                context.lineWidth = .5;
+                context.lineWidth = .05;
             }
         }
         context.beginPath();
-        context.moveTo(zoomXcalc(nd1.posX),zoomYcalc(nd1.posY));
-        context.lineTo(zoomXcalc(nd2.posX),zoomYcalc(nd2.posY));
+        context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+        context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
         context.closePath();
         context.stroke();
     }
@@ -447,29 +456,36 @@ draw = function() {
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
                 context.strokeStyle = "#454545";
-                context.lineWidth = .5;
+                context.lineWidth = .2;
                 nd1.active = true;
                 nd2.active = true;
             } else {
-                context.strokeStyle = "#fff";
-                context.lineWidth = .5;
+                context.strokeStyle = "#454545";
+                context.lineWidth = .05;
             }
         }
         context.beginPath();
-        context.moveTo(zoomXcalc(nd1.posX), zoomYcalc(nd1.posY));
-        context.lineTo(zoomXcalc(nd2.posX), zoomYcalc(nd2.posY));
+        context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+        context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
         context.closePath();
         context.stroke();
     }
     for (i = 0; i < nodes.length; i++) {
-        if(nodes[i].active) context.globalAlpha = 1;
-        else context.globalAlpha = .2;
+        focusValue = 0;
+        if (selectedMovie !== null) {
+            if (selectedMovie.name === nodes[i].name) focusValue = 10;
+        }
+        if (nodes[i].active) {
+            context.globalAlpha = 1;
+        } else {
+            context.globalAlpha = .2;
+        }
         nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
         nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
-        x = zoomXcalc(nodes[i].posX);
-        y = zoomYcalc(nodes[i].posY);
+        x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
+        y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
         context.beginPath();
-        context.arc(x, y, pointRadius, 0, Math.PI * 2, false);
+        context.arc(x, y, pointRadius+focusValue, 0, Math.PI * 2, false);
         context.fillStyle = "#454545";
         context.fill();
         var total = data[i].positive + data[i].negative;
@@ -477,27 +493,27 @@ draw = function() {
             var thisPositive = data[i].children[r].positive;
             var thisNegative = data[i].children[r].negative;
             context.beginPath();
-            var linewidth = innerLineWidth * ( (thisPositive + thisNegative) / total);
+            var linewidth = (innerLineWidth+focusValue*1.5) * ( (thisPositive + thisNegative) / total);
             if (linewidth <= 0) linewidth = 0.001;
             context.lineWidth = linewidth;
-            context.arc(x, y, innerRadius+(context.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
+            context.arc(x, y, (innerRadius+focusValue*1.5)+(context.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
             context.strokeStyle = color[r];
             context.stroke();
 
             //drawPolarity
-            context.lineWidth = outerLineWidth;
-            context.beginPath();
-            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
-            if (thisPositive > thisNegative) {
-                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-            } else {
-                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
-            }
-            context.stroke();
+//            context.lineWidth = outerLineWidth;
+//            context.beginPath();
+//            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
+//            if (thisPositive > thisNegative) {
+//                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
+//            } else {
+//                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
+//            }
+//            context.stroke();
         }
         context.font  = "12px sans-serif";
         context.textAlign = "center";
-        context.fillText(nodes[i].name,x, y+outerRadius);
+        context.fillText(nodes[i].name,x, y+outerRadius+focusValue+15);
     }
 };
 
