@@ -9,7 +9,7 @@
             width:100%;
             height:100%;
             overflow:hidden;
-            background-color:rgb(60,69,80);
+            background-color:rgb(241, 241, 241);
         }
         #canvas {
             position:absolute;
@@ -25,6 +25,7 @@
             background-color:rgba(244,244,244,.5);
             transition-property:background-color;
             transition-duration:.3s;
+            height:900px;
         }
         #infoPanel:hover {
             background-color:#fff;
@@ -50,7 +51,7 @@
 </head>
 <body>
 <canvas id="canvas" width="1400" height="900"></canvas>
-<div id="infoPanel" style="position:fixed; z-index:999; width:250px; height:500px; outline:1px solid #ccc; left:5px; top:5px;">
+<div id="infoPanel" style="position:fixed; z-index:999; width:250px; outline:1px solid #ccc; left:5px; top:5px;">
     <ul id="polaritylegend">
         <li style="background-color:rgba(255,0,0,1)">-1</li>
         <li style="background-color:rgba(255,0,0,.8)"></li>
