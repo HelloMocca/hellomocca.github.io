@@ -427,12 +427,12 @@ draw = function() {
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
                 context.strokeStyle = "#454545";
-                context.lineWidth = .5;
+                context.lineWidth = 1;
                 nd1.active = true;
                 nd2.active = true;
             } else {
                 context.strokeStyle = "#454545";
-                context.lineWidth = .05;
+                context.lineWidth = .5;
             }
         }
         context.beginPath();
@@ -452,7 +452,7 @@ draw = function() {
                 nd2.active = true;
             } else {
                 context.strokeStyle = "#fff";
-                context.lineWidth = .05;
+                context.lineWidth = .5;
             }
         }
         context.beginPath();
