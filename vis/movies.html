@@ -9,7 +9,8 @@
             width:100%;
             height:100%;
             overflow:hidden;
-            background-color:rgb(60,69,80);
+            //background-color:rgb(60,69,80);
+            background-color:#fff;
         }
         #canvas {
             position:absolute;
@@ -72,7 +73,7 @@
 </div>-->
 <script>
 var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
-color = ['#B37AF7','#9FD646','#6BD1D7','#E97820','#EE8DEE','#ECBA33'];
+color = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(0,51,153,.2)', 'rgba(0,51,153,.5)', 'rgba(0,51,153,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
@@ -143,7 +144,7 @@ function updateLegends() {
         //drawPolarity
         if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
         else {
-            ctx.strokeStyle = "#fff";
+            ctx.strokeStyle = "#454545";
             if (thisPositive > thisNegative) {
                ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
             } else {
@@ -407,7 +408,7 @@ draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.strokeStyle = "#fff";
+    context.strokeStyle = "#454545";
     context.lineWidth = .05;
     context.globalAlpha = 1;
     if (selectedMovie !== null) {
@@ -425,12 +426,12 @@ draw = function() {
         nd2 = nodes[polarityEdges[i].target];
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                context.strokeStyle = "#fff";
+                context.strokeStyle = "#454545";
                 context.lineWidth = .5;
                 nd1.active = true;
                 nd2.active = true;
             } else {
-                context.strokeStyle = "#fff";
+                context.strokeStyle = "#454545";
                 context.lineWidth = .05;
             }
         }
@@ -445,7 +446,7 @@ draw = function() {
         nd2 = nodes[edges[i].target];
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                context.strokeStyle = "#fff";
+                context.strokeStyle = "#454545";
                 context.lineWidth = .5;
                 nd1.active = true;
                 nd2.active = true;
@@ -469,7 +470,7 @@ draw = function() {
         y = zoomYcalc(nodes[i].posY);
         context.beginPath();
         context.arc(x, y, pointRadius, 0, Math.PI * 2, false);
-        context.fillStyle = "#fff";
+        context.fillStyle = "#454545";
         context.fill();
         var total = data[i].positive + data[i].negative;
         for (var r = 0; r < data[i].children.length; r++) {
@@ -484,15 +485,15 @@ draw = function() {
             context.stroke();
 
             //drawPolarity
-//            context.lineWidth = outerLineWidth;
-//            context.beginPath();
-//            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
-//            if (thisPositive > thisNegative) {
-//                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-//            } else {
-//                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
-//            }
-//            context.stroke();
+            context.lineWidth = outerLineWidth;
+            context.beginPath();
+            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
+            if (thisPositive > thisNegative) {
+                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
+            } else {
+                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
+            }
+            context.stroke();
         }
         context.font  = "12px sans-serif";
         context.textAlign = "center";
