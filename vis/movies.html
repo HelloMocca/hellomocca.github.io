@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <title>movie review similarity</title>
     <style>
+        @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
         html,body {
            margin:0;padding:0;
             width:100%;
             height:100%;
             overflow:hidden;
             background-color:rgb(241, 241, 241);
+            font-family:'Jeju Gothic';
         }
         #canvas {
             position:absolute;
             left:0;
+            display:block;
             top:0;
         }
         #infoPanel h1 {
             padding:0;
-            margin:0 0 0 25px;
+            margin:0 0 0 10px;
             font-size:25px;
         }
         #infoPanel {
@@ -37,9 +41,9 @@
             margin-left:5px;
             display:table;
             background-color:white;
-            margin-top:10px;
         }
-        #polaritylegend li{
+
+        #polaritylegend li {
             display:inline-block;
             float:left;
             width:22px;
@@ -50,8 +54,10 @@
     </style>
 </head>
 <body>
-<canvas id="canvas" width="1400" height="900"></canvas>
-<div id="infoPanel" style="position:fixed; z-index:999; width:250px; outline:1px solid #ccc; left:5px; top:5px;">
+<canvas id="canvas"></canvas>
+<div id="infoPanel" style="position:fixed; z-index:999; width:250px; height:100%; outline:1px solid #ccc;">
+    <h2 style="font-size:40px; margin:10px;">Opinion Analyzer</h2>
+    <canvas width="200" height="200" id="legends" style="margin:10px 25px 10px 25px;"></canvas>
     <ul id="polaritylegend">
         <li style="background-color:rgba(255,0,0,1)">-1</li>
         <li style="background-color:rgba(255,0,0,.8)"></li>
@@ -65,23 +71,25 @@
         <li style="background-color:rgba(0,51,153,.8)"></li>
         <li style="background-color:rgba(0,51,153,1); color:white;">1</li>
     </ul>
-    <canvas width="200" height="200" id="legends" style="margin:10px 25px 10px 25px;"></canvas>
-    <h1>영화이름</h1>
+    <h1 style="margin-top:10px;">영화이름</h1>
 </div><!--
 <div style="position:absolute; z-index:998; width:200px; left:0; top:0; height:150px; outline:1px solid #ccc;" >
   <span id="mName">영화이름</span>
 </div>-->
+<div style="outline:1px solid #ccc; width:100%; height:80px; top:100%; margin-top:-80px; background-color:rgb(244,244,244); position:absolute;">
+
+</div>
 <script>
 var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
-color = ['#B37AF7','#9FD646','#6BD1D7','#E97820','#EE8DEE','#ECBA33'];
+color = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(0,51,153,.2)', 'rgba(0,51,153,.5)', 'rgba(0,51,153,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
 var canvas;
 var context;
 var cooling;
-var pointRadius = 5;
-var innerRadius = 15;
+var pointRadius = 1;
+var innerRadius = 1;
 var outerRadius = 50;
 var innerLineWidth = 35;
 var outerLineWidth = 5;
@@ -93,7 +101,8 @@ var moviesSimArray = [];
 var mDown = false;
 var dragging = false;
 var beginOffsetX, beginOffsetY;
-var moveOffsetX, moveOffsetY;
+var moveOffsetX = 0; var moveOffsetY = 0;
+var transitOffsetX = 0; var transitOffsetY = 0;
 var beforePositionX, beforePositionY;
 var data = null;
 var selectedMovie = null;
@@ -105,62 +114,88 @@ var currWidth = [0,0,0,0,0,0];
 var numOfMovie = 0;
 var numOfProperty = 0;
 function updateLegends() {
-    var legend = document.querySelector("#legends");
     document.querySelector("#infoPanel h1").innerHTML = "";
+    var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
     if (initLegend) {
         ctx.lineWidth = 1;
         legendLoop = 0;
         currWidth = [0,0,0,0,0,0];
     }
+    var i, r;
+    ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
+    var propMaxValue = 0;
+    var thisPositive, thisNegative, total;
     if (selectedMovie !== null) {
         document.querySelector("#infoPanel h1").innerHTML = selectedMovie.name;
+        for (i = 0; i < data[0].children.length; i++) {
+            total = selectedMovie.positive + selectedMovie.negative;
+            thisPositive = selectedMovie.children[i].positive;
+            thisNegative = selectedMovie.children[i].negative;
+            if (propMaxValue < ((thisPositive + thisNegative) / total)) {
+                propMaxValue = (thisPositive + thisNegative) / total;
+            }
+        }
     }
-    var i;
-    ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
     for(i = 0; i < data[0].children.length; i++) {
         ctx.beginPath();
         ctx.strokeStyle = color[i];
         if (selectedMovie === null) {
-            if(initLegend) targetWidth = [50,50,50,50,50,50];
+            if(initLegend) targetWidth = [65,65,65,65,65,65];
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
         } else {
-            var total = selectedMovie.positive + selectedMovie.negative;
-            var thisPositive = selectedMovie.children[i].positive;
-            var thisNegative = selectedMovie.children[i].negative;
+            total = selectedMovie.positive + selectedMovie.negative;
+            thisPositive = selectedMovie.children[i].positive;
+            thisNegative = selectedMovie.children[i].negative;
             if (initLegend){
-                targetWidth[i] = 60*((thisPositive + thisNegative) / total);
+                targetWidth[i] = 55*(((thisPositive + thisNegative) / total) / propMaxValue  );
                 if(targetWidth[i]<= 0) targetWidth[i] = 1;
             }
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
         }
-        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 40+(ctx.lineWidth/2), (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
+        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 1+(ctx.lineWidth/2), (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
         ctx.stroke();
-        ctx.beginPath();
-        ctx.lineWidth = 5;
 
-        //drawPolarity
-        if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
-        else {
-            ctx.strokeStyle = "#fff";
-            if (thisPositive > thisNegative) {
-               ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-            } else {
-                ctx.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
+        if (selectedMovie !== null) {
+            var dep2 = selectedMovie.children[i].children;
+            for (r = 0; r < dep2.length; r++) {
+
+            }
+            for (r = 0; r < dep2.length; r++) {
+                var basicrad = (degree360/numOfProperty) / dep2.length;
+                var lw = targetWidth[i]*(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative);
+                if (lw === 0) lw = 1;
+                ctx.lineWidth = lw;
+                ctx.beginPath();
+                ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 58+(ctx.lineWidth/2), ((degree360/numOfProperty)*i)+(basicrad * r), ((degree360/numOfProperty)*i)+(basicrad * (r+1)), false);
+                ctx.stroke();
             }
         }
-        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 95,  (degree360/numOfProperty)*i + (Math.PI/180 * 2),  (degree360/numOfProperty)*(i+1) - (Math.PI/180 * 2), false);
-        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        //drawPolarity
+//        if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
+//        else {
+//            ctx.strokeStyle = "#454545";
+//            if (thisPositive > thisNegative) {
+//               ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
+//            } else {
+//                ctx.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
+//            }
+//        }
+//        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 95,  (degree360/numOfProperty)*i + (Math.PI/180 * 2),  (degree360/numOfProperty)*(i+1) - (Math.PI/180 * 2), false);
+//        ctx.stroke();
     }
     ctx.textBaseline = "middle";
     for(i = 0; i < numOfProperty; i++){
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
         ctx.rotate((((degree360/numOfProperty) * i) + (degree360/numOfProperty /2)));
-        ctx.font = "13px sans-serif";
-        ctx.fillText(data[0].children[i].name,50,0);
+        ctx.font = "13px Jeju Gothic";
+        ctx.fillText(data[0].children[i].name,20,0);
         ctx.restore();
     }
     legendLoop++;
@@ -175,6 +210,8 @@ function updateLegends() {
 
 window.addEventListener('load',function(){
     canvas = document.querySelector("#canvas");
+    console.log(canvas.width = document.body.clientWidth);
+    console.log(canvas.height = document.body.clientHeight - 80);
     context = canvas.getContext('2d');
     cooling = canvas.width *.1;
     var req = new XMLHttpRequest();
@@ -192,24 +229,25 @@ window.addEventListener('load',function(){
                 update();
                 document.addEventListener('mousedown', function(e){
                     mDown = true;
-                    beginOffsetX = e.x;
-                    beginOffsetY = e.y;
-                    beforePositionX = document.querySelector('#canvas').offsetLeft;
-                    beforePositionY = document.querySelector('#canvas').offsetTop;
+                    beginOffsetX = e.offsetX;
+                    beginOffsetY = e.offsetY;
                 },false);
                 document.addEventListener('mousemove', function(e){
                    if (mDown) {
                        dragging = true;
-                       moveOffsetX = e.x - beginOffsetX;
-                       moveOffsetY = e.y - beginOffsetY;
-                       document.querySelector('#canvas').style.left = beforePositionX+moveOffsetX+"px";
-                       document.querySelector('#canvas').style.top = beforePositionY+moveOffsetY+"px";
+                       moveOffsetX = e.offsetX - beginOffsetX;
+                       moveOffsetY = e.offsetY - beginOffsetY;
+                       draw();
                    }
                 },false);
                 document.addEventListener('mouseup', function(e){
                     if(dragging){
                       mDown = false;
                       dragging = false;
+                        transitOffsetX += moveOffsetX;
+                        transitOffsetY += moveOffsetY;
+                        moveOffsetX = 0;
+                        moveOffsetY = 0;
                     } else {
                         mDown = false;
                     }
@@ -220,8 +258,8 @@ window.addEventListener('load',function(){
                     var i;
                     for (i = 0; i < nodes.length; i++) {
                         node = nodes[i];
-                        ex = e.offsetX - zoomXcalc(node.posX);
-                        ey = e.offsetY - zoomYcalc(node.posY);
+                        ex = e.offsetX -( zoomXcalc(node.posX) + moveOffsetX + transitOffsetX );
+                        ey = e.offsetY -( zoomYcalc(node.posY) + moveOffsetY + transitOffsetY );
                         er = Math.sqrt(ex * ex + ey * ey);
                         if (er < outerRadius) {
                             selectedMovie = data[i];
@@ -258,9 +296,9 @@ function zoomin() {
     if(zoomrate > 1.2) zoomrate = 1.2;
     zoomlevel += 2;
     if(zoomlevel > 0) zoomlevel = 0;
-    pointRadius = 5 + zoomlevel;
+    pointRadius = 1 + zoomlevel;
     if(pointRadius < 1) pointRadius = 1;
-    innerRadius = 15 + zoomlevel;
+    innerRadius = 1 + zoomlevel;
     //if(innerRadius < 2) innerRadius = 2;
     if(innerRadius < 1) innerRadius = 1;
     innerLineWidth = 35 + zoomlevel;
@@ -276,9 +314,9 @@ function zoomout() {
     console.log(zoomrate);
     zoomlevel -= 2;
     if(zoomlevel < -35) zoomlevel = -35;
-    pointRadius = 5 + zoomlevel;
+    pointRadius = 1 + zoomlevel;
     if(pointRadius < 1) pointRadius = 1;
-    innerRadius = 15 + zoomlevel;
+    innerRadius = 1 + zoomlevel;
     //if(innerRadius < 2) innerRadius = 2;
     if(innerRadius < 1) innerRadius = 1;
     innerLineWidth = 35 + zoomlevel;
@@ -404,11 +442,13 @@ function initNodes() {
     }
 }
 
+
+var focusValue = 0;
 draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.strokeStyle = "#fff";
+    context.strokeStyle = "#181818";
     context.lineWidth = .05;
     context.globalAlpha = 1;
     if (selectedMovie !== null) {
@@ -426,18 +466,18 @@ draw = function() {
         nd2 = nodes[polarityEdges[i].target];
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                context.strokeStyle = "#fff";
-                context.lineWidth = .5;
+                context.strokeStyle = "#181818";
+                context.lineWidth = .05;
                 nd1.active = true;
                 nd2.active = true;
             } else {
-                context.strokeStyle = "#fff";
+                context.strokeStyle = "#181818";
                 context.lineWidth = .05;
             }
         }
         context.beginPath();
-        context.moveTo(zoomXcalc(nd1.posX),zoomYcalc(nd1.posY));
-        context.lineTo(zoomXcalc(nd2.posX),zoomYcalc(nd2.posY));
+        context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+        context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
         context.closePath();
         context.stroke();
     }
@@ -446,41 +486,48 @@ draw = function() {
         nd2 = nodes[edges[i].target];
         if (selectedMovie !== null) {
             if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                context.strokeStyle = "#fff";
-                context.lineWidth = .5;
+                context.strokeStyle = "#181818";
+                context.lineWidth = .05;
                 nd1.active = true;
                 nd2.active = true;
             } else {
-                context.strokeStyle = "#fff";
+                context.strokeStyle = "#181818";
                 context.lineWidth = .05;
             }
         }
         context.beginPath();
-        context.moveTo(zoomXcalc(nd1.posX), zoomYcalc(nd1.posY));
-        context.lineTo(zoomXcalc(nd2.posX), zoomYcalc(nd2.posY));
+        context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+        context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX,zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
         context.closePath();
         context.stroke();
     }
     for (i = 0; i < nodes.length; i++) {
-        if(nodes[i].active) context.globalAlpha = 1;
-        else context.globalAlpha = .2;
+        focusValue = 0;
+        if (selectedMovie !== null) {
+            if (selectedMovie.name === nodes[i].name) focusValue = 10;
+        }
+        if (nodes[i].active) {
+            context.globalAlpha = 1;
+        } else {
+            context.globalAlpha = .2;
+        }
         nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
         nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
-        x = zoomXcalc(nodes[i].posX);
-        y = zoomYcalc(nodes[i].posY);
+        x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
+        y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
         context.beginPath();
-        context.arc(x, y, pointRadius, 0, Math.PI * 2, false);
-        context.fillStyle = "#fff";
+        context.arc(x, y, pointRadius+focusValue, 0, Math.PI * 2, false);
+        context.fillStyle = "#454545";
         context.fill();
         var total = data[i].positive + data[i].negative;
         for (var r = 0; r < data[i].children.length; r++) {
             var thisPositive = data[i].children[r].positive;
             var thisNegative = data[i].children[r].negative;
             context.beginPath();
-            var linewidth = innerLineWidth * ( (thisPositive + thisNegative) / total);
+            var linewidth = (innerLineWidth+focusValue*1.5) * ( (thisPositive + thisNegative) / total);
             if (linewidth <= 0) linewidth = 0.001;
             context.lineWidth = linewidth;
-            context.arc(x, y, innerRadius+(context.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
+            context.arc(x, y, (innerRadius+focusValue*1.5)+(context.lineWidth/2), (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
             context.strokeStyle = color[r];
             context.stroke();
 
@@ -497,7 +544,7 @@ draw = function() {
         }
         context.font  = "12px sans-serif";
         context.textAlign = "center";
-        context.fillText(nodes[i].name,x, y+outerRadius);
+        context.fillText(nodes[i].name,x, y+outerRadius+focusValue+15);
     }
 };
 
@@ -505,8 +552,8 @@ update = function() {
     if(cooling < 0.0001) return;
     var nd1, nd2;
     var i,r;
-    var k = Math.sqrt(canvas.width*canvas.height/nodes.length);
-    //var k = 150;
+    var k = Math.sqrt(canvas.width*canvas.height / nodes.length);
+    var k = 150;
     var ex, ey, er;
     aForce = function(er) {return er*er /k};
     rForce = function(er) {return (k*k)/er};
