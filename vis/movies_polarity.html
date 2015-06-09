@@ -23,7 +23,7 @@
         #infoPanel h1 {
             padding:0;
             margin:0 0 0 10px;
-            font-size:25px;
+            font-size:20px;
         }
         #infoPanel {
             background-color:rgb(244,244,244);
@@ -57,21 +57,32 @@
         button {
             padding:5px;
         }
+
+        #footer {
+            outline:1px solid #ccc;
+            width:100%;
+            height:20px;
+            top:100%;
+            margin-top:-20px;
+            background-color:#454545;
+            color:#fff;
+            position:absolute;
+        }
     </style>
 </head>
 <body>
-<div id="header" style="width:100%; z-index:999; position:fixed; background-color:rgb(244,244,244); outline:1px solid #ccc;">
-    <h2 style="font-size:40px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
-    <div class="util-box" style="display:inline-block; float:right; margin-top:20px; margin-right:25px;">
+<div id="header" style="width:100%; z-index:999; position:fixed; background-color:#454545; color:#fff; outline:1px solid #ccc;">
+    <h2 style="font-size:25px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
+    <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
         <button><i class="fa fa-adjust"></i>  Reverse</button>
         <button><i class="fa fa-tag"></i>  Node Name</button>
     </div>
 </div>
 <canvas id="canvas"></canvas>
 <div id="infoPanel" style="position:fixed; width:250px; height:100%; outline:1px solid #ccc;">
-    <h1 style="margin-top:45px;">영화이름</h1>
-    <canvas width="200" height="200" id="legends" style="margin:0 25px 10px 25px;"></canvas>
-    <div id="property-container">
+    <h1 style="margin-top:10px">영화이름</h1>
+    <canvas width="200" height="200" id="legends" style="margin:0 25px 0 25px;"></canvas>
+    <div id="property-container" style="margin-left:22px;">
         <canvas id="prop0" width="100" height="100" class="propCanvas"></canvas>
         <canvas id="prop1" width="100" height="100" class="propCanvas"></canvas>
         <canvas id="prop2" width="100" height="100" class="propCanvas"></canvas>
@@ -93,7 +104,7 @@
         <li style="background-color:rgba(47,157,39,1); color:white;">1</li>
     </ul>
 </div>
-<div id="footer" style="outline:1px solid #ccc; width:100%; height:40px; top:100%; margin-top:-40px; background-color:rgb(244,244,244); position:absolute;">
+<div id="footer">
 
 </div>
 <script>
@@ -168,7 +179,7 @@ function updateLegends() {
             thisPositive = selectedMovie.children[i].positive;
             thisNegative = selectedMovie.children[i].negative;
             if (initLegend){
-                targetWidth[i] = 55*(((thisPositive + thisNegative) / total) / propMaxValue  );
+                targetWidth[i] = 55*(((thisPositive + thisNegative) / total) / propMaxValue);
                 if(targetWidth[i]<= 0) targetWidth[i] = 1;
             }
             if (thisPositive > thisNegative) {
@@ -185,6 +196,7 @@ function updateLegends() {
         var beginRad = Math.PI/180;
         var endRad = 0;
         var motherWidth = ctx.lineWidth;
+        var rot;
         if (selectedMovie !== null) {
             var propCvs = document.querySelector("#prop"+i);
             var propCtx = propCvs.getContext('2d');
@@ -202,7 +214,7 @@ function updateLegends() {
                 }
                 var lw = targetWidth[i]*(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative);
                 if (lw === 0) lw = 1;
-                ctx.lineWidth = 10;
+                ctx.lineWidth = 20;
                 ctx.beginPath();
                 ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth+2+(ctx.lineWidth/2), (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
                 beginRad += endRad;
@@ -215,7 +227,7 @@ function updateLegends() {
 
 
                 propCtx.beginPath();
-                propCtx.lineWidth = 30;
+                propCtx.lineWidth = 40;
                 var propEndRad = degree360 * ((dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative) );
                 propCtx.arc(propCvs.width/2, propCvs.height/2+5, propCtx.lineWidth/2, propBeginRad , propBeginRad+propEndRad, false);
                 propCtx.strokeStyle = ctx.strokeStyle;
@@ -224,11 +236,18 @@ function updateLegends() {
                 if (propEndRad > (degree360/6)) {
                     propCtx.save();
                     propCtx.translate(propCvs.width / 2, propCvs.height / 2 + 5);
-                    propCtx.rotate(propBeginRad - (propEndRad/2));
-                    propCtx.textAlign ="left";
-                    propCtx.textBaseline="middle";
+                    rot = propBeginRad - (propEndRad/2);
                     propCtx.fillStyle = "#fff";
-                    propCtx.fillText(dep2[r].name,5, 0);
+                    propCtx.textBaseline="middle";
+                    if (rot > (degree360/4) && rot < (Math.PI + Math.PI/2)) {
+                        propCtx.rotate(rot + Math.PI);
+                        propCtx.textAlign = "right";
+                        propCtx.fillText(dep2[r].name, -10, 0);
+                    } else {
+                        propCtx.rotate(rot);
+                        propCtx.textAlign = "left";
+                        propCtx.fillText(dep2[r].name, 8, 0);
+                    }
                     propCtx.restore();
                 }
             }
@@ -243,7 +262,7 @@ function updateLegends() {
     for(i = 0; i < numOfProperty; i++){
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
-        var rot = ((degree360/numOfProperty) * i+1) - ((degree360/numOfProperty)/2);
+        rot = ((degree360/numOfProperty) * i+1) - ((degree360/numOfProperty)/2);
         console.log(rot);
         if (rot > (degree360/4) && rot < (Math.PI + Math.PI/2)) {
             ctx.rotate(rot + Math.PI);
