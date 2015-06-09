@@ -1,10 +1,364 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+  <head>
+      <meta charset="utf-8">
+      <style>
+          html, body{
+              margin:0;
+              width:100%;
+              height:100%;
+          }
+          .chart .bar{
+              margin:2px;
+              outline:1px solid rgb(178, 34, 0);
+          }
+          .inner-bar {
+              position:relative;
+              display:inline-block;
+              height:100%;
+              outline:1px solid white;
+              transition-duration:.3s;
+              background: rgb(178, 34, 0);
+          }
 
-</body>
+          .inner-bar:hover {
+              background: rgb(188,186,169);
+          }
+      </style>
+      <!-- need the raphael vector library -->
+      <script type="text/javascript" src="raphael-min.js"></script>
+      <!-- our treemapping library-->
+      <script type="text/javascript" src="treemap-squared-0.5.min.js"></script>
+  </head>
+  <body>
+    <div class="chart"></div>
+    <script>
+        var json = [{
+            "name": "설국열차",
+            "description": "영화이름",
+            "positive":1564,
+            "negative":861,
+            "children":
+                    [{
+                        "name": "영화",
+                        "description": "영화에 대한 평가",
+                        "positive":321,
+                        "negative":199,
+                        "children":
+                                [{
+                                    "name":"영화",
+                                    "positive":304,
+                                    "negative":195
+                                },{
+                                    "name":"작품",
+                                    "positive":10,
+                                    "negative":4
+                                },{
+                                    "name":"스케일",
+                                    "positive":7,
+                                    "negative":0
+                                }]
+                    },{
+                        "name": "배우",
+                        "description":"배우에 대한 의견",
+                        "positive":312,
+                        "negative":58,
+                        "children":[{
+                            "name":"배우",
+                            "positive":11,
+                            "negative":0
+                        },{
+                            "name":"캐릭터",
+                            "positive":1,
+                            "negative":4
+                        },{
+                            "name":"연기력",
+                            "positive":47,
+                            "negative":5
+                        },{
+                            "name":"역할",
+                            "positive":4,
+                            "negative":4
+                        },{
+                            "name":"스타일",
+                            "positive":1,
+                            "negative":2
+                        },{
+                            "name":"대사",
+                            "positive":1,
+                            "negative":5
+                        },{
+                            "name":"등장인물",
+                            "positive":0,
+                            "negative":4
+                        },{
+                            "name":"캐스팅",
+                            "positive":9,
+                            "negative":2
+                        },{
+                            "name":"주인공",
+                            "positive":1,
+                            "negative":0
+                        },{
+                            "name":"연기",
+                            "positive":233,
+                            "negative":29
+                        },{
+                            "name":"인물",
+                            "positive":3,
+                            "negative":2
+                        },{
+                            "name":"출연",
+                            "positive":1,
+                            "negative":1
+                        }]
+                    },{
+                        "name":"감독",
+                        "description":"감독에 대한 의견",
+                        "positive":191,
+                        "negative":51,
+                        "children":[
+                            {
+                                "name":"감독",
+                                "positive":43,
+                                "negative":4
+                            },{
+                                "name":"편집",
+                                "positive":1,
+                                "negative":3
+                            },{
+                                "name":"연출",
+                                "positive":83,
+                                "negative":21
+                            },{
+                                "name":"연출력",
+                                "positive":30,
+                                "negative":4
+                            },{
+                                "name":"구성",
+                                "positive":34,
+                                "negative":19
+                            }
+                        ]
+                    },{
+                        "name":"스토리",
+                        "description":"스토리에 대한 의견",
+                        "positive":563,
+                        "negative":516,
+                        "children":[
+                            {
+                                "name":"스토리",
+                                "positive":215,
+                                "negative":67
+                            },{
+                                "name":"주제",
+                                "positive":13,
+                                "negative":1
+                            },{
+                                "name":"마무리",
+                                "positive":0,
+                                "negative":40
+                            },{
+                                "name":"소재",
+                                "positive":71,
+                                "negative":4
+                            },{
+                                "name":"각본",
+                                "positive":8,
+                                "negative":4
+                            },{
+                                "name":"이야기",
+                                "positive":4,
+                                "negative":3
+                            },{
+                                "name":"내용",
+                                "positive":106,
+                                "negative":43
+                            },{
+                                "name":"결말",
+                                "positive":54,
+                                "negative":287
+                            },{
+                                "name":"원작",
+                                "positive":7,
+                                "negative":0
+                            },{
+                                "name":"전개",
+                                "positive":32,
+                                "negative":39
+                            },{
+                                "name":"줄거리",
+                                "positive":5,
+                                "negative":1
+                            },{
+                                "name":"설정",
+                                "positive":30,
+                                "negative":10
+                            },{
+                                "name":"짜임새",
+                                "positive":5,
+                                "negative":12
+                            },{
+                                "name":"시나리오",
+                                "positive":13,
+                                "negative":5
+                            }]
+                    },{
+                        "name":"영상",
+                        "description":"영상에 대한 의견",
+                        "positive":175,
+                        "negative":34,
+                        "children":[
+                            {
+                                "name":"영상",
+                                "positive":46,
+                                "negative":0
+                            },{
+                                "name":"씬",
+                                "positive":28,
+                                "negative":2
+                            },{
+                                "name":"배경",
+                                "positive":11,
+                                "negative":2
+                            },{
+                                "name":"볼거리",
+                                "positive":12,
+                                "negative":1
+                            },{
+                                "name":"화면",
+                                "positive":5,
+                                "negative":1
+                            },{
+                                "name":"표현",
+                                "positive":9,
+                                "negative":6
+                            },{
+                                "name":"그래픽",
+                                "positive":3,
+                                "negative":1
+                            },{
+                                "name":"영상미",
+                                "positive":27,
+                                "negative":0
+                            },{
+                                "name":"장면",
+                                "positive":18,
+                                "negative":20
+                            },{
+                                "name":"분위기",
+                                "positive":13,
+                                "negative":1
+                            },{
+                                "name":"비주얼",
+                                "positive":3,
+                                "negative":0
+                            }]
+                    },{
+                        "name":"음향",
+                        "description":"음향에 대한 의견",
+                        "positive":2,
+                        "negative":3,
+                        "children":[
+                            {
+                                "name":"사운드",
+                                "positive":1,
+                                "negative":1
+                            },{
+                                "name":"노래",
+                                "positive":0,
+                                "negative":1
+                            },{
+                                "name":"소리",
+                                "positive":1,
+                                "negative":1
+                            }
+                        ]
+                    }]
+        }];
+    </script>
+  <script>
+      var mocca = {};
+      mocca.createElement = function(o) {
+          var el = document.createElement(o.name);
+          if (o.attrs !== undefined) {
+              for ( var attr in o.attrs) {
+                  if (o.attrs.hasOwnProperty(attr)) {
+                      el.setAttribute(attr, o.attrs[attr]);
+                  }
+              }
+          }
+          if (o.content) {
+              el.innerHTML = o.content;
+          }
+          return el;
+      };
+
+
+      (function(){
+          var barHeight = 300;
+          var chart = document.querySelector(".chart");
+          var max = 2000;
+          for (var i = 0; i < json.length; i++) {
+              var w = document.body.clientWidth / 2500;
+              console.log(w);
+              chart.appendChild(mocca.createElement({
+                name:"div",
+                attrs:{
+                    id:json[i].name,
+                    class:"bar",
+                    style:"width:"+w * (json[i].positive + json[i].negative)+"px; height:"+barHeight+"px"
+                }
+              }));
+
+              var parentBar = chart.querySelector("#"+json[i].name);
+              for (var r = 0; r < json[i].children.length; r++) {
+                  var property = json[i].children[r];
+                  parentBar.appendChild(mocca.createElement({
+                      name:"div",
+                      attrs:{
+                          id:property.name,
+                          class:"inner-bar",
+                          style:"width:"+w*(property.positive + property.negative)+"px;"
+                      }
+                  }));
+                  drawTree(property.name,r)
+              }
+          }
+      })();
+
+      function drawTree(target,r){
+          data = [270, 15, 40, 70, 12, 7, 140, 420, 7, 60, 6, 40, 20, 20];
+          var boxFormatter = function (coordinates, index) {
+
+              var defaultColor = ['#47C83E','#CC3D3D','#D9418C','#F2CB61','#4374D9'];
+              // so in this case an index of [1,1] would refer to "London" and [2,1] to "Berlin"
+              // coordinates are in the form [x1,y1,x2,y2]
+
+              var datapoint,i, color;
+
+              // get the value of the data point using the index to find it
+              datapoint = data;
+              for (i=0; i<index.length; i++){
+                  datapoint = datapoint[index[i]];
+              }
+//
+//              //var saturation = ((datapoint / 60000)*0.6) + 0.4;
+//              var brightness = ((datapoint / 60000)*0.3) + 0.2;
+//              color = "hsb(0.2," + 1 + "," + brightness + ")";
+              color = defaultColor[r];
+
+              return{ "fill" : color };
+          };
+          var thisEl = document.querySelector("#"+target);
+          labels = ["스토리", "주제", "마무리", "마무리", "소재", "각본", "이야기", "내용", "결말", "원작", "전개", "줄거리", "설정", "짜임새", "시나리오"];
+          Treemap.draw(target, thisEl.offsetWidth, thisEl.offsetHeight, data, labels, {box: boxFormatter});
+      }
+
+      function boxFormatter(coordinates, index){
+
+      }
+  </script>
+
+  </body>
 </html>
