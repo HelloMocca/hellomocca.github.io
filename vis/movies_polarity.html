@@ -72,12 +72,12 @@
     <h1 style="margin-top:45px;">영화이름</h1>
     <canvas width="200" height="200" id="legends" style="margin:0 25px 10px 25px;"></canvas>
     <div id="property-container">
-        <canvas id="prop0" width="80" height="80" class="propCanvas"></canvas>
-        <canvas id="prop1" width="80" height="80" class="propCanvas"></canvas>
-        <canvas id="prop2" width="80" height="80" class="propCanvas"></canvas>
-        <canvas id="prop3" width="80" height="80" class="propCanvas"></canvas>
-        <canvas id="prop4" width="80" height="80" class="propCanvas"></canvas>
-        <canvas id="prop5" width="80" height="80" class="propCanvas"></canvas>
+        <canvas id="prop0" width="100" height="100" class="propCanvas"></canvas>
+        <canvas id="prop1" width="100" height="100" class="propCanvas"></canvas>
+        <canvas id="prop2" width="100" height="100" class="propCanvas"></canvas>
+        <canvas id="prop3" width="100" height="100" class="propCanvas"></canvas>
+        <canvas id="prop4" width="100" height="100" class="propCanvas"></canvas>
+        <canvas id="prop5" width="100" height="100" class="propCanvas"></canvas>
     </div>
     <ul id="polaritylegend">
         <li style="background-color:rgba(255,0,0,1)">-1</li>
@@ -193,8 +193,10 @@ function updateLegends() {
             propCtx.fillText(selectedMovie.children[i].name, propCvs.width/2, 10);
             var dep2 = selectedMovie.children[i].children;
             var propBeginRad = 0;
+            console.log("[1단계]"+selectedMovie.children[i].name+":"+(thisPositive + thisNegative) / total);
             for (r = 0; r < dep2.length; r++) {
-                endRad = (degree360/numOfProperty) * ((dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative) );
+                console.log("[2단계]"+dep2[r].name+":"+(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative));
+                endRad = (degree360/numOfProperty) *((dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative) );
                 if (endRad < 0) {
                     continue;
                 }
@@ -219,7 +221,16 @@ function updateLegends() {
                 propCtx.strokeStyle = ctx.strokeStyle;
                 propCtx.stroke();
                 propBeginRad += propEndRad;
-
+                if (propEndRad > (degree360/6)) {
+                    propCtx.save();
+                    propCtx.translate(propCvs.width / 2, propCvs.height / 2 + 5);
+                    propCtx.rotate(propBeginRad - (propEndRad/2));
+                    propCtx.textAlign ="left";
+                    propCtx.textBaseline="middle";
+                    propCtx.fillStyle = "#fff";
+                    propCtx.fillText(dep2[r].name,5, 0);
+                    propCtx.restore();
+                }
             }
         }
 
@@ -331,7 +342,7 @@ window.addEventListener('load',function(){
             }
         }
     };
-    req.open("get","reviewScore_eng.json",false);
+    req.open("get","reviewScore.json",false);
     req.send();
 });
 
@@ -556,7 +567,6 @@ draw = function() {
         var isSelected = false;
         if (selectedMovie !== null) {
             if (selectedMovie.name === nodes[i].name){
-                //focusValue = 50;
                 isSelected = true;
                 nodes[i].active = true;
             }
@@ -584,7 +594,6 @@ draw = function() {
             if (linewidth <= 0) linewidth = 0.001;
             context.lineWidth = linewidth;
             context.arc(x, y, context.lineWidth/2, (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
-
             var polarity = Math.floor( 0.4 * (thisPositive / (thisPositive + thisNegative) *100));
             context.strokeStyle = colorl[r] + (80 - polarity) +"%)";
             if (thisPositive > thisNegative) {
@@ -592,16 +601,12 @@ draw = function() {
             } else {
                 context.strokeStyle = "hsl(0,100%,"+(80 - Math.floor(0.4 * (thisNegative/(thisPositive+thisNegative)*100)) )+"%)";
             }
-
             context.stroke();
-
             var motherWidth = context.lineWidth;
-            //if (isSelected) {
                 var dep2 = data[i].children[r].children;
                 var beginRad = 0;
                 var endRad = 0;
                 for (var v = 0; v < dep2.length; v++) {
-                    var basicrad = (degree360/numOfProperty) / dep2.length;
                     var lw = linewidth*(dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative);
                     context.strokeStyle = colorl[r]+ (80 -  Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive+dep2[v].negative)*100)) ) +"%)";
                     if(dep2[v].positive > dep2[v].negative) {
@@ -609,9 +614,7 @@ draw = function() {
                     } else {
                         context.strokeStyle = "hsl(0,70%,"+(80 - Math.floor(0.4 * (dep2[v].negative/(dep2[v].positive+dep2[v].negative)*100)) )+"%)";
                     }
-
                     if (lw === 0) lw = 1;
-                    //context.lineWidth = lw;
                     context.lineWidth =5;
                     context.beginPath();
                     endRad = (degree360/numOfProperty) * ((dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative));
@@ -619,17 +622,6 @@ draw = function() {
                     beginRad += endRad;
                     context.stroke();
                 }
-           // }
-            //drawPolarity
-//            context.lineWidth = outerLineWidth;
-//            context.beginPath();
-//            context.arc(x, y, outerRadius, (degree360/numOfProperty) * r + (Math.PI/180 * 2), (degree360/numOfProperty) * (r+1) - (Math.PI/180 * 2), false);
-//            if (thisPositive > thisNegative) {
-//                context.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-//            } else {
-//                context.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
-//            }
-//            context.stroke();
         }
         context.font = "12px sans-serif";
         if (selectedMovie !== null) {
