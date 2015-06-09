@@ -32,9 +32,6 @@
             padding-top:50px;
             height:900px;
         }
-        #infoPanel:hover {
-            background-color:#fff;
-        }
         #polaritylegend {
             list-style:none;
             margin:0;
@@ -56,13 +53,19 @@
         .propCanvas {
             outline:1px solid #ccc;
         }
+
+        button {
+            padding:5px;
+        }
     </style>
 </head>
 <body>
-<div id="header" style="width:100%; z-index:999; position:fixed; background-color:#fff; outline:1px solid #ccc;">
-    <h2 style="font-size:40px; margin:10px;">
-        <i class="fa fa-cubes"></i> Opinion Analyzer
-    </h2>
+<div id="header" style="width:100%; z-index:999; position:fixed; background-color:rgb(244,244,244); outline:1px solid #ccc;">
+    <h2 style="font-size:40px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
+    <div class="util-box" style="display:inline-block; float:right; margin-top:20px; margin-right:25px;">
+        <button><i class="fa fa-adjust"></i>  Reverse</button>
+        <button><i class="fa fa-tag"></i>  Node Name</button>
+    </div>
 </div>
 <canvas id="canvas"></canvas>
 <div id="infoPanel" style="position:fixed; width:250px; height:100%; outline:1px solid #ccc;">
@@ -222,26 +225,23 @@ function updateLegends() {
 
         ctx.beginPath();
         ctx.lineWidth = 5;
-        //drawPolarity
-//        if (selectedMovie === null) ctx.strokeStyle = dcolor[i];
-//        else {
-//            ctx.strokeStyle = "#454545";
-//            if (thisPositive > thisNegative) {
-//               ctx.strokeStyle = "rgba(0,51,153,"+thisPositive / (thisPositive+thisNegative)+")";
-//            } else {
-//                ctx.strokeStyle = "rgba(255,0,0,"+thisNegative / (thisPositive+thisNegative)+")";
-//            }
-//        }
-//        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 95,  (degree360/numOfProperty)*i + (Math.PI/180 * 2),  (degree360/numOfProperty)*(i+1) - (Math.PI/180 * 2), false);
-//        ctx.stroke();
     }
     ctx.textBaseline = "middle";
+    ctx.font = "13px Jeju Gothic";
+    ctx.textAlign = "right";
     for(i = 0; i < numOfProperty; i++){
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
-        ctx.rotate((((degree360/numOfProperty) * i) + (degree360/numOfProperty /2)));
-        ctx.font = "13px Jeju Gothic";
-        ctx.fillText(data[0].children[i].name,20,0);
+        var rot = ((degree360/numOfProperty) * i+1) - ((degree360/numOfProperty)/2);
+        console.log(rot);
+        if (rot > (degree360/4) && rot < (Math.PI + Math.PI/2)) {
+            ctx.rotate(rot + Math.PI);
+            ctx.fillText(data[0].children[i].name, -20, 0);
+        } else {
+            ctx.textAlign="left";
+            ctx.rotate(rot);
+            ctx.fillText(data[0].children[i].name, 20, 0);
+        }
         ctx.restore();
     }
     legendLoop++;
