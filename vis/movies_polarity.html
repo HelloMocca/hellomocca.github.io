@@ -233,7 +233,7 @@ function updateLegends() {
                 propCtx.strokeStyle = ctx.strokeStyle;
                 propCtx.stroke();
                 propBeginRad += propEndRad;
-                if (propEndRad > (degree360/6)) {
+                if (propEndRad >= (degree360/9)) {
                     propCtx.save();
                     propCtx.translate(propCvs.width / 2, propCvs.height / 2 + 5);
                     rot = propBeginRad - (propEndRad/2);
@@ -642,14 +642,20 @@ draw = function() {
                     context.stroke();
                 }
         }
+    }
+    context.textAlign = "left";
+    context.textBaseline = "middle";
+    for (i = 0; i < nodes.length; i++) {
+        if (nodes[i].active) context.globalAlpha = 1;
+        else context.globalAlpha = .2;
         context.font = "12px Jeju Gothic";
         if (selectedMovie !== null) {
             if (nodes[i].name === selectedMovie.name) {
                 context.font = "20px bold Jeju Gothic";
             }
         }
-        context.textAlign = "left";
-        context.textBaseline = "middle";
+        x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
+        y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
         context.fillText(nodes[i].name, x+5, y);
     }
 };
