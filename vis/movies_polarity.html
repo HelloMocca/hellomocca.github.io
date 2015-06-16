@@ -75,7 +75,7 @@
     <h2 style="font-size:25px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
         <button><i class="fa fa-adjust"></i>  Reverse</button>
-        <button><i class="fa fa-tag"></i>  Node Name</button>
+        <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Node Name</button>
     </div>
 </div>
 <canvas id="canvas"></canvas>
@@ -112,6 +112,7 @@
 //color = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 var color = ['hsl(189,100%,40%)','hsl(116,75%,40%)','hsl(78,100%,40%)','hsl(54,100%,40%)','hsl(44,100%,40%)','hsl(22,100%,40%)'];
 var colorl = ['hsl(189,100%,','hsl(116,75%,','hsl(78,100%,','hsl(54,100%,','hsl(44,100%,','hsl(22,100%,'];
+var pcolor = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(71,200,62,.2)', 'rgba(71,200,62,.5)', 'rgba(71,200,62,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
@@ -143,6 +144,8 @@ var currWidth = [0,0,0,0,0,0];
 var numOfMovie = 0;
 var numOfProperty = 0;
 var sDegree = Math.PI/180;
+var viewNodeTitle = true;
+var isPcolor = true;
 function updateLegends() {
     document.querySelector("#infoPanel h1").innerHTML = "Description";
     var legend = document.querySelector("#legends");
@@ -173,7 +176,11 @@ function updateLegends() {
             if(initLegend) targetWidth = [65,65,65,65,65,65];
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
-            ctx.strokeStyle = dcolor[i];
+            if (isPcolor) {
+                ctx.strokeStyle = pcolor[i];
+            } else {
+                ctx.strokeStyle = dcolor[i];
+            }
         } else {
             total = selectedMovie.positive + selectedMovie.negative;
             thisPositive = selectedMovie.children[i].positive;
@@ -182,10 +189,14 @@ function updateLegends() {
                 targetWidth[i] = 55*(((thisPositive + thisNegative) / total) / propMaxValue);
                 if(targetWidth[i]<= 0) targetWidth[i] = 1;
             }
-            if (thisPositive > thisNegative) {
-                ctx.strokeStyle = "hsl(116,70%,"+(80 - Math.floor(0.4 * (thisPositive/(thisPositive+thisNegative)*100)) )+"%)";
+            if (isPcolor) {
+                ctx.strokeStyle = pcolor[i];
             } else {
-                ctx.strokeStyle = "hsl(0,100%,"+(80 - Math.floor(0.4 * (thisNegative/(thisPositive+thisNegative)*100)) )+"%)";
+                if (thisPositive > thisNegative) {
+                    ctx.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
+                } else {
+                    ctx.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
+                }
             }
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
@@ -218,10 +229,12 @@ function updateLegends() {
                 ctx.beginPath();
                 ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth+2+(ctx.lineWidth/2), (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
                 beginRad += endRad;
-                if(dep2[r].positive > dep2[r].negative) {
-                    ctx.strokeStyle = "hsl(116,70%,"+(80 - Math.floor(0.4 * (dep2[r].positive/(dep2[r].positive+dep2[r].negative)*100)) )+"%)";
-                } else {
-                    ctx.strokeStyle = "hsl(0,70%,"+(80 - Math.floor(0.4 * (dep2[r].negative/(dep2[r].positive+dep2[r].negative)*100)) )+"%)";
+                if (!isPcolor)  {
+                    if (dep2[r].positive > dep2[r].negative) {
+                        ctx.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                    } else {
+                        ctx.strokeStyle = "hsl(0,70%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                    }
                 }
                 ctx.stroke();
 
@@ -263,7 +276,6 @@ function updateLegends() {
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
         rot = ((degree360/numOfProperty) * i+1) - ((degree360/numOfProperty)/2);
-        console.log(rot);
         if (rot > (degree360/4) && rot < (Math.PI + Math.PI/2)) {
             ctx.rotate(rot + Math.PI);
             ctx.fillText(data[0].children[i].name, -20, 0);
@@ -614,11 +626,14 @@ draw = function() {
             context.lineWidth = linewidth;
             context.arc(x, y, context.lineWidth/2, (degree360/numOfProperty) * r, (degree360/numOfProperty) * (r+1), false);
             var polarity = Math.floor( 0.4 * (thisPositive / (thisPositive + thisNegative) *100));
-            context.strokeStyle = colorl[r] + (80 - polarity) +"%)";
-            if (thisPositive > thisNegative) {
-                context.strokeStyle = "hsl(116,70%,"+(80 - Math.floor(0.4 * (thisPositive/(thisPositive+thisNegative)*100)) )+"%)";
+            if (isPcolor) {
+                context.strokeStyle = pcolor[r];
             } else {
-                context.strokeStyle = "hsl(0,100%,"+(80 - Math.floor(0.4 * (thisNegative/(thisPositive+thisNegative)*100)) )+"%)";
+                if (thisPositive > thisNegative) {
+                    context.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
+                } else {
+                    context.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
+                }
             }
             context.stroke();
             var motherWidth = context.lineWidth;
@@ -627,11 +642,15 @@ draw = function() {
                 var endRad = 0;
                 for (var v = 0; v < dep2.length; v++) {
                     var lw = linewidth*(dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative);
-                    context.strokeStyle = colorl[r]+ (80 -  Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive+dep2[v].negative)*100)) ) +"%)";
-                    if(dep2[v].positive > dep2[v].negative) {
-                        context.strokeStyle = "hsl(116,70%,"+(80 - Math.floor(0.4 * (dep2[v].positive/(dep2[v].positive+dep2[v].negative)*100)) )+"%)";
+                    if(isPcolor) {
+                        context.strokeStyle = pcolor[r];
+                        //context.strokeStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                     } else {
-                        context.strokeStyle = "hsl(0,70%,"+(80 - Math.floor(0.4 * (dep2[v].negative/(dep2[v].positive+dep2[v].negative)*100)) )+"%)";
+                        if (dep2[v].positive > dep2[v].negative) {
+                            context.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                        } else {
+                            context.strokeStyle = "hsl(0,70%," + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                        }
                     }
                     if (lw === 0) lw = 1;
                     context.lineWidth =5;
@@ -643,20 +662,22 @@ draw = function() {
                 }
         }
     }
-    context.textAlign = "left";
-    context.textBaseline = "middle";
-    for (i = 0; i < nodes.length; i++) {
-        if (nodes[i].active) context.globalAlpha = 1;
-        else context.globalAlpha = .2;
-        context.font = "12px Jeju Gothic";
-        if (selectedMovie !== null) {
-            if (nodes[i].name === selectedMovie.name) {
-                context.font = "20px bold Jeju Gothic";
+    if (viewNodeTitle) {
+        context.textAlign = "left";
+        context.textBaseline = "middle";
+        for (i = 0; i < nodes.length; i++) {
+            if (nodes[i].active) context.globalAlpha = 1;
+            else context.globalAlpha = .2;
+            context.font = "12px Jeju Gothic";
+            if (selectedMovie !== null) {
+                if (nodes[i].name === selectedMovie.name) {
+                    context.font = "20px bold Jeju Gothic";
+                }
             }
+            x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
+            y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
+            context.fillText(nodes[i].name, x + 5, y);
         }
-        x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
-        y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
-        context.fillText(nodes[i].name, x+5, y);
     }
 };
 
@@ -759,6 +780,11 @@ window.requestAFrame = (function () {
                 return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
             };
 })();
+
+function showNodeTitle() {
+    viewNodeTitle = !viewNodeTitle;
+}
+
 </script>
 </body>
 </html>
