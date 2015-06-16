@@ -104,6 +104,16 @@
         <li style="background-color:rgba(47,157,39,1); color:white;">1</li>
     </ul>
 </div>
+<div id="infoBox" style="display:none; position:absolute; left:0; top:0; background-color:rgba(255,255,255,.5); width:300px; height:150px; outline:1px solid #ccc;">
+    <div id="infoBox-image" style="float:left; padding:15px;">
+        <img width="80" src="http://movie2.phinf.naver.net/20150522_110/14322815808174ge1b_JPEG/movie_image.jpg?type=f125">
+    </div>
+    <div id="infoBox-desc" style="float:left;">
+       <div id="infoBox-movieName" style="max-width:170px; padding:15px 15px 15px 0;">
+
+       </div>
+    </div>
+</div>
 <div id="footer">
 
 </div>
@@ -344,13 +354,18 @@ window.addEventListener('load',function(){
                     var node;
                     var ex,ey;
                     var i;
+                    document.querySelector("#infoBox").style.display = "none";
                     for (i = 0; i < nodes.length; i++) {
                         node = nodes[i];
                         ex = e.offsetX -( zoomXcalc(node.posX) + moveOffsetX + transitOffsetX );
                         ey = e.offsetY -( zoomYcalc(node.posY) + moveOffsetY + transitOffsetY );
                         er = Math.sqrt(ex * ex + ey * ey);
                         if (er < node.r) {
+                            document.querySelector("#infoBox").style.display = "block";
+                            document.querySelector("#infoBox").style.left = (e.offsetX+25) +"px";
+                            document.querySelector("#infoBox").style.top = (e.offsetY) +"px";
                             selectedMovie = data[i];
+                            document.querySelector("#infoBox #infoBox-movieName").innerHTML = selectedMovie.name;
                             updateLegends();
                             draw();
                             break;
@@ -671,7 +686,8 @@ draw = function() {
             context.font = "12px Jeju Gothic";
             if (selectedMovie !== null) {
                 if (nodes[i].name === selectedMovie.name) {
-                    context.font = "20px bold Jeju Gothic";
+                    continue;
+                    //context.font = "20px bold Jeju Gothic";
                 }
             }
             x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
