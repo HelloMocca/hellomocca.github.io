@@ -74,7 +74,7 @@
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#454545; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
-        <button><i class="fa fa-adjust"></i>  Reverse</button>
+        <button onclick="changeColorMode()"><i class="fa fa-adjust"></i>  Color Mode Change</button>
         <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Node Name</button>
     </div>
 </div>
@@ -784,6 +784,11 @@ window.requestAFrame = (function () {
 function showNodeTitle() {
     viewNodeTitle = !viewNodeTitle;
 }
+
+function changeColorMode() {
+    isPcolor = !isPcolor;
+}
+
 
 </script>
 </body>
