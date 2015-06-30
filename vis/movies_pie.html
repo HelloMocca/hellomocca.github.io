@@ -74,7 +74,8 @@
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#454545; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
-        <button onclick="changeColorMode()"><i class="fa fa-adjust"></i>  Color Mode Change</button>
+        <button onclick="changeColorMode(true)"><i class="fa fa-adjust"></i>  Strong to Positive</button>
+        <button onclick="changeColorMode(false)"><i class="fa fa-adjust"></i>  Strong to Negative</button>
         <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Node Name</button>
     </div>
 </div>
@@ -83,37 +84,24 @@
     <h1 style="margin-top:10px">Detail Viewer</h1>
     <canvas width="200" height="200" id="legends" style="margin:0 25px 0 25px;"></canvas>
     <div id="property-container" style="margin-left:22px;">
-        <canvas id="prop0" width="100" height="100" class="propCanvas"></canvas>
-        <canvas id="prop1" width="100" height="100" class="propCanvas"></canvas>
-        <canvas id="prop2" width="100" height="100" class="propCanvas"></canvas>
-        <canvas id="prop3" width="100" height="100" class="propCanvas"></canvas>
-        <canvas id="prop4" width="100" height="100" class="propCanvas"></canvas>
-        <canvas id="prop5" width="100" height="100" class="propCanvas"></canvas>
+        <canvas id="prop0" width="200" height="100" class="propCanvas"></canvas>
+        <canvas id="prop1" width="200" height="100" class="propCanvas"></canvas>
+        <canvas id="prop2" width="200" height="100" class="propCanvas"></canvas>
+        <canvas id="prop3" width="200" height="100" class="propCanvas"></canvas>
+        <canvas id="prop4" width="200" height="100" class="propCanvas"></canvas>
+        <canvas id="prop5" width="200" height="100" class="propCanvas"></canvas>
     </div>
-    <ul id="polaritylegend">
-        <li style="background-color:rgba(255,0,0,1)">-1</li>
-        <li style="background-color:rgba(255,0,0,.8)"></li>
-        <li style="background-color:rgba(255,0,0,.6)">-0.6</li>
-        <li style="background-color:rgba(255,0,0,.4)"></li>
-        <li style="background-color:rgba(255,0,0,.2)">-0.2</li>
-        <li style="background-color:rgba(255,0,0,0)"></li>
-        <li style="background-color:rgba(47,157,39,.2)">0.2</li>
-        <li style="background-color:rgba(47,157,39,.4)"></li>
-        <li style="background-color:rgba(47,157,39,.6); color:white;">0.6</li>
-        <li style="background-color:rgba(47,157,39,.8)"></li>
-        <li style="background-color:rgba(47,157,39,1); color:white;">1</li>
-    </ul>
 </div>
-<div id="infoBox" style="display:block; position:absolute; left:100%; margin-left:-250px; top:50px; height:100%; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">
-    <div id="infoBox-image" style="float:left; padding:15px;">
-        <img width="200" src="">
-    </div>
-    <div id="infoBox-desc" style="float:left;">
-       <div id="infoBox-movieName" style="max-width:170px; padding:15px 15px 15px 0;">
+<!--<div id="infoBox" style="display:block; position:absolute; left:100%; margin-left:-250px; top:50px; height:100%; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">-->
+    <!--<div id="infoBox-image" style="float:left; padding:15px;">-->
+        <!--<img width="200" src="">-->
+    <!--</div>-->
+    <!--<div id="infoBox-desc" style="float:left;">-->
+       <!--<div id="infoBox-movieName" style="max-width:170px; padding:15px 15px 15px 0;">-->
 
-       </div>
-    </div>
-</div>
+       <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <div id="footer">
 
 </div>
@@ -122,9 +110,11 @@
 //color = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 var color = ['hsl(189,100%,40%)','hsl(116,75%,40%)','hsl(78,100%,40%)','hsl(54,100%,40%)','hsl(44,100%,40%)','hsl(22,100%,40%)'];
 var colorl = ['hsl(189,100%,','hsl(116,75%,','hsl(78,100%,','hsl(54,100%,','hsl(44,100%,','hsl(22,100%,'];
+var colorl = ['hsl(6,55%,','hsl(31,61%,','hsl(248,15%,','hsl(60,30%,','hsl(205,39%,','hsl(170,33%,'];
 var pcolor = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 pcolor = ['rgb(128,61,125)','rgb(201,190,26)','rgb(38,142,60)','rgb(62,76,137)','rgb(198,121,41)','rgb(120,77,78)'];
 pcolor = ['rgb(52,156,95)','rgb(234,101,118)','rgb(189,217,202)','rgb(255,160,118)','rgb(148,108,168)','rgb(212,185,202)'];
+pcolor = ['#bebada','#fdb462','#fb8072','#8dd3c7','#80b1d3','#ffffb3'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(71,200,62,.2)', 'rgba(71,200,62,.5)', 'rgba(71,200,62,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
@@ -158,6 +148,7 @@ var numOfProperty = 0;
 var sDegree = Math.PI/180;
 var viewNodeTitle = true;
 var isPcolor = true;
+var isReverse = false;
 function updateLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
@@ -180,46 +171,49 @@ function updateLegends() {
             }
         }
     }
+    ctx.strokeStyle = "white";
     for(i = 0; i < data[0].children.length; i++) {
-        ctx.beginPath();
         if (selectedMovie === null) {
             if(initLegend) targetWidth = [65,65,65,65,65,65];
             currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
             if (isPcolor) {
-                ctx.strokeStyle = pcolor[i];
+                ctx.fillStyle = pcolor[i];
             } else {
-                ctx.strokeStyle = dcolor[i];
+                ctx.fillStyle = dcolor[i];
             }
         } else {
             total = selectedMovie.positive + selectedMovie.negative;
             thisPositive = selectedMovie.children[i].positive;
             thisNegative = selectedMovie.children[i].negative;
             if (initLegend){
-                targetWidth[i] = 55*(((thisPositive + thisNegative) / total) / propMaxValue);
+                targetWidth[i] = 80*(((thisPositive + thisNegative) / total) / propMaxValue);
                 if(targetWidth[i]<= 0) targetWidth[i] = 1;
             }
             if (isPcolor) {
-                ctx.strokeStyle = pcolor[i];
-            } else {
-                if (thisPositive > thisNegative) {
-                    ctx.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
-                } else {
-                    ctx.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
-                }
+                //ctx.fillStyle = pcolor[i];
+//                if (isReverse) {
+//                ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
+//                } else {
+//                    ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
+//                }
+//                } else {
+//                if (thisPositive > thisNegative) {
+//                    ctx.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
+//                } else {
+//                    ctx.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
+//                }
             }
             currWidth[i] += targetWidth[i]/20;
-            ctx.lineWidth = currWidth[i];
+           // ctx.lineWidth = currWidth[i];
         }
-        ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 1+(ctx.lineWidth/2), (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
-        ctx.stroke();
 
         var beginRad = Math.PI/180;
         var endRad = 0;
-        var motherWidth = ctx.lineWidth;
+        var motherWidth = currWidth[i];
         var rot;
         if (selectedMovie !== null) {
-            var propCvs = document.querySelector("#prop"+i);
+            var propCvs = document.querySelector("#prop"+(i+2)%6);
             var propCtx = propCvs.getContext('2d');
             propCtx.clearRect(0,0, propCvs.width, propCvs.height);
             propCtx.textAlign = "center";
@@ -235,17 +229,18 @@ function updateLegends() {
                 }
                 var lw = targetWidth[i]*(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative);
                 if (lw === 0) lw = 1;
-                ctx.lineWidth = 20;
+                ctx.lineWidth = .2;
                 ctx.beginPath();
-                ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth+2+(ctx.lineWidth/2), (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
+                ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
+                ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth, (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
                 beginRad += endRad;
-                if (!isPcolor)  {
-                    if (dep2[r].positive > dep2[r].negative) {
-                        ctx.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
-                    } else {
-                        ctx.strokeStyle = "hsl(0,70%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
-                    }
+                if (isReverse)  {
+                        ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                } else {
+                        ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                 }
+                ctx.closePath();
+                ctx.fill();
                 ctx.stroke();
 
 
@@ -279,6 +274,7 @@ function updateLegends() {
         ctx.beginPath();
         ctx.lineWidth = 5;
     }
+    ctx.fillStyle = "#454545";
     ctx.textBaseline = "middle";
     ctx.font = "13px Jeju Gothic";
     ctx.textAlign = "right";
@@ -354,7 +350,7 @@ window.addEventListener('load',function(){
                     var node;
                     var ex,ey;
                     var i;
-                    document.querySelector("#infoBox").style.display = "block";
+                    //document.querySelector("#infoBox").style.display = "block";
                     for (i = 0; i < nodes.length; i++) {
                         node = nodes[i];
                         ex = e.offsetX -( zoomXcalc(node.posX) + moveOffsetX + transitOffsetX );
@@ -362,7 +358,7 @@ window.addEventListener('load',function(){
                         er = Math.sqrt(ex * ex + ey * ey);
                         if (er < node.r) {
                             selectedMovie = data[i];
-                            document.querySelector("#infoBox img").src = "poster/"+i+".jpg";
+                            //document.querySelector("#infoBox img").src = "poster/"+i+".jpg";
                             updateLegends();
                             draw();
                             break;
@@ -385,7 +381,7 @@ window.addEventListener('load',function(){
             }
         }
     };
-    req.open("get","reviewScore.json",false);
+    req.open("get","data.json",false);
     req.send();
 });
 
@@ -521,6 +517,7 @@ function makeEdge() {
     console.log("num of pEdge :"+edges.length);
 }
 
+var propPoint = [];
 function initNodes() {
     var max = 0;
     var i, r;
@@ -540,6 +537,16 @@ function initNodes() {
             this.posY = 10;
             this.r = r;
             this.active = true;
+        });
+    }
+
+    var ii = 0;
+    for (i = 0; i < 6; i++) {
+        ii = i-6/4;
+        propPoint.push(new function(){
+            this.name = "p"+i;
+           this.x = (canvas.width * .2) * Math.cos(2*Math.PI*ii/6) + canvas.width * .5;
+           this.y = (canvas.width * .2) * Math.sin(2*Math.PI*ii/6) + canvas.height * .5;
         });
     }
 }
@@ -562,6 +569,7 @@ draw = function() {
             nodes[i].active = true;
         }
     }
+
     var i, r,nd1,nd2;
     if (true) {
         for (i = 0; i < polarityEdges.length; i++) {
@@ -578,11 +586,11 @@ draw = function() {
                     context.lineWidth = .05;
                 }
             }
-            context.beginPath();
-            context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
-            context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
-            context.closePath();
-            context.stroke();
+//            context.beginPath();
+//            context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+//            context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
+//            context.closePath();
+//            context.stroke();
         }
         for (i = 0; i < edges.length; i++) {
             nd1 = nodes[edges[i].origin];
@@ -598,11 +606,11 @@ draw = function() {
                     context.lineWidth = .05;
                 }
             }
-            context.beginPath();
-            context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
-            context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
-            context.closePath();
-            context.stroke();
+//            context.beginPath();
+//            context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+//            context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
+//            context.closePath();
+//            context.stroke();
         }
     }
     for (i = 0; i < nodes.length; i++) {
@@ -659,18 +667,12 @@ draw = function() {
                // var endRad = 0;
                 for (var v = 0; v < dep2.length; v++) {
                     propRad = (degree360/6) / dep2.length;
-                    //var lw = linewidth*(dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative);
                     var lw = context.lineWidth;
-                    if(isPcolor) {
-                        context.fillStyle = pcolor[r];
-                        //context.strokeStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
-                    } else {
-                        if (dep2[v].positive > dep2[v].negative) {
-                            context.fillStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                    if(isReverse) {
+                            context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
-                            context.fillStyle = "hsl(0,70%," + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                            context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         }
-                    }
                     context.strokeStyle  = "white";
                     if (lw === 0) lw = 1;
                     context.lineWidth = .5;
@@ -774,6 +776,28 @@ update = function() {
         nd2.dy += ey/er*fa;
     }
 
+    for (i=0; i < nodes.length; i++) {
+        var max = 0;
+        var mIdx = 0;
+        for (r=0; r < data[i].children.length; r++){
+            var dep2 = data[i].children[r];
+
+            if((dep2.positive + dep2.negative) > max){
+                max = dep2.positive+dep2.negative;
+                mIdx = (r+2)%6;
+            }
+        }
+        nd1 = propPoint[mIdx];
+        nd2 = nodes[i];
+        ex = nd1.x - nd2.x;
+        ey = nd1.y - nd2.y;
+        er = Math.sqrt(ex*ex + ey*ey);
+        if (er === 0) er = 0.0001;
+        fa = aForce(er);
+        nd2.dx += ex/er*fa*9;
+        nd2.dy += ey/er*fa*9;
+    }
+
     //Central
     for (i = 0; i < nodes.length; i++) {
         node = nodes[i];
@@ -814,8 +838,8 @@ function showNodeTitle() {
     updateLegends();
 }
 
-function changeColorMode() {
-    isPcolor = !isPcolor;
+function changeColorMode(bool) {
+    isReverse = bool;
     draw();
     updateLegends();
 }
