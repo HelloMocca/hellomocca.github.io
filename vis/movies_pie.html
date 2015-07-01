@@ -16,9 +16,11 @@
         }
         #canvas {
             position:absolute;
-            left:0;
+            left:260px;
             display:block;
-            top:45px;
+            top:55px;
+            background-color:#eeeeee;
+            outline: 1px solid #ccc;
         }
         #infoPanel h1 {
             padding:0;
@@ -51,7 +53,7 @@
         }
 
         .propCanvas {
-            outline:1px solid #ccc;
+           /* outline:1px solid #ccc;*/
         }
 
         button {
@@ -71,25 +73,22 @@
     </style>
 </head>
 <body>
-<div id="header" style="width:100%; z-index:999; position:fixed; background-color:#454545; color:#fff; outline:1px solid #ccc;">
-    <h2 style="font-size:25px; margin:10px; display:inline-block;">Opinion Analyzer</h2>
+<div id="header" style="width:100%; z-index:999; position:fixed; background-color:#5d5d5d; color:#fff; outline:1px solid #ccc;">
+    <h2 style="font-size:25px; font-weight:300; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
         <button onclick="changeColorMode(true)"><i class="fa fa-adjust"></i>  Strong to Positive</button>
         <button onclick="changeColorMode(false)"><i class="fa fa-adjust"></i>  Strong to Negative</button>
-        <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Node Name</button>
+        <button onclick="showEdge()"><i class="fa fa-arrows-h"></i>  Show/Hide Node Edge</button>
+        <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Show/Hide Node Name</button>
     </div>
 </div>
 <canvas id="canvas"></canvas>
 <div id="infoPanel" style="position:fixed; width:250px; height:100%; outline:1px solid #ccc;">
-    <h1 style="margin-top:10px">Detail Viewer</h1>
+    <h1 style="margin-top:10px; font-weight:lighter;">Opinion Overview</h1>
     <canvas width="200" height="200" id="legends" style="margin:0 25px 0 25px;"></canvas>
     <div id="property-container" style="margin-left:22px;">
-        <canvas id="prop0" width="200" height="100" class="propCanvas"></canvas>
-        <canvas id="prop1" width="200" height="100" class="propCanvas"></canvas>
-        <canvas id="prop2" width="200" height="100" class="propCanvas"></canvas>
-        <canvas id="prop3" width="200" height="100" class="propCanvas"></canvas>
-        <canvas id="prop4" width="200" height="100" class="propCanvas"></canvas>
-        <canvas id="prop5" width="200" height="100" class="propCanvas"></canvas>
+        <h2 style="margin-top:10px; font-size:15px; font-weight:lighter;">Detail Property Summary</h2>
+        <canvas id="prop0" width="200" height="500" class="propCanvas"></canvas>
     </div>
 </div>
 <!--<div id="infoBox" style="display:block; position:absolute; left:100%; margin-left:-250px; top:50px; height:100%; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">-->
@@ -149,6 +148,7 @@ var sDegree = Math.PI/180;
 var viewNodeTitle = true;
 var isPcolor = true;
 var isReverse = false;
+var viewEdge = true;
 function updateLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
@@ -172,10 +172,16 @@ function updateLegends() {
         }
     }
     ctx.strokeStyle = "white";
+
+    var propCvs = document.querySelector("#prop0");
+    var propCtx = propCvs.getContext('2d');
+    propCtx.textBaseline ="top";
+    propCtx.clearRect(0,0, propCvs.width, propCvs.height);
+    var bar = [];
+
     for(i = 0; i < data[0].children.length; i++) {
         if (selectedMovie === null) {
             if(initLegend) targetWidth = [65,65,65,65,65,65];
-            currWidth[i] += targetWidth[i]/20;
             ctx.lineWidth = currWidth[i];
             if (isPcolor) {
                 ctx.fillStyle = pcolor[i];
@@ -190,22 +196,7 @@ function updateLegends() {
                 targetWidth[i] = 80*(((thisPositive + thisNegative) / total) / propMaxValue);
                 if(targetWidth[i]<= 0) targetWidth[i] = 1;
             }
-            if (isPcolor) {
-                //ctx.fillStyle = pcolor[i];
-//                if (isReverse) {
-//                ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                } else {
-//                    ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                }
-//                } else {
-//                if (thisPositive > thisNegative) {
-//                    ctx.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                } else {
-//                    ctx.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                }
-            }
             currWidth[i] += targetWidth[i]/20;
-           // ctx.lineWidth = currWidth[i];
         }
 
         var beginRad = Math.PI/180;
@@ -213,22 +204,15 @@ function updateLegends() {
         var motherWidth = currWidth[i];
         var rot;
         if (selectedMovie !== null) {
-            var propCvs = document.querySelector("#prop"+(i+2)%6);
-            var propCtx = propCvs.getContext('2d');
-            propCtx.clearRect(0,0, propCvs.width, propCvs.height);
-            propCtx.textAlign = "center";
-            propCtx.fillText(selectedMovie.children[i].name, propCvs.width/2, 10);
             var dep2 = selectedMovie.children[i].children;
-            var propBeginRad = 0;
             console.log("[1단계]"+selectedMovie.children[i].name+":"+(thisPositive + thisNegative) / total);
+            var lw = 0;
             for (r = 0; r < dep2.length; r++) {
                 console.log("[2단계]"+dep2[r].name+":"+(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative));
                 endRad = (degree360/numOfProperty) *((dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative) );
                 if (endRad < 0) {
                     continue;
                 }
-                var lw = targetWidth[i]*(dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative);
-                if (lw === 0) lw = 1;
                 ctx.lineWidth = .2;
                 ctx.beginPath();
                 ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
@@ -244,36 +228,34 @@ function updateLegends() {
                 ctx.stroke();
 
 
-                propCtx.beginPath();
-                propCtx.lineWidth = 40;
-                var propEndRad = degree360 * ((dep2[r].positive+dep2[r].negative) / (thisPositive+thisNegative) );
-                propCtx.arc(propCvs.width/2, propCvs.height/2+5, propCtx.lineWidth/2, propBeginRad , propBeginRad+propEndRad, false);
-                propCtx.strokeStyle = ctx.strokeStyle;
-                propCtx.stroke();
-                propBeginRad += propEndRad;
-                if (propEndRad >= (degree360/9)) {
-                    propCtx.save();
-                    propCtx.translate(propCvs.width / 2, propCvs.height / 2 + 5);
-                    rot = propBeginRad - (propEndRad/2);
-                    propCtx.fillStyle = "#fff";
-                    propCtx.textBaseline="middle";
-                    if (rot > (degree360/4) && rot < (Math.PI + Math.PI/2)) {
-                        propCtx.rotate(rot + Math.PI);
-                        propCtx.textAlign = "right";
-                        propCtx.fillText(dep2[r].name, -10, 0);
-                    } else {
-                        propCtx.rotate(rot);
-                        propCtx.textAlign = "left";
-                        propCtx.fillText(dep2[r].name, 8, 0);
-                    }
-                    propCtx.restore();
+                lw = (dep2[r].positive+dep2[r].negative) / total;
+                if (lw > .03) {
+                    bar.push([dep2[r].name, (dep2[r].positive+dep2[r].negative)/(thisPositive+thisNegative), ctx.fillStyle]);
                 }
             }
-        }
 
-        ctx.beginPath();
-        ctx.lineWidth = 5;
+        } else {
+            ctx.beginPath();
+            ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
+            ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 80, (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
+            ctx.closePath();
+            ctx.fill();
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
     }
+
+    if (selectedMovie !== null) {
+        for (r = 0; r < bar.length; r++) {
+            propCtx.fillStyle = bar[r][2];
+            propCtx.fillRect( 5, 2+(28*r), 180 * bar[r][1] , 25);
+            propCtx.fillStyle = "#454545";
+            propCtx.font = "15px Jeju Gothic";
+            propCtx.fillText(bar[r][0], 5, 5+(28*r) );
+        }
+    }
+
+
     ctx.fillStyle = "#454545";
     ctx.textBaseline = "middle";
     ctx.font = "13px Jeju Gothic";
@@ -304,8 +286,8 @@ function updateLegends() {
 
 window.addEventListener('load',function(){
     canvas = document.querySelector("#canvas");
-    console.log(canvas.width = document.body.clientWidth);
-    console.log(canvas.height = document.body.clientHeight - document.querySelector("#footer").clientHeight - 45);
+    console.log(canvas.width = document.body.clientWidth - 270);
+    console.log(canvas.height = document.body.clientHeight - document.querySelector("#footer").clientHeight - 65);
     context = canvas.getContext('2d');
     cooling = canvas.width *.1;
     var req = new XMLHttpRequest();
@@ -495,19 +477,18 @@ function getPolarityMatrix() {
 }
 
 function makeEdge() {
+    var i, r;
     edges = [];
     var origin;
     var target;
-    for (var i = 0; i < polaritySimArray.length; i++) {
+    for (i = 0; i < polaritySimArray.length; i++) {
         origin = i;
         edgenum = 0;
-        for (var r = i+1; r < polaritySimArray[i].length; r++) {
+        for (r = i+1; r < polaritySimArray[i].length; r++) {
             target = r;
-            if (moviesSimArray[i][r] >= .9) {
-                //if (edgenum < 3) {
-                edges.push({origin: i, target: r, value: moviesSimArray[i][r]});
-               // }
-                edgenum++;
+            if (moviesSimArray[i][r] >= .95) {
+                    edges.push({origin: i, target: r, value: moviesSimArray[i][r]});
+                    edgenum++;
                 if (polaritySimArray[i][r] >= .9) {
                     polarityEdges.push({origin:i, target: r});
                 }
@@ -526,7 +507,8 @@ function initNodes() {
         if((data[i].positive + data[i].negative) > max) max = data[i].positive + data[i].negative;
     }
     for (i = 0; i < len; i++) {
-        r = 50 * ((data[i].positive + data[i].negative) / max) ;
+        r = 100 * ((data[i].positive + data[i].negative) / max) ;
+        if (r < 20) r = 20;
         nodes.push(new function() {
             this.name = data[i].name;
             this.x = i*20;
@@ -577,40 +559,44 @@ draw = function() {
             nd2 = nodes[polarityEdges[i].target];
             if (selectedMovie !== null) {
                 if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                    context.strokeStyle = "#181818";
-                    context.lineWidth = .05;
+                    context.strokeStyle = "#a6a6a6";
+                    context.lineWidth = .01;
                     nd1.active = true;
                     nd2.active = true;
                 } else {
-                    context.strokeStyle = "#181818";
-                    context.lineWidth = .05;
+                    context.strokeStyle = "#a6a6a6";
+                    context.lineWidth = .01;
                 }
             }
-//            context.beginPath();
-//            context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
-//            context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
-//            context.closePath();
-//            context.stroke();
+            if (viewEdge) {
+                context.beginPath();
+                context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+                context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
+                context.closePath();
+                context.stroke();
+            }
         }
         for (i = 0; i < edges.length; i++) {
             nd1 = nodes[edges[i].origin];
             nd2 = nodes[edges[i].target];
             if (selectedMovie !== null) {
                 if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                    context.strokeStyle = "#181818";
-                    context.lineWidth = .05;
+                    context.strokeStyle = "#a6a6a6";
+                    context.lineWidth = .01;
                     nd1.active = true;
                     nd2.active = true;
                 } else {
-                    context.strokeStyle = "#181818";
-                    context.lineWidth = .05;
+                    context.strokeStyle = "#a6a6a6";
+                    context.lineWidth = .01;
                 }
             }
-//            context.beginPath();
-//            context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
-//            context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
-//            context.closePath();
-//            context.stroke();
+            if (viewEdge) {
+                context.beginPath();
+                context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
+                context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
+                context.closePath();
+                context.stroke();
+            }
         }
     }
     for (i = 0; i < nodes.length; i++) {
@@ -681,7 +667,6 @@ draw = function() {
                     context.beginPath();
                     context.moveTo(x,y);
                     var radius = nodes[i].r;
-                    if (radius < 20) radius = 20;
                     context.arc(x, y, radius * ((thisPositive+thisNegative)/propMaxValue), beginRad, beginRad+endRad, false);
                     context.closePath();
                     beginRad += endRad;
@@ -697,15 +682,18 @@ draw = function() {
         for (i = 0; i < nodes.length; i++) {
             if (nodes[i].active) context.globalAlpha = 1;
             else context.globalAlpha = .2;
-            context.font = "12px Jeju Gothic";
-            if (selectedMovie !== null) {
-                if (nodes[i].name === selectedMovie.name) {
-                    continue;
+            context.font = "lighter 12px Jeju Gothic";
+            if (nodes[i].r < 25) {
+                context.font = "0px Jeju Gothic";
+            }
+            if (selectedMovie != null) {
+                if (selectedMovie.name == nodes[i].name) {
+                    context.font = "bolder 12px Jeju Gothic";
                 }
             }
             x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
             y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
-            context.fillText(nodes[i].name, x + 30, y);
+            context.fillText(nodes[i].name, x + 10, y);
         }
     }
 };
@@ -814,7 +802,11 @@ update = function() {
     for (i = 0; i < nodes.length; i++) {
         er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
         nodes[i].x += nodes[i].dx / er * Math.min(er, cooling);
+        if(nodes[i].x < (nodes[i].r*2) ) nodes[i].x = (nodes[i].r*2);
+        if(nodes[i].x > (canvas.width - (nodes[i].r*2))) nodes[i].x = canvas.width -(nodes[i].r*2);
         nodes[i].y += nodes[i].dy / er * Math.min(er, cooling);
+        if(nodes[i].y < (nodes[i].r*2)) nodes[i].y = (nodes[i].r*2);
+        if(nodes[i].y > (canvas.height - (nodes[i].r*2))) nodes[i].y = canvas.height - (nodes[i].r*2);
     }
     cooling = cooling *.95;
     draw();
@@ -843,6 +835,12 @@ function changeColorMode(bool) {
     draw();
     updateLegends();
 }
+
+    function showEdge() {
+        viewEdge = !viewEdge;
+        draw();
+        updateLegends();
+    }
 
 
 </script>
