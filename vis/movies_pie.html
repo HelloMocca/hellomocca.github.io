@@ -76,6 +76,7 @@
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#5d5d5d; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; font-weight:300; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
+        <button onclick="changePolarView()"> Show Polarity View</button>
         <button onclick="changeColorMode(true)"><i class="fa fa-adjust"></i>  Strong to Positive</button>
         <button onclick="changeColorMode(false)"><i class="fa fa-adjust"></i>  Strong to Negative</button>
         <button onclick="showEdge()"><i class="fa fa-arrows-h"></i>  Show/Hide Node Edge</button>
@@ -149,6 +150,7 @@ var viewNodeTitle = true;
 var isPcolor = true;
 var isReverse = false;
 var viewEdge = true;
+var isPolarview = false;
 function updateLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
@@ -183,10 +185,14 @@ function updateLegends() {
         if (selectedMovie === null) {
             if(initLegend) targetWidth = [65,65,65,65,65,65];
             ctx.lineWidth = currWidth[i];
-            if (isPcolor) {
-                ctx.fillStyle = pcolor[i];
+            if (isPolarview) {
+                if(isReverse) {
+                    ctx.fillStyle = "hsl(220,30%,80%)";
+                } else {
+                    ctx.fillStyle = "hsl(0,35%,80%)";
+                }
             } else {
-                ctx.fillStyle = dcolor[i];
+                ctx.fillStyle = pcolor[i];
             }
         } else {
             total = selectedMovie.positive + selectedMovie.negative;
@@ -218,10 +224,18 @@ function updateLegends() {
                 ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
                 ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth, (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
                 beginRad += endRad;
-                if (isReverse)  {
-                        ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                if (isPolarview) {
+                    if (isReverse) {
+                        ctx.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                    } else {
+                        ctx.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                    }
                 } else {
+                    if (isReverse)  {
+                        ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                    } else {
                         ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                    }
                 }
                 ctx.closePath();
                 ctx.fill();
@@ -654,11 +668,20 @@ draw = function() {
                 for (var v = 0; v < dep2.length; v++) {
                     propRad = (degree360/6) / dep2.length;
                     var lw = context.lineWidth;
-                    if(isReverse) {
+                    if(isPolarview) {
+                        if (isReverse) {
+                            context.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                        } else {
+                            context.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                        }
+                    }
+                    else {
+                        if (isReverse) {
                             context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
                             context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         }
+                    }
                     context.strokeStyle  = "white";
                     if (lw === 0) lw = 1;
                     context.lineWidth = .5;
@@ -842,6 +865,11 @@ function changeColorMode(bool) {
         updateLegends();
     }
 
+    function changePolarView() {
+        isPolarview = !isPolarview;
+        draw();
+        updateLegends();
+    }
 
 </script>
 </body>
