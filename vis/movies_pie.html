@@ -227,10 +227,15 @@ function updateLegends() {
                 ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth, (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
                 beginRad += endRad;
                 if (isPolarview) {
-                    if (isReverse) {
-                        ctx.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+//                    if (isReverse) {
+//                        ctx.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+//                    } else {
+//                        ctx.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+//                    }
+                    if (dep2[r].positive > dep2[r].negative) {
+                        ctx.fillStyle = "hsl(220,30%," + (100 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     } else {
-                        ctx.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                        ctx.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     }
                 } else {
                     if (isReverse)  {
@@ -383,16 +388,24 @@ window.addEventListener('load',function(){
     req.send();
 });
 
-var zoomlevel = 0;
+var zoomLevel = 10;
 var zoomrate = 1;
 function zoomin() {
+    zoomLevel++;
+    if(zoomLevel > 40) {
+        zoomLevel = 40;
+        return;
+    }
     zoomrate += 0.08;
-    if(zoomrate > 5.0) zoomrate = 5.0;
 }
 
 function zoomout() {
+    zoomLevel--;
+    if(zoomLevel < 1) {
+        zoomLevel = 1;
+        return;
+    }
     zoomrate -= 0.08;
-    if(zoomrate < 0.2) zoomrate = 0.2;
 }
 
 function zoomXcalc(posX) {
@@ -633,10 +646,10 @@ draw = function() {
                     propRad = (degree360 / 6) / dep2.length;
                     var lw = context.lineWidth;
                     if (isPolarview) {
-                        if (isReverse) {
-                            context.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                        if (dep2[v].positive > dep2[v].negative) {
+                            context.fillStyle = "hsl(220,30%," + (100 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
-                            context.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                            context.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].negative+dep2[v].positive) * 100)) ) + "%)";
                         }
                     }
                     else {
@@ -648,12 +661,12 @@ draw = function() {
                     }
                     context.strokeStyle = "white";
                     if (lw === 0) lw = 1;
-                    context.lineWidth = .5;
+                    context.lineWidth = .5 * (zoomLevel/20);
                     endRad = (degree360 / 6) * ((dep2[v].positive + dep2[v].negative) / (thisPositive + thisNegative));
                     //endRad = propRad;
                     context.beginPath();
                     context.moveTo(x, y);
-                    var radius = nodes[i].r;
+                    var radius = nodes[i].r * (zoomLevel/20);
                     context.arc(x, y, radius * ((thisPositive + thisNegative) / propMaxValue), beginRad, beginRad + endRad, false);
                     context.closePath();
                     beginRad += endRad;
@@ -662,17 +675,25 @@ draw = function() {
                 }
             }
         } else {
-            var maxPropVal = 0;
-            var maxPropIdx = 0;
-            for (r = 0; r < data[i].children.length; r++) {
-                if (maxPropVal < (data[i].children[r].positive + data[i].children[r].negative)) {
-                    maxPropVal = (data[i].children[r].positive + data[i].children[r].negative);
-                    maxPropIdx = r;
+            if (isPolarview) {
+                if (data[i].positive >= data[i].negative) {
+                   context.fillStyle = "hsl(220,30%," + (100 - Math.floor(0.4 * (data[i].positive / (data[i].positive+data[i].negative) * 100)) ) + "%)";
+                } else {
+                   context.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (data[i].negative / (data[i].negative+data[i].positive) * 100)) ) + "%)";
                 }
+            } else {
+                var maxPropVal = 0;
+                var maxPropIdx = 0;
+                for (r = 0; r < data[i].children.length; r++) {
+                    if (maxPropVal < (data[i].children[r].positive + data[i].children[r].negative)) {
+                        maxPropVal = (data[i].children[r].positive + data[i].children[r].negative);
+                        maxPropIdx = r;
+                    }
+                }
+                context.fillStyle = pcolor[maxPropIdx];
             }
-            context.fillStyle = pcolor[maxPropIdx];
             context.beginPath();
-            context.arc(x,y, nodes[i].r/10, 0, Math.PI*2);
+            context.arc(x,y, (nodes[i].r/10)*(zoomLevel/5), 0, Math.PI*2);
             context.closePath();
             context.fill();
         }
