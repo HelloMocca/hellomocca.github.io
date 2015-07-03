@@ -34,13 +34,30 @@
             padding-top:50px;
             height:900px;
         }
-        #polaritylegend {
-            list-style:none;
-            margin:0;
+
+        #optionBox {
+            transition-property:height;
+            transition-duration:.5s;
+        }
+
+        #optionBox h4 {
             padding:0;
-            margin-left:5px;
-            display:table;
-            background-color:white;
+            margin:0;
+            font-size:14px;
+        }
+
+        .subOptionBox {
+            padding:10px;
+            border-top:1px solid #ccc;
+        }
+
+        .subOptionBox label {
+            font-size:12px;
+        }
+
+        .subOptionBox form {
+            margin:0;
+            padding:5px;
         }
 
         #polaritylegend li {
@@ -76,12 +93,6 @@
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#5d5d5d; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; font-weight:300; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
-        <button onclick="changeNodeShape()">Node Shape</button>
-        <button onclick="changePolarView()"> Show Polarity View</button>
-        <button onclick="changeColorMode(true)"><i class="fa fa-adjust"></i>  Strong to Positive</button>
-        <button onclick="changeColorMode(false)"><i class="fa fa-adjust"></i>  Strong to Negative</button>
-        <button onclick="showEdge()"><i class="fa fa-arrows-h"></i>  Show/Hide Node Edge</button>
-        <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Show/Hide Node Name</button>
     </div>
 </div>
 <canvas id="canvas"></canvas>
@@ -93,28 +104,33 @@
         <canvas id="prop0" width="200" height="500" class="propCanvas"></canvas>
     </div>
 </div>
-<!--<div id="infoBox" style="display:block; position:absolute; left:100%; margin-left:-250px; top:50px; height:100%; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">-->
-    <!--<div id="infoBox-image" style="float:left; padding:15px;">-->
-        <!--<img width="200" src="">-->
-    <!--</div>-->
-    <!--<div id="infoBox-desc" style="float:left;">-->
-       <!--<div id="infoBox-movieName" style="max-width:170px; padding:15px 15px 15px 0;">-->
-
-       <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<div id="optionBox" style="display:block; position:absolute; left:100%; margin-left:-270px; top:70px; height:40px; overflow:hidden; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">
+    <div style="width:250px; display:table;"><span style="padding:10px; display:block; float:left;">Options</span><button style="margin:8px; float:right;" onclick="openOptions()"><i class="fa fa-plus"></i></button></div>
+    <div class="subOptionBox">
+        <h4>Node Shape</h4>
+            <form>
+            <input type="radio" name="nodeShape" id="radio-circle-node" checked="checked" onclick="changeNodeShape(true)"><label for="radio-circle-node">Circle Node</label><br/>
+            <input type="radio" name="nodeShape" id="radio-polar-node" onclick="changeNodeShape(false)"><label for="radio-polar-node">Polar Chart Node</label>
+            </form>
+    </div>
+    <div class="subOptionBox">
+        <h4>Color Setting</h4>
+        <form>
+            <input type="radio" name="colorMode" id="radio-property-color" checked="checked" onclick="changePolarView(false)"><label for="radio-property-color">Set to Property Colors</label><br/>
+            <input type="radio" name="colorMode" id="radio-polarity-color" onclick="changePolarView(true)"><label for="radio-polarity-color">Set to Polarity Colors</label>
+        </form>
+    </div>
+    <div class="subOptionBox">
+        <input type="checkbox" id="checkbox-edge" checked="checked" onclick="showEdge()"> <label for="checkbox-edge" style="margin-right:20px;">Show Edges</label>
+        <input type="checkbox" id="checkbox-label" checked="checked" onclick="showNodeTitle()"> <label for="checkbox-label">Show Labels</label>
+    </div>
+</div>
 <div id="footer">
 
 </div>
 <script>
-//var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
-//color = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
-var color = ['hsl(189,100%,40%)','hsl(116,75%,40%)','hsl(78,100%,40%)','hsl(54,100%,40%)','hsl(44,100%,40%)','hsl(22,100%,40%)'];
-var colorl = ['hsl(189,100%,','hsl(116,75%,','hsl(78,100%,','hsl(54,100%,','hsl(44,100%,','hsl(22,100%,'];
 var colorl = ['hsl(6,55%,','hsl(31,61%,','hsl(248,15%,','hsl(60,30%,','hsl(205,39%,','hsl(170,33%,'];
 var pcolor = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
-pcolor = ['rgb(128,61,125)','rgb(201,190,26)','rgb(38,142,60)','rgb(62,76,137)','rgb(198,121,41)','rgb(120,77,78)'];
-pcolor = ['rgb(52,156,95)','rgb(234,101,118)','rgb(189,217,202)','rgb(255,160,118)','rgb(148,108,168)','rgb(212,185,202)'];
 pcolor = ['#fb8072','#fdb462','#bebada','#8dd3c7','#80b1d3','#ffffb3'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(71,200,62,.2)', 'rgba(71,200,62,.5)', 'rgba(71,200,62,1)'];
 const degree360 = Math.PI*2;
@@ -865,16 +881,28 @@ function changeColorMode(bool) {
         updateLegends();
     }
 
-    function changePolarView() {
-        isPolarview = !isPolarview;
+    function changePolarView(b) {
+        isPolarview = b;
         draw();
         updateLegends();
     }
 
-    function changeNodeShape() {
-        isNormalNode = !isNormalNode;
+    function changeNodeShape(b) {
+        isNormalNode = b;
         draw();
         updateLegends();
+    }
+
+    var isOptionOpen = false;
+    function openOptions() {
+        if (isOptionOpen) {
+            document.querySelector('.fa.fa-minus').className = "fa fa-plus";
+            document.querySelector('#optionBox').style.height = "40px";
+        } else {
+            document.querySelector('.fa.fa-plus').className = "fa fa-minus";
+            document.querySelector('#optionBox').style.height = "250px";
+        }
+        isOptionOpen = !isOptionOpen;
     }
 
 </script>
