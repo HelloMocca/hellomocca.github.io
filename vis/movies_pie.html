@@ -716,13 +716,14 @@ draw = function() {
     }
     context.fillStyle = "#454545";
     if (viewNodeTitle) {
-        context.textAlign = "left";
+        context.textAlign = "center";
         context.textBaseline = "middle";
         for (i = 0; i < nodes.length; i++) {
             if (nodes[i].active) context.globalAlpha = 1;
             else context.globalAlpha = .2;
             context.font = "lighter 12px Jeju Gothic";
-            if (nodes[i].r < 25) {
+            if (nodes[i].r * (zoomLevel/20) > 50) context.font = "lighter 20px Jeju Gothic";
+            if (nodes[i].r * (zoomLevel/20) < 25) {
                 context.font = "0px Jeju Gothic";
             }
             if (selectedMovie != null) {
@@ -732,7 +733,7 @@ draw = function() {
             }
             x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
             y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
-            context.fillText(nodes[i].name, x + 10, y);
+            context.fillText(nodes[i].name, x, y);
         }
     }
 };
