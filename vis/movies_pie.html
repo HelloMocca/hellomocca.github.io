@@ -76,6 +76,7 @@
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#5d5d5d; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; font-weight:300; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
+        <button onclick="changeNodeShape()">Node Shape</button>
         <button onclick="changePolarView()"> Show Polarity View</button>
         <button onclick="changeColorMode(true)"><i class="fa fa-adjust"></i>  Strong to Positive</button>
         <button onclick="changeColorMode(false)"><i class="fa fa-adjust"></i>  Strong to Negative</button>
@@ -114,7 +115,7 @@ var colorl = ['hsl(6,55%,','hsl(31,61%,','hsl(248,15%,','hsl(60,30%,','hsl(205,3
 var pcolor = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
 pcolor = ['rgb(128,61,125)','rgb(201,190,26)','rgb(38,142,60)','rgb(62,76,137)','rgb(198,121,41)','rgb(120,77,78)'];
 pcolor = ['rgb(52,156,95)','rgb(234,101,118)','rgb(189,217,202)','rgb(255,160,118)','rgb(148,108,168)','rgb(212,185,202)'];
-pcolor = ['#bebada','#fdb462','#fb8072','#8dd3c7','#80b1d3','#ffffb3'];
+pcolor = ['#fb8072','#fdb462','#bebada','#8dd3c7','#80b1d3','#ffffb3'];
 var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(71,200,62,.2)', 'rgba(71,200,62,.5)', 'rgba(71,200,62,1)'];
 const degree360 = Math.PI*2;
 var nodes = [];
@@ -151,6 +152,7 @@ var isPcolor = true;
 var isReverse = false;
 var viewEdge = true;
 var isPolarview = false;
+var isNormalNode = true;
 function updateLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
@@ -385,32 +387,12 @@ var zoomlevel = 0;
 var zoomrate = 1;
 function zoomin() {
     zoomrate += 0.08;
-    if(zoomrate > 1.2) zoomrate = 1.2;
-    zoomlevel += 2;
-    if(zoomlevel > 0) zoomlevel = 0;
-    innerRadius = 1 + zoomlevel;
-    //if(innerRadius < 2) innerRadius = 2;
-    if(innerRadius < 1) innerRadius = 1;
-    innerLineWidth = 35 + zoomlevel;
-    //if(innerLineWidth < 3) innerLineWidth = 3;
-    if (innerLineWidth < 1) innerLineWidth = 1;
-    outerRadius = innerRadius+innerLineWidth+zoomlevel;
-    if (outerRadius < 1) outerRadius = 1;
+    if(zoomrate > 5.0) zoomrate = 5.0;
 }
 
 function zoomout() {
     zoomrate -= 0.08;
     if(zoomrate < 0.2) zoomrate = 0.2;
-    zoomlevel -= 2;
-    if(zoomlevel < -35) zoomlevel = -35;
-    innerRadius = 1 + zoomlevel;
-    //if(innerRadius < 2) innerRadius = 2;
-    if(innerRadius < 1) innerRadius = 1;
-    innerLineWidth = 35 + zoomlevel;
-    //if(innerLineWidth < 3) innerLineWidth = 3;
-    if (innerLineWidth < 1) innerLineWidth = 1;
-    outerRadius = innerRadius+innerLineWidth+zoomlevel;
-    if (outerRadius < 1) outerRadius = 1;
 }
 
 function zoomXcalc(posX) {
@@ -553,8 +535,6 @@ draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.strokeStyle = "#181818";
-    context.lineWidth = .05;
     context.globalAlpha = 1;
     if (selectedMovie !== null) {
         for(i = 0; i < nodes.length; i++) {
@@ -567,22 +547,23 @@ draw = function() {
     }
 
     var i, r,nd1,nd2;
-    if (true) {
         for (i = 0; i < polarityEdges.length; i++) {
             nd1 = nodes[polarityEdges[i].origin];
             nd2 = nodes[polarityEdges[i].target];
             if (selectedMovie !== null) {
                 if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                     nd1.active = true;
                     nd2.active = true;
                 } else {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                 }
             }
             if (viewEdge) {
+                context.strokeStyle = "#BDBDBD";
+                context.lineWidth = .1;
                 context.beginPath();
                 context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
                 context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
@@ -595,16 +576,18 @@ draw = function() {
             nd2 = nodes[edges[i].target];
             if (selectedMovie !== null) {
                 if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                     nd1.active = true;
                     nd2.active = true;
                 } else {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                 }
             }
             if (viewEdge) {
+                context.strokeStyle = "#BDBDBD";
+                context.lineWidth = .1;
                 context.beginPath();
                 context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
                 context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
@@ -612,7 +595,6 @@ draw = function() {
                 context.stroke();
             }
         }
-    }
     for (i = 0; i < nodes.length; i++) {
         focusValue = 0;
         var isSelected = false;
@@ -631,44 +613,26 @@ draw = function() {
         nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
         x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
         y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
-        var propMaxValue = 0;
-        for (r = 0; r < data[i].children.length; r++) {
-//            propMaxValue += data[i].children[r].positive + data[i].children[r].negative;
-            if (propMaxValue < (data[i].children[r].positive + data[i].children[r].negative)) {
-                propMaxValue = (data[i].children[r].positive + data[i].children[r].negative);
+        if (!isNormalNode) {
+            var beginRad = 0;
+            var endRad = 0;
+            var radRange = 0;
+            var propRad = 0;
+            var propMaxValue = 0;
+            for (r = 0; r < data[i].children.length; r++) {
+                if (propMaxValue < (data[i].children[r].positive + data[i].children[r].negative)) {
+                    propMaxValue = (data[i].children[r].positive + data[i].children[r].negative);
+                }
             }
-        }
-        var beginRad = 0;
-        var endRad = 0;
-        var radRange = 0;
-        var propRad = 0;
-        for (r = 0; r < data[i].children.length; r++) {
-            var thisPositive = data[i].children[r].positive;
-            var thisNegative = data[i].children[r].negative;
-              radRange = (degree360 * ((thisPositive+thisNegative)/(data[i].positive+data[i].negative)));
-//            context.beginPath();
-//            context.lineWidth = 30;
-//            context.arc(x,y,context.lineWidth/2, beginRad1, beginRad1+endRad1);
-//            beginRad1 += endRad1;
-//            var polarity = Math.floor( 0.4 * (thisPositive / (thisPositive + thisNegative) *100));
-//            if (isPcolor) {
-//                context.strokeStyle = pcolor[r];
-//            } else {
-//                if (thisPositive > thisNegative) {
-//                    context.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                } else {
-//                    context.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                }
-//            }
-//            context.stroke();
-            var motherWidth = context.lineWidth;
+            for (r = 0; r < data[i].children.length; r++) {
+                var thisPositive = data[i].children[r].positive;
+                var thisNegative = data[i].children[r].negative;
+                radRange = (degree360 * ((thisPositive + thisNegative) / (data[i].positive + data[i].negative)));
                 var dep2 = data[i].children[r].children;
-                //var beginRad = 0;
-               // var endRad = 0;
                 for (var v = 0; v < dep2.length; v++) {
-                    propRad = (degree360/6) / dep2.length;
+                    propRad = (degree360 / 6) / dep2.length;
                     var lw = context.lineWidth;
-                    if(isPolarview) {
+                    if (isPolarview) {
                         if (isReverse) {
                             context.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
@@ -682,20 +646,35 @@ draw = function() {
                             context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         }
                     }
-                    context.strokeStyle  = "white";
+                    context.strokeStyle = "white";
                     if (lw === 0) lw = 1;
                     context.lineWidth = .5;
-                    endRad = (degree360/6) * ((dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative));
+                    endRad = (degree360 / 6) * ((dep2[v].positive + dep2[v].negative) / (thisPositive + thisNegative));
                     //endRad = propRad;
                     context.beginPath();
-                    context.moveTo(x,y);
+                    context.moveTo(x, y);
                     var radius = nodes[i].r;
-                    context.arc(x, y, radius * ((thisPositive+thisNegative)/propMaxValue), beginRad, beginRad+endRad, false);
+                    context.arc(x, y, radius * ((thisPositive + thisNegative) / propMaxValue), beginRad, beginRad + endRad, false);
                     context.closePath();
                     beginRad += endRad;
                     context.fill();
                     context.stroke();
                 }
+            }
+        } else {
+            var maxPropVal = 0;
+            var maxPropIdx = 0;
+            for (r = 0; r < data[i].children.length; r++) {
+                if (maxPropVal < (data[i].children[r].positive + data[i].children[r].negative)) {
+                    maxPropVal = (data[i].children[r].positive + data[i].children[r].negative);
+                    maxPropIdx = r;
+                }
+            }
+            context.fillStyle = pcolor[maxPropIdx];
+            context.beginPath();
+            context.arc(x,y, nodes[i].r/10, 0, Math.PI*2);
+            context.closePath();
+            context.fill();
         }
     }
     context.fillStyle = "#454545";
@@ -725,8 +704,8 @@ update = function() {
     if(cooling < 0.0001) return;
     var nd1, nd2;
     var i,r;
-    //var k = Math.sqrt(canvas.height*canvas.height / nodes.length);
-    var k = 200;
+    var k = Math.sqrt(canvas.height*canvas.height / nodes.length);
+    //var k = 70;
     var ex, ey, er;
     aForce = function(er) {return er*er /k};
     rForce = function(er) {return (k*k)/er};
@@ -867,6 +846,12 @@ function changeColorMode(bool) {
 
     function changePolarView() {
         isPolarview = !isPolarview;
+        draw();
+        updateLegends();
+    }
+
+    function changeNodeShape() {
+        isNormalNode = !isNormalNode;
         draw();
         updateLegends();
     }
