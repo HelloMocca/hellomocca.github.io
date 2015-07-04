@@ -86,7 +86,7 @@
 
         #property-container {
             height:200px;
-            overflow:scroll;
+            overflow-y:scroll;
         }
 
         .propTitle {
@@ -131,6 +131,7 @@
             overflow-y:scroll;
             outline:1px solid #ccc;
             margin-top:5px;
+            overflow-x:hidden;
         }
     </style>
 </head>
@@ -357,8 +358,7 @@ function updateLegends() {
             if (bar[r][3] > .03) {
               el = document.createElement("div");
               el.setAttribute('class','propBar');
-              el.style.width = "0px";
-              el.style.width = (180 * bar[r][1]) +"px";
+              el.style.width = (160 * bar[r][1]) +"px";
               tel.appendChild(el);
                 gauge = document.createElement("div");
                 gauge.setAttribute('class','gauge');
