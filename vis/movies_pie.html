@@ -124,6 +124,14 @@
             from {width:0%;}
             to {width:100%;}
         }
+
+        .propBarContainer {
+            width:200px;
+            height:100px;
+            overflow-y:scroll;
+            outline:1px solid #ccc;
+            margin-top:5px;
+        }
     </style>
 </head>
 <body>
@@ -334,26 +342,24 @@ function updateLegends() {
         var el = null;
         var propN = null;
         var gauge = null;
-        for (r = 0; r < bar.length; r++) {
+        for (var y = 0; y < bar.length; y++) {
+            r = (y+27)%bar.length;
             if (propTitle !== bar[r][4]) {
-                if (validCnt > 0) {
-                   tel.innerHTML = propTitle;
-                }
-                validCnt = 0;
                 propTitle = bar[r][4];
                 tel = document.createElement("div");
                 tel.setAttribute('class','propTitle');
+                tel.innerHTML = propTitle;
+                document.querySelector('#property-container').appendChild(tel);
+                tel = document.createElement("div");
+                tel.setAttribute('class','propBarContainer');
                 document.querySelector('#property-container').appendChild(tel);
             }
             if (bar[r][3] > .03) {
-              validCnt++;
               el = document.createElement("div");
               el.setAttribute('class','propBar');
               el.style.width = "0px";
-              //el.style.backgroundColor = bar[r][2];
-              //el.innerHTML = bar[r][0];
               el.style.width = (180 * bar[r][1]) +"px";
-              document.querySelector('#property-container').appendChild(el);
+              tel.appendChild(el);
                 gauge = document.createElement("div");
                 gauge.setAttribute('class','gauge');
                 gauge.style.backgroundColor = bar[r][2];
@@ -362,17 +368,7 @@ function updateLegends() {
                 propN.setAttribute('class','propName');
                 propN.innerHTML = bar[r][0];
               el.appendChild(propN);
-
             }
-//            propCtx.fillStyle = bar[r][2];
-//            propCtx.fillRect(5, 2 + (28 * r), 180 * bar[r][1], 25);
-//            propCtx.fillStyle = "#454545";
-//            propCtx.font = "15px Nanum Gothic";
-//            propCtx.fillText(bar[r][0], 5, 5 + (28 * r));
-
-        }
-        if(validCnt>0) {
-            tel.innerHTML = propTitle;
         }
     }
 
