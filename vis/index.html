@@ -754,30 +754,6 @@ draw = function() {
                     context.stroke();
                 }
             }
-        } else {
-            if (isPolarview) {
-                if (data[i].positive >= data[i].negative) {
-                   context.fillStyle = "hsl(220,30%," + (100 - Math.floor(0.4 * (data[i].positive / (data[i].positive+data[i].negative) * 100)) ) + "%)";
-                } else {
-                   context.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (data[i].negative / (data[i].negative+data[i].positive) * 100)) ) + "%)";
-                }
-            } else {
-                var maxPropVal = 0;
-                var maxPropIdx = 0;
-                for (r = 0; r < data[i].children.length; r++) {
-                    if (maxPropVal < (data[i].children[r].positive + data[i].children[r].negative)) {
-                        maxPropVal = (data[i].children[r].positive + data[i].children[r].negative);
-                        maxPropIdx = r;
-                    }
-                }
-                context.fillStyle = pcolor[maxPropIdx];
-            }
-            context.beginPath();
-            context.arc(x,y, (nodes[i].r/10)*(zoomLevel/5), 0, Math.PI*2);
-            context.closePath();
-            context.fill();
-            context.strokeStyle = "#454545";
-            context.stroke();
         }
     }
     // 노드의 이름(영화제목)을 그림
