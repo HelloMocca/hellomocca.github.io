@@ -73,6 +73,7 @@
     </style>
 </head>
 <body>
+<!-- Header 메뉴 -->
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#5d5d5d; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; font-weight:300; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
@@ -83,7 +84,9 @@
         <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Show/Hide Node Name</button>
     </div>
 </div>
+<!-- 시각화 캔바스 -->
 <canvas id="canvas"></canvas>
+<!-- 좌측 상세정보창 -->
 <div id="infoPanel" style="position:fixed; width:250px; height:100%; outline:1px solid #ccc;">
     <h1 style="margin-top:10px; font-weight:lighter;">Opinion Overview</h1>
     <canvas width="200" height="200" id="legends" style="margin:0 25px 0 25px;"></canvas>
@@ -106,16 +109,8 @@
 
 </div>
 <script>
-//var color = ['#86E57F','#A566FF','#00D8FF','#FFBB00','#FF00DD','#FFFF24'];
-//color = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
-var color = ['hsl(189,100%,40%)','hsl(116,75%,40%)','hsl(78,100%,40%)','hsl(54,100%,40%)','hsl(44,100%,40%)','hsl(22,100%,40%)'];
-var colorl = ['hsl(189,100%,','hsl(116,75%,','hsl(78,100%,','hsl(54,100%,','hsl(44,100%,','hsl(22,100%,'];
-var colorl = ['hsl(6,55%,','hsl(31,61%,','hsl(248,15%,','hsl(60,30%,','hsl(205,39%,','hsl(170,33%,'];
-var pcolor = ['#CC3D3D','#CC723D','#CCA63D','#C4B73B','#9FC93C','#47C83E'];
-pcolor = ['rgb(128,61,125)','rgb(201,190,26)','rgb(38,142,60)','rgb(62,76,137)','rgb(198,121,41)','rgb(120,77,78)'];
-pcolor = ['rgb(52,156,95)','rgb(234,101,118)','rgb(189,217,202)','rgb(255,160,118)','rgb(148,108,168)','rgb(212,185,202)'];
-pcolor = ['#bebada','#fdb462','#fb8072','#8dd3c7','#80b1d3','#ffffb3'];
-var dcolor = ['rgba(255,0,0,1)','rgba(255,0,0,.5)','rgba(255,0,0,.2)', 'rgba(71,200,62,.2)', 'rgba(71,200,62,.5)', 'rgba(71,200,62,1)'];
+var colorl = ['hsl(6,55%,','hsl(31,61%,','hsl(248,15%,','hsl(60,30%,','hsl(205,39%,','hsl(170,33%,']; // 긍부정에따른 색상
+var pcolor = ['#bebada','#fdb462','#fb8072','#8dd3c7','#80b1d3','#ffffb3']; // 평가범주에 따른 색상
 const degree360 = Math.PI*2;
 var nodes = [];
 var canvas;
@@ -151,10 +146,12 @@ var isPcolor = true;
 var isReverse = false;
 var viewEdge = true;
 var isPolarview = false;
+
+//좌측 상세정보창을 갱신(update)해주는 부분
 function updateLegends() {
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
-    if (initLegend) {
+    if (initLegend) { // 초기화
         ctx.lineWidth = 1;
         legendLoop = 0;
         currWidth = [0,0,0,0,0,0];
@@ -163,7 +160,7 @@ function updateLegends() {
     ctx.clearRect(0, 0, legend.clientWidth, legend.clientHeight);
     var propMaxValue = 0;
     var thisPositive, thisNegative, total;
-    if (selectedMovie !== null) {
+    if (selectedMovie !== null) { // 영화가 선택되었을 경우 평가요소중에서 가장높은 값을 구함 == propMaxValue
         for (i = 0; i < data[0].children.length; i++) {
             total = selectedMovie.positive + selectedMovie.negative;
             thisPositive = selectedMovie.children[i].positive;
@@ -182,6 +179,7 @@ function updateLegends() {
     var bar = [];
 
     for(i = 0; i < data[0].children.length; i++) {
+        // 영화가 선택되지 않을 경우 각 평가요소를 나타내는 부채꼴의 크기는 모두 동일
         if (selectedMovie === null) {
             if(initLegend) targetWidth = [65,65,65,65,65,65];
             ctx.lineWidth = currWidth[i];
@@ -195,6 +193,7 @@ function updateLegends() {
                 ctx.fillStyle = pcolor[i];
             }
         } else {
+            //영화가 선택되었을 경우 각 평가요소를 나타내는 부채꼴의 크기를 비율에 따라 조절
             total = selectedMovie.positive + selectedMovie.negative;
             thisPositive = selectedMovie.children[i].positive;
             thisNegative = selectedMovie.children[i].negative;
@@ -210,6 +209,7 @@ function updateLegends() {
         var motherWidth = currWidth[i];
         var rot;
         if (selectedMovie !== null) {
+            // 영화가 선택되었을경우 각 평가요소의 세부 평가요소가 얼마나 비중을 차지하는지 계산하고 색상을 부여함
             var dep2 = selectedMovie.children[i].children;
             console.log("[1단계]"+selectedMovie.children[i].name+":"+(thisPositive + thisNegative) / total);
             var lw = 0;
@@ -224,13 +224,13 @@ function updateLegends() {
                 ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
                 ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth, (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
                 beginRad += endRad;
-                if (isPolarview) {
+                if (isPolarview) { // 극성보기일 경우 색상부여
                     if (isReverse) {
                         ctx.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     } else {
                         ctx.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     }
-                } else {
+                } else {  // 평가요소에 따른 색상부여일 경우
                     if (isReverse)  {
                         ctx.fillStyle = colorl[i] + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     } else {
@@ -241,14 +241,14 @@ function updateLegends() {
                 ctx.fill();
                 ctx.stroke();
 
-
+                // 전체 의견중에 현재 평가요소에 대한 의견이 얼마나 큰 비중을 차지하는지 계산
                 lw = (dep2[r].positive+dep2[r].negative) / total;
-                if (lw > .03) {
+                if (lw > .03) { // 전체 의견중에 3% 이상일 경우는 막대그래프로 그리기 위해 배열에 추가
                     bar.push([dep2[r].name, (dep2[r].positive+dep2[r].negative)/(thisPositive+thisNegative), ctx.fillStyle]);
                 }
             }
 
-        } else {
+        } else {    // 선택된 영화가 없을경우
             ctx.beginPath();
             ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
             ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 80, (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
@@ -259,7 +259,7 @@ function updateLegends() {
         }
     }
 
-    if (selectedMovie !== null) {
+    if (selectedMovie !== null) {  // 선택된 영화가 있을경우 막대그래프로 그리기 위해 추가한 배열에서 값을 꺼내어 막대 그래프를 그림
         for (r = 0; r < bar.length; r++) {
             propCtx.fillStyle = bar[r][2];
             propCtx.fillRect( 5, 2+(28*r), 180 * bar[r][1] , 25);
@@ -269,7 +269,7 @@ function updateLegends() {
         }
     }
 
-
+    // 부채꼴에 평가요소 이름을 넣는 부분
     ctx.fillStyle = "#454545";
     ctx.textBaseline = "middle";
     ctx.font = "13px Jeju Gothic";
@@ -289,40 +289,42 @@ function updateLegends() {
         ctx.restore();
     }
     legendLoop++;
-    if(initLegend) initLegend = false;
-    if (legendLoop === 20) {
+    if(initLegend) initLegend = false; // 초기화가 한번 이루어질 경우 다시 일어나지 않도록 함
+    if (legendLoop === 20) { // 20회에 나누어서 그림이 그려짐
         initLegend = true;
         legendLoop = 0;
         return;
     }
+    // 1000/60 밀리세컨드로 이 동작을 호출한다
     legendDrawTimer = setTimeout(updateLegends,1000/60);
 }
 
 window.addEventListener('load',function(){
     canvas = document.querySelector("#canvas");
-    console.log(canvas.width = document.body.clientWidth - 270);
-    console.log(canvas.height = document.body.clientHeight - document.querySelector("#footer").clientHeight - 65);
+    // 그래프의 크기를 설정하는 부분
+    console.log(canvas.width = document.body.clientWidth - 270); //그래프의 가로길이
+    console.log(canvas.height = document.body.clientHeight - document.querySelector("#footer").clientHeight - 65); //그래프의 세로길이
     context = canvas.getContext('2d');
     cooling = canvas.width *.1;
     var req = new XMLHttpRequest();
-    req.onreadystatechange = function(){
+    req.onreadystatechange = function(){ //그래프를 그리기 위한 영화 의견 데이터를 가져오는 부분
         if (req.readyState == 4) {
             if (req.status == 200) {
-                data = JSON.parse(req.responseText).movies;
-                numOfMovie = data.length;
-                numOfProperty = data[0].children.length;
-                updateLegends();
-                getSimilarityMatrix();
-                getPolarityMatrix();
-                initNodes();
-                makeEdge();
-                update();
-                document.addEventListener('mousedown', function(e){
+                data = JSON.parse(req.responseText).movies; //JSON에서 movies 들을 data 변수에 넣음
+                numOfMovie = data.length;                   //영화의 수
+                numOfProperty = data[0].children.length;    //평가요소의 수
+                updateLegends();                            //좌측 상세보기창 초기화
+                getSimilarityMatrix();                      //유사도 매트리스 계산
+                getPolarityMatrix();                        //극성 매트리스 계산
+                initNodes();                                //영화 노드 초기화
+                makeEdge();                                 //영화끼리의 연결 설정
+                update();                                   //노드 위치 계산
+                document.addEventListener('mousedown', function(e){         //마우스를 눌렀을때
                     mDown = true;
                     beginOffsetX = e.offsetX;
                     beginOffsetY = e.offsetY;
                 },false);
-                document.addEventListener('mousemove', function(e){
+                document.addEventListener('mousemove', function(e){         //마우스를 움직일때
                    if (mDown) {
                        dragging = true;
                        moveOffsetX = e.offsetX - beginOffsetX;
@@ -330,7 +332,7 @@ window.addEventListener('load',function(){
                        draw();
                    }
                 },false);
-                document.addEventListener('mouseup', function(e){
+                document.addEventListener('mouseup', function(e){           //마우스 누르는걸 떼었을때
                     if(dragging){
                       mDown = false;
                       dragging = false;
@@ -342,17 +344,17 @@ window.addEventListener('load',function(){
                         mDown = false;
                     }
                 },false);
-                document.querySelector('#canvas').addEventListener('click',function(e){
+                document.querySelector('#canvas').addEventListener('click',function(e){     // 그래프상에서 클릭했을때
                     var node;
                     var ex,ey;
                     var i;
                     //document.querySelector("#infoBox").style.display = "block";
-                    for (i = 0; i < nodes.length; i++) {
+                    for (i = 0; i < nodes.length; i++) {                                    //현재 마우스 위치와 각 노드와의 거리 계산
                         node = nodes[i];
                         ex = e.offsetX -( zoomXcalc(node.posX) + moveOffsetX + transitOffsetX );
                         ey = e.offsetY -( zoomYcalc(node.posY) + moveOffsetY + transitOffsetY );
                         er = Math.sqrt(ex * ex + ey * ey);
-                        if (er < node.r) {
+                        if (er < node.r) {                                                  //현재 마우스위치와 노드거리가 일치하면 선택된 영화로 설정
                             selectedMovie = data[i];
                             //document.querySelector("#infoBox img").src = "poster/"+i+".jpg";
                             updateLegends();
@@ -360,13 +362,13 @@ window.addEventListener('load',function(){
                             break;
                         }
                     }
-                    if (i === nodes.length) {
-                        selectedMovie = null;
+                    if (i === nodes.length) {                                               //현재 마우스위치에 노드가 없을때
+                        selectedMovie = null;                                               // 선택된 영화가 없도록 하고 좌측 상세보기 메뉴 초기화
                         updateLegends();
                         draw();
                     }
                 },false);
-                document.querySelector('#canvas').addEventListener('wheel',function(e){
+                document.querySelector('#canvas').addEventListener('wheel',function(e){     //줌인 줌아웃 계산
                     if (e.deltaY < 0) {
                         zoomin();
                     } else {
@@ -377,7 +379,7 @@ window.addEventListener('load',function(){
             }
         }
     };
-    req.open("get","data.json",false);
+    req.open("get","data_eng.json",false);
     req.send();
 });
 
@@ -421,6 +423,7 @@ function zoomYcalc(posY) {
     return posY * zoomrate;
 }
 
+// 유사도를 계산하는 부분
 function getSimilarityMatrix() {
     for (var i = 0; i < numOfMovie; i++) {
         //each Movies
@@ -455,6 +458,7 @@ function getSimilarityMatrix() {
     }
 }
 
+// 극성을 계산하는 부분(긍정인지 부정인지)
 function getPolarityMatrix() {
     for (var i = 0; i < numOfMovie; i++) {
         var prop;
@@ -490,6 +494,7 @@ function getPolarityMatrix() {
     }
 }
 
+//유사도가 높은 영화끼리 링크(edge) 생성
 function makeEdge() {
     var i, r;
     edges = [];
@@ -500,10 +505,10 @@ function makeEdge() {
         edgenum = 0;
         for (r = i+1; r < polaritySimArray[i].length; r++) {
             target = r;
-            if (moviesSimArray[i][r] >= .95) {
+            if (moviesSimArray[i][r] >= .95) {  //유사도 95% 일경우 연결 추가
                     edges.push({origin: i, target: r, value: moviesSimArray[i][r]});
                     edgenum++;
-                if (polaritySimArray[i][r] >= .9) {
+                if (polaritySimArray[i][r] >= .9) {     //유사도 95%면서 긍부정도 90%이상이면 긍부정 연결도 추가
                     polarityEdges.push({origin:i, target: r});
                 }
             }
@@ -512,7 +517,8 @@ function makeEdge() {
     console.log("num of pEdge :"+edges.length);
 }
 
-var propPoint = [];
+//노드의 초기화가 이루어짐
+var propPoint = [];  //propPoint는 그래프상에 보이지 않는 평가요소 지점
 function initNodes() {
     var max = 0;
     var i, r;
@@ -547,7 +553,7 @@ function initNodes() {
     }
 }
 
-
+//그래프를 그리는 부분
 var focusValue = 0;
 draw = function() {
     var x;
@@ -567,7 +573,7 @@ draw = function() {
     }
 
     var i, r,nd1,nd2;
-    if (true) {
+    if (true) { // 노드간의 연결을 그리는 부분 만약 false로 할 경우 그리지 않는다.
         for (i = 0; i < polarityEdges.length; i++) {
             nd1 = nodes[polarityEdges[i].origin];
             nd2 = nodes[polarityEdges[i].target];
@@ -613,6 +619,8 @@ draw = function() {
             }
         }
     }
+
+    //여기서 부터 노드를 그리기 시작함.
     for (i = 0; i < nodes.length; i++) {
         focusValue = 0;
         var isSelected = false;
@@ -627,13 +635,13 @@ draw = function() {
         } else {
             context.globalAlpha = .2;
         }
+        //노드가 보이게될 위치 posX, posY 계산
         nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
         nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
         x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
         y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
         var propMaxValue = 0;
-        for (r = 0; r < data[i].children.length; r++) {
-//            propMaxValue += data[i].children[r].positive + data[i].children[r].negative;
+        for (r = 0; r < data[i].children.length; r++) { // 평가요소중에 가장 비중이 높은 평가요소가 무엇인지 계산
             if (propMaxValue < (data[i].children[r].positive + data[i].children[r].negative)) {
                 propMaxValue = (data[i].children[r].positive + data[i].children[r].negative);
             }
@@ -642,51 +650,33 @@ draw = function() {
         var endRad = 0;
         var radRange = 0;
         var propRad = 0;
+        // 각평가요소의 부채꼴을 그리는 부분
         for (r = 0; r < data[i].children.length; r++) {
             var thisPositive = data[i].children[r].positive;
             var thisNegative = data[i].children[r].negative;
               radRange = (degree360 * ((thisPositive+thisNegative)/(data[i].positive+data[i].negative)));
-//            context.beginPath();
-//            context.lineWidth = 30;
-//            context.arc(x,y,context.lineWidth/2, beginRad1, beginRad1+endRad1);
-//            beginRad1 += endRad1;
-//            var polarity = Math.floor( 0.4 * (thisPositive / (thisPositive + thisNegative) *100));
-//            if (isPcolor) {
-//                context.strokeStyle = pcolor[r];
-//            } else {
-//                if (thisPositive > thisNegative) {
-//                    context.strokeStyle = "hsl(116,70%," + (80 - Math.floor(0.4 * (thisPositive / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                } else {
-//                    context.strokeStyle = "hsl(0,100%," + (80 - Math.floor(0.4 * (thisNegative / (thisPositive + thisNegative) * 100)) ) + "%)";
-//                }
-//            }
-//            context.stroke();
-            var motherWidth = context.lineWidth;
                 var dep2 = data[i].children[r].children;
-                //var beginRad = 0;
-               // var endRad = 0;
                 for (var v = 0; v < dep2.length; v++) {
                     propRad = (degree360/6) / dep2.length;
                     var lw = context.lineWidth;
-                    if(isPolarview) {
+                    if(isPolarview) {   // 극성보기일 경우
                         if (isReverse) {
                             context.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
                             context.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         }
                     }
-                    else {
+                    else {      //평가요소별 보기일경우
                         if (isReverse) {
                             context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
                             context.fillStyle = colorl[r] + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         }
                     }
-                    context.strokeStyle  = "white";
+                    context.strokeStyle  = "white"; //부채꼴 사이는 하얀색으로 구별함
                     if (lw === 0) lw = 1;
                     context.lineWidth = .5;
                     endRad = (degree360/6) * ((dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative));
-                    //endRad = propRad;
                     context.beginPath();
                     context.moveTo(x,y);
                     var radius = nodes[i].r;
@@ -698,6 +688,7 @@ draw = function() {
                 }
         }
     }
+    // 노드의 이름(영화제목)을 그림
     context.fillStyle = "#454545";
     if (viewNodeTitle) {
         context.textAlign = "left";
@@ -706,10 +697,10 @@ draw = function() {
             if (nodes[i].active) context.globalAlpha = 1;
             else context.globalAlpha = .2;
             context.font = "lighter 12px Jeju Gothic";
-            if (nodes[i].r < 25) {
+            if (nodes[i].r < 25) {  //노드의 크기가 25보다 작을경우 보이지 않음
                 context.font = "0px Jeju Gothic";
             }
-            if (selectedMovie != null) {
+            if (selectedMovie != null) {    //선택된 영화가 잇을경우 해당영화의 이름을 표기
                 if (selectedMovie.name == nodes[i].name) {
                     context.font = "bolder 12px Jeju Gothic";
                 }
@@ -721,21 +712,24 @@ draw = function() {
     }
 };
 
+//노드의 위치를 계산하는 부분
 update = function() {
-    if(cooling < 0.0001) return;
+    if(cooling < 0.0001) return; //cooling 이 점점 작아지며 0.0001보다 작아질 경우 더이상 계산하지 않음
     var nd1, nd2;
     var i,r;
     //var k = Math.sqrt(canvas.height*canvas.height / nodes.length);
-    var k = 200;
+    var k = 200;    // k 상수: 각 노드간의 밀어내거나 끌어당기는 힘의 정도
     var ex, ey, er;
     aForce = function(er) {return er*er /k};
     rForce = function(er) {return (k*k)/er};
+
+    //노드의 변위 초기화
     for (i = 0; i < nodes.length; i++) {
         nodes[i].dx = 0;
         nodes[i].dy = 0;
     }
 
-    //repulsive
+    //밀어내는힘
     for (i = 0; i < nodes.length-1; i++) {
         nd1 = nodes[i];
         for (r = i+1; r < nodes.length; r++){
@@ -758,7 +752,7 @@ update = function() {
         }
     }
 
-    //attractive
+    //끌어당기는힘 (유사한 평가요소 비율을 가진 영화끼리)
     for(i = 0; i < edges.length; i++) {
         nd1 = nodes[edges[i].origin];
         nd2 = nodes[edges[i].target];
@@ -772,7 +766,7 @@ update = function() {
         nd2.dx += ex/er*fa;
         nd2.dy += ey/er*fa;
     }
-
+    //끌어당기는힘2 (유사한 극성을 가진 영화끼리)
     for(i = 0; i < polarityEdges.length; i++) {
         nd1 = nodes[polarityEdges[i].origin];
         nd2 = nodes[polarityEdges[i].target];
@@ -787,6 +781,7 @@ update = function() {
         nd2.dy += ey/er*fa;
     }
 
+    //끌어당기는힘3 (평가요소 지점으로 끌리는 힘, 예를들어 스토리에대한 평가요소가 강할경우 12시 방향으로 끌림)
     for (i=0; i < nodes.length; i++) {
         var max = 0;
         var mIdx = 0;
@@ -809,7 +804,7 @@ update = function() {
         nd2.dy += ey/er*fa*9;
     }
 
-    //Central
+    //그래프 중앙으로 끌어당기는힘 (그래프가 전체적으로 중앙에 위치하도록 보정)
     for (i = 0; i < nodes.length; i++) {
         node = nodes[i];
         ex = canvas.width/2 - node.x;
@@ -821,7 +816,7 @@ update = function() {
         node.dy += ey/er*fa;
     }
 
-    //apply
+    //최종 노드의 변위(dx, dy) 값을 토대로 노드의 위치를 재구성하는 부분
     for (i = 0; i < nodes.length; i++) {
         er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
         nodes[i].x += nodes[i].dx / er * Math.min(er, cooling);
@@ -832,8 +827,8 @@ update = function() {
         if(nodes[i].y > (canvas.height - (nodes[i].r*2))) nodes[i].y = canvas.height - (nodes[i].r*2);
     }
     cooling = cooling *.95;
-    draw();
-    window.requestAFrame(update);
+    draw(); //그래프 그리기
+    window.requestAFrame(update); //계산을 반복수행함
 };
 
 window.requestAFrame = (function () {
