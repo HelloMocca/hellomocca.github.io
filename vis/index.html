@@ -5,14 +5,14 @@
     <title>movie polarity review similarity</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <style>
-        @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
         html,body {
            margin:0;padding:0;
             width:100%;
             height:100%;
             overflow:hidden;
-            font-family:'Jeju Gothic';
+            font-family:'Nanum Gothic';
         }
         #canvas {
             position:absolute;
@@ -29,18 +29,31 @@
         }
         #infoPanel {
             background-color:rgb(244,244,244);
-            transition-property:background-color;
-            transition-duration:.3s;
-            padding-top:50px;
-            height:900px;
         }
-        #polaritylegend {
-            list-style:none;
-            margin:0;
+
+        #optionBox {
+            transition-property:height;
+            transition-duration:.5s;
+        }
+
+        #optionBox h4 {
             padding:0;
-            margin-left:5px;
-            display:table;
-            background-color:white;
+            margin:0;
+            font-size:14px;
+        }
+
+        .subOptionBox {
+            padding:10px;
+            border-top:1px solid #ccc;
+        }
+
+        .subOptionBox label {
+            font-size:12px;
+        }
+
+        .subOptionBox form {
+            margin:0;
+            padding:5px;
         }
 
         #polaritylegend li {
@@ -66,9 +79,59 @@
             height:20px;
             top:100%;
             margin-top:-20px;
-            background-color:#454545;
+            background-color:#5d5d5d;
             color:#fff;
             position:absolute;
+        }
+
+        #property-container {
+            height:200px;
+            overflow-y:scroll;
+        }
+
+        .propTitle {
+            font-size:15px;
+            margin-top:10px;
+        }
+
+        .propBar {
+            position:relative;
+            height:15px;
+            font-size:12px;
+            margin-top:1px;
+            margin-left:10px;
+            margin-bottom:1px;
+            transition-delay:1s;
+            transition-property:width;
+            transition-duration:.3s;
+        }
+
+        .gauge {
+            position:relative;
+            width:100%;
+            height:100%;
+            animation-name:gauge;
+            animation-duration:2s;
+        }
+
+        .propName {
+            top:0;
+            position:absolute;
+            width:200px;
+        }
+
+        @keyframes gauge {
+            from {width:0%;}
+            to {width:100%;}
+        }
+
+        .propBarContainer {
+            width:200px;
+            height:70px;
+            overflow-y:scroll;
+            outline:1px solid #ccc;
+            margin-top:5px;
+            overflow-x:hidden;
         }
     </style>
 </head>
@@ -77,11 +140,6 @@
 <div id="header" style="width:100%; z-index:999; position:fixed; background-color:#5d5d5d; color:#fff; outline:1px solid #ccc;">
     <h2 style="font-size:25px; font-weight:300; margin:10px; display:inline-block;">Opinion Analyzer</h2>
     <div class="util-box" style="display:inline-block; float:right; margin-top:10px; margin-right:25px;">
-        <button onclick="changePolarView()"> Show Polarity View</button>
-        <button onclick="changeColorMode(true)"><i class="fa fa-adjust"></i>  Strong to Positive</button>
-        <button onclick="changeColorMode(false)"><i class="fa fa-adjust"></i>  Strong to Negative</button>
-        <button onclick="showEdge()"><i class="fa fa-arrows-h"></i>  Show/Hide Node Edge</button>
-        <button onclick="showNodeTitle()"><i class="fa fa-tag"></i>  Show/Hide Node Name</button>
     </div>
 </div>
 <!-- 시각화 캔바스 -->
@@ -90,21 +148,32 @@
 <div id="infoPanel" style="position:fixed; width:250px; height:100%; outline:1px solid #ccc;">
     <h1 style="margin-top:10px; font-weight:lighter;">Opinion Overview</h1>
     <canvas width="200" height="200" id="legends" style="margin:0 25px 0 25px;"></canvas>
-    <div id="property-container" style="margin-left:22px;">
-        <h2 style="margin-top:10px; font-size:15px; font-weight:lighter;">Detail Property Summary</h2>
-        <canvas id="prop0" width="200" height="500" class="propCanvas"></canvas>
+    <div id="node-name" style="text-align:center; min-width:2px; min-height:20px;"></div>
+    <div id="property-container" style="padding-left:22px; margin-top:20px; border-top:1px solid #ccc;">
+        <!--<canvas id="prop0" width="200" height="500" class="propCanvas"></canvas>-->
     </div>
 </div>
-<!--<div id="infoBox" style="display:block; position:absolute; left:100%; margin-left:-250px; top:50px; height:100%; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">-->
-    <!--<div id="infoBox-image" style="float:left; padding:15px;">-->
-        <!--<img width="200" src="">-->
-    <!--</div>-->
-    <!--<div id="infoBox-desc" style="float:left;">-->
-       <!--<div id="infoBox-movieName" style="max-width:170px; padding:15px 15px 15px 0;">-->
-
-       <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<div id="optionBox" style="display:block; position:absolute; left:270px; top:70px; height:40px; overflow:hidden; background-color:rgba(255,255,255,.5); outline:1px solid #ccc;">
+    <div style="width:250px; display:table;"><span style="padding:10px; display:block; float:left;">Options</span><button style="margin:8px; float:right;" onclick="openOptions()"><i class="fa fa-plus"></i></button></div>
+    <div class="subOptionBox">
+        <h4>Node Shape</h4>
+            <form>
+                <input type="radio" name="nodeShape" id="radio-circle-node" checked="checked" onclick="changeNodeShape(true)"><label for="radio-circle-node">Circle Node</label><br/>
+                <input type="radio" name="nodeShape" id="radio-polar-node" onclick="changeNodeShape(false)"><label for="radio-polar-node">Polar Chart Node</label>
+            </form>
+    </div>
+    <div class="subOptionBox">
+        <h4>Color Setting</h4>
+        <form>
+            <input type="radio" name="colorMode" id="radio-property-color" checked="checked" onclick="changePolarView(false)"><label for="radio-property-color">Set to Property Colors</label><br/>
+            <input type="radio" name="colorMode" id="radio-polarity-color" onclick="changePolarView(true)"><label for="radio-polarity-color">Set to Polarity Colors</label>
+        </form>
+    </div>
+    <div class="subOptionBox">
+        <input type="checkbox" id="checkbox-edge" checked="checked" onclick="showEdge()"> <label for="checkbox-edge" style="margin-right:20px;">Show Edges</label>
+        <input type="checkbox" id="checkbox-label" checked="checked" onclick="showNodeTitle()"> <label for="checkbox-label">Show Labels</label>
+    </div>
+</div>
 <div id="footer">
 
 </div>
@@ -146,9 +215,11 @@ var isPcolor = true;
 var isReverse = false;
 var viewEdge = true;
 var isPolarview = false;
-
 //좌측 상세정보창을 갱신(update)해주는 부분
+var isNormalNode = true;
+var createBar = true;
 function updateLegends() {
+    document.querySelector("#node-name").innerHTML = "";
     var legend = document.querySelector("#legends");
     var ctx = legend.getContext('2d');
     if (initLegend) { // 초기화
@@ -172,10 +243,10 @@ function updateLegends() {
     }
     ctx.strokeStyle = "white";
 
-    var propCvs = document.querySelector("#prop0");
-    var propCtx = propCvs.getContext('2d');
-    propCtx.textBaseline ="top";
-    propCtx.clearRect(0,0, propCvs.width, propCvs.height);
+    //var propCvs = document.querySelector("#prop0");
+    //var propCtx = propCvs.getContext('2d');
+    //propCtx.textBaseline ="top";
+    //propCtx.clearRect(0,0, propCvs.width, propCvs.height);
     var bar = [];
 
     for(i = 0; i < data[0].children.length; i++) {
@@ -210,6 +281,7 @@ function updateLegends() {
         var rot;
         if (selectedMovie !== null) {
             // 영화가 선택되었을경우 각 평가요소의 세부 평가요소가 얼마나 비중을 차지하는지 계산하고 색상을 부여함
+            document.querySelector("#node-name").innerHTML = selectedMovie.name;
             var dep2 = selectedMovie.children[i].children;
             console.log("[1단계]"+selectedMovie.children[i].name+":"+(thisPositive + thisNegative) / total);
             var lw = 0;
@@ -222,13 +294,13 @@ function updateLegends() {
                 ctx.lineWidth = .2;
                 ctx.beginPath();
                 ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
-                ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth, (((degree360/numOfProperty)*i)+beginRad), (((degree360/numOfProperty)*i)+beginRad+endRad), false);
+                ctx.arc(legend.clientWidth/2, legend.clientHeight/2, motherWidth, (((degree360/numOfProperty)*(i+1))+beginRad), (((degree360/numOfProperty)*(i+1))+beginRad+endRad), false);
                 beginRad += endRad;
                 if (isPolarview) { // 극성보기일 경우 색상부여
                     if (isReverse) {
                         ctx.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[r].positive / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     } else {
-                        ctx.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
+                        ctx.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (dep2[r].negative / (dep2[r].positive + dep2[r].negative) * 100)) ) + "%)";
                     }
                 } else {  // 평가요소에 따른 색상부여일 경우
                     if (isReverse)  {
@@ -251,11 +323,15 @@ function updateLegends() {
         } else {    // 선택된 영화가 없을경우
             ctx.beginPath();
             ctx.moveTo(legend.clientWidth/2, legend.clientHeight/2);
-            ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 80, (degree360/numOfProperty)*i, (degree360/numOfProperty)*(i+1), false);
+            ctx.arc(legend.clientWidth/2, legend.clientHeight/2, 80, (degree360/numOfProperty)*(i+1), (degree360/numOfProperty)*(i+2), false);
             ctx.closePath();
             ctx.fill();
             ctx.lineWidth = 1;
             ctx.stroke();
+            dep2 = data[0].children[i].children;
+            for (r = 0; r < dep2.length; r++) {
+                bar.push([dep2[r].name, 1, ctx.fillStyle, 1, data[0].children[i].name]);
+            }
         }
     }
 
@@ -272,19 +348,19 @@ function updateLegends() {
     // 부채꼴에 평가요소 이름을 넣는 부분
     ctx.fillStyle = "#454545";
     ctx.textBaseline = "middle";
-    ctx.font = "13px Jeju Gothic";
+    ctx.font = "13px Nanum Gothic";
     ctx.textAlign = "right";
     for(i = 0; i < numOfProperty; i++){
         ctx.save();
         ctx.translate(legend.clientWidth/2, legend.clientHeight/2);
-        rot = ((degree360/numOfProperty) * i+1) - ((degree360/numOfProperty)/2);
+        rot = ((degree360/numOfProperty) * (i+1)+1) - ((degree360/numOfProperty)/2);
         if (rot > (degree360/4) && rot < (Math.PI + Math.PI/2)) {
             ctx.rotate(rot + Math.PI);
-            ctx.fillText(data[0].children[i].name, -20, 0);
+            ctx.fillText(data[0].children[i].name, -40, 0);
         } else {
             ctx.textAlign="left";
             ctx.rotate(rot);
-            ctx.fillText(data[0].children[i].name, 20, 0);
+            ctx.fillText(data[0].children[i].name, 40, 0);
         }
         ctx.restore();
     }
@@ -357,6 +433,7 @@ window.addEventListener('load',function(){
                         if (er < node.r) {                                                  //현재 마우스위치와 노드거리가 일치하면 선택된 영화로 설정
                             selectedMovie = data[i];
                             //document.querySelector("#infoBox img").src = "poster/"+i+".jpg";
+                            createBar = true;
                             updateLegends();
                             draw();
                             break;
@@ -383,36 +460,24 @@ window.addEventListener('load',function(){
     req.send();
 });
 
-var zoomlevel = 0;
+var zoomLevel = 10;
 var zoomrate = 1;
 function zoomin() {
+    zoomLevel++;
+    if(zoomLevel > 40) {
+        zoomLevel = 40;
+        return;
+    }
     zoomrate += 0.08;
-    if(zoomrate > 1.2) zoomrate = 1.2;
-    zoomlevel += 2;
-    if(zoomlevel > 0) zoomlevel = 0;
-    innerRadius = 1 + zoomlevel;
-    //if(innerRadius < 2) innerRadius = 2;
-    if(innerRadius < 1) innerRadius = 1;
-    innerLineWidth = 35 + zoomlevel;
-    //if(innerLineWidth < 3) innerLineWidth = 3;
-    if (innerLineWidth < 1) innerLineWidth = 1;
-    outerRadius = innerRadius+innerLineWidth+zoomlevel;
-    if (outerRadius < 1) outerRadius = 1;
 }
 
 function zoomout() {
+    zoomLevel--;
+    if(zoomLevel < 1) {
+        zoomLevel = 1;
+        return;
+    }
     zoomrate -= 0.08;
-    if(zoomrate < 0.2) zoomrate = 0.2;
-    zoomlevel -= 2;
-    if(zoomlevel < -35) zoomlevel = -35;
-    innerRadius = 1 + zoomlevel;
-    //if(innerRadius < 2) innerRadius = 2;
-    if(innerRadius < 1) innerRadius = 1;
-    innerLineWidth = 35 + zoomlevel;
-    //if(innerLineWidth < 3) innerLineWidth = 3;
-    if (innerLineWidth < 1) innerLineWidth = 1;
-    outerRadius = innerRadius+innerLineWidth+zoomlevel;
-    if (outerRadius < 1) outerRadius = 1;
 }
 
 function zoomXcalc(posX) {
@@ -544,7 +609,7 @@ function initNodes() {
 
     var ii = 0;
     for (i = 0; i < 6; i++) {
-        ii = i-6/4;
+        ii = ((i+1)%6)-6/4;
         propPoint.push(new function(){
             this.name = "p"+i;
            this.x = (canvas.width * .2) * Math.cos(2*Math.PI*ii/6) + canvas.width * .5;
@@ -559,8 +624,6 @@ draw = function() {
     var x;
     var y;
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.strokeStyle = "#181818";
-    context.lineWidth = .05;
     context.globalAlpha = 1;
     if (selectedMovie !== null) {
         for(i = 0; i < nodes.length; i++) {
@@ -579,16 +642,18 @@ draw = function() {
             nd2 = nodes[polarityEdges[i].target];
             if (selectedMovie !== null) {
                 if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                     nd1.active = true;
                     nd2.active = true;
                 } else {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                 }
             }
             if (viewEdge) {
+                context.strokeStyle = "#BDBDBD";
+                context.lineWidth = .1;
                 context.beginPath();
                 context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
                 context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
@@ -601,16 +666,18 @@ draw = function() {
             nd2 = nodes[edges[i].target];
             if (selectedMovie !== null) {
                 if (selectedMovie.name === nd1.name || selectedMovie.name === nd2.name) {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                     nd1.active = true;
                     nd2.active = true;
                 } else {
-                    context.strokeStyle = "#a6a6a6";
-                    context.lineWidth = .01;
+                    context.strokeStyle = "#BDBDBD";
+                    context.lineWidth = .1;
                 }
             }
             if (viewEdge) {
+                context.strokeStyle = "#BDBDBD";
+                context.lineWidth = .1;
                 context.beginPath();
                 context.moveTo(zoomXcalc(nd1.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd1.posY) + moveOffsetY + transitOffsetY);
                 context.lineTo(zoomXcalc(nd2.posX) + moveOffsetX + transitOffsetX, zoomYcalc(nd2.posY) + moveOffsetY + transitOffsetY);
@@ -619,7 +686,6 @@ draw = function() {
             }
         }
     }
-
     //여기서 부터 노드를 그리기 시작함.
     for (i = 0; i < nodes.length; i++) {
         focusValue = 0;
@@ -657,13 +723,13 @@ draw = function() {
               radRange = (degree360 * ((thisPositive+thisNegative)/(data[i].positive+data[i].negative)));
                 var dep2 = data[i].children[r].children;
                 for (var v = 0; v < dep2.length; v++) {
-                    propRad = (degree360/6) / dep2.length;
+                    propRad = (degree360 / 6) / dep2.length;
                     var lw = context.lineWidth;
                     if(isPolarview) {   // 극성보기일 경우
                         if (isReverse) {
                             context.fillStyle = "hsl(220,30%," + (80 - Math.floor(0.4 * (dep2[v].positive / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
                         } else {
-                            context.fillStyle = "hsl(0,35%," + (80 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].positive + dep2[v].negative) * 100)) ) + "%)";
+                            context.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (dep2[v].negative / (dep2[v].negative+dep2[v].positive) * 100)) ) + "%)";
                         }
                     }
                     else {      //평가요소별 보기일경우
@@ -678,20 +744,46 @@ draw = function() {
                     context.lineWidth = .5;
                     endRad = (degree360/6) * ((dep2[v].positive+dep2[v].negative) / (thisPositive+thisNegative));
                     context.beginPath();
-                    context.moveTo(x,y);
-                    var radius = nodes[i].r;
-                    context.arc(x, y, radius * ((thisPositive+thisNegative)/propMaxValue), beginRad, beginRad+endRad, false);
+                    context.moveTo(x, y);
+                    var radius = nodes[i].r * (zoomLevel/20);
+                    context.arc(x, y, radius * ((thisPositive + thisNegative) / propMaxValue), beginRad, beginRad + endRad, false);
                     context.closePath();
                     beginRad += endRad;
                     context.fill();
+                    context.lineWidth = 1;
                     context.stroke();
                 }
+            }
+        } else {
+            if (isPolarview) {
+                if (data[i].positive >= data[i].negative) {
+                   context.fillStyle = "hsl(220,30%," + (100 - Math.floor(0.4 * (data[i].positive / (data[i].positive+data[i].negative) * 100)) ) + "%)";
+                } else {
+                   context.fillStyle = "hsl(0,35%," + (100 - Math.floor(0.4 * (data[i].negative / (data[i].negative+data[i].positive) * 100)) ) + "%)";
+                }
+            } else {
+                var maxPropVal = 0;
+                var maxPropIdx = 0;
+                for (r = 0; r < data[i].children.length; r++) {
+                    if (maxPropVal < (data[i].children[r].positive + data[i].children[r].negative)) {
+                        maxPropVal = (data[i].children[r].positive + data[i].children[r].negative);
+                        maxPropIdx = r;
+                    }
+                }
+                context.fillStyle = pcolor[maxPropIdx];
+            }
+            context.beginPath();
+            context.arc(x,y, (nodes[i].r/10)*(zoomLevel/5), 0, Math.PI*2);
+            context.closePath();
+            context.fill();
+            context.strokeStyle = "#454545";
+            context.stroke();
         }
     }
     // 노드의 이름(영화제목)을 그림
     context.fillStyle = "#454545";
     if (viewNodeTitle) {
-        context.textAlign = "left";
+        context.textAlign = "center";
         context.textBaseline = "middle";
         for (i = 0; i < nodes.length; i++) {
             if (nodes[i].active) context.globalAlpha = 1;
@@ -702,12 +794,13 @@ draw = function() {
             }
             if (selectedMovie != null) {    //선택된 영화가 잇을경우 해당영화의 이름을 표기
                 if (selectedMovie.name == nodes[i].name) {
-                    context.font = "bolder 12px Jeju Gothic";
+                    context.font = "bolder 12px Nanum Gothic";
+                    if (nodes[i].r * (zoomLevel/20) > 50) context.font = "bolder 20px Nanum Gothic";
                 }
             }
             x = zoomXcalc(nodes[i].posX) + transitOffsetX + moveOffsetX;
             y = zoomYcalc(nodes[i].posY) + transitOffsetY + moveOffsetY;
-            context.fillText(nodes[i].name, x + 10, y);
+            context.fillText(nodes[i].name, x, y);
         }
     }
 };
@@ -860,10 +953,28 @@ function changeColorMode(bool) {
         updateLegends();
     }
 
-    function changePolarView() {
-        isPolarview = !isPolarview;
+    function changePolarView(b) {
+        isPolarview = b;
         draw();
         updateLegends();
+    }
+
+    function changeNodeShape(b) {
+        isNormalNode = b;
+        draw();
+        updateLegends();
+    }
+
+    var isOptionOpen = false;
+    function openOptions() {
+        if (isOptionOpen) {
+            document.querySelector('.fa.fa-minus').className = "fa fa-plus";
+            document.querySelector('#optionBox').style.height = "40px";
+        } else {
+            document.querySelector('.fa.fa-plus').className = "fa fa-minus";
+            document.querySelector('#optionBox').style.height = "270px";
+        }
+        isOptionOpen = !isOptionOpen;
     }
 
 </script>
