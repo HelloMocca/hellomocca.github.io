@@ -17,9 +17,11 @@
 </a>
 <script>
   function appTimer() {
-    var timer = setTimeout(function(){
-      location.href = "www.naver.com";
-    }, 1000);
+    var timer = setTimeout(redirectToMarket, 1000);
+  }
+  
+  function redirectToMarket() {
+      location.href = "market://details?id=com.naver.android.pholar";
   }
 </script>
 </body>
