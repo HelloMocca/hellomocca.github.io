@@ -8,12 +8,19 @@
 </a>
 
 <br/><br/>
-<a href="pholar://goCamera?version=1">
+<a href="pholar://goCamera?version=1" onclick="appTimer">
   <button>앱 카메라 열기</button>
 </a>
 <br/><br/>
 <a href="market://details?id=com.naver.android.pholar">
   <button>안드로이드 앱 설치</button>
 </a>
+<script>
+  function appTimer() {
+    var timer = setTimeout(function(){
+      window.open("market://details?id=com.naver.android.pholar");
+    }, 1000);
+  }
+</script>
 </body>
 </html>
