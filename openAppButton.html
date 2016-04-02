@@ -35,7 +35,7 @@
   }
 </script>
 <script>
-    document.on('click', '[data-app-launcher]', function($e) {
+    $(body).on('click', '[data-app-launcher]', function($e) {
 			nhn.mobile.launchApp($e.currentTarget);
 		});
   </script>
