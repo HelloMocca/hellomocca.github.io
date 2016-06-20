@@ -40,20 +40,42 @@
         canvas.height = window.innerHeight;
         
         var cooling = canvas.width*.1;
+        var totalNodeCount = 0;
         
-        init = function() {
-           for (var i = 0; i < 10; i++) {
-               nodes.push(new function() {
-                  this.name = "node"+i;
-                  this.x = i*20;
-                  this.y = 10;
-                  this.dx = 0;
-                  this.dy = 0;
-                  this.posX = i*20;
-                  this.posY = 10;
-                  this.r = 2;
-               });
-            }
+        init = function(query) {
+           var currTagEdge;
+           nodes.push(new function() {
+              this.name = query;
+              this.x = canvas.width/2;
+              this.y = canvas.height/2;
+              this.dx = 0;
+              this.dy = 0;
+              this.posX = i*20;
+              this.posY = 10;
+              this.r = 2;
+           });
+           for (var i = 0; i < taginfo.length; i++) {
+              currTagEdge = taginfo[i];
+              if (currTagEdge[0] == query) {
+                 totalNodeCount++;
+                 nodes.push(new function() {
+                    this.name = currTagEdge[1];
+                    this.x = i*20;
+                    this.y = 10;
+                    this.dx = 0;
+                    this.dy = 0;
+                    this.posX = i*20;
+                    this.posY = 10;
+                    this.r = 2;
+                 });
+                 
+                 edges.push({
+                    origin: 0,
+                    target: totalNodeCount
+                 });
+                 
+              }
+           }
             update();
         }
         
@@ -143,7 +165,7 @@
             window.requestAFrame(update);
         };
         
-        init();
+        init("트와이스");
 
 </script>
 </body>
