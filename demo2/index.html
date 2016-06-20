@@ -180,17 +180,17 @@
               }
             }
             
-            //Central
-            for (i = 0; i < nodes.length; i++) {
-              node = nodes[i];
-              ex = canvas.width/2 - node.x;
-              ey = canvas.height/2 - node.y;
-              er = Math.sqrt(ex*ex + ey*ey);
-              if(er === 0) er = 0.0001;
-              fa = aForce(er);
-              node.dx += ex/er*fa;
-              node.dy += ey/er*fa;
-            }
+            // //Central
+            // for (i = 0; i < nodes.length; i++) {
+            //  node = nodes[i];
+            //  ex = canvas.width/2 - node.x;
+            //  ey = canvas.height/2 - node.y;
+            //  er = Math.sqrt(ex*ex + ey*ey);
+            //  if(er === 0) er = 0.0001;
+            //  fa = aForce(er);
+            //  node.dx += ex/er*fa;
+            //  node.dy += ey/er*fa;
+            // }
             
             //apply
             for (i = 0; i < nodes.length; i++) {
