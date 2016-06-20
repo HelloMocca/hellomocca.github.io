@@ -191,12 +191,18 @@
               node.dx += ex/er*fa;
               node.dy += ey/er*fa;
             }
+            
             //apply
             for (i = 0; i < nodes.length; i++) {
               er = Math.sqrt(nodes[i].dx * nodes[i].dx + nodes[i].dy * nodes[i].dy);
               nodes[i].x += nodes[i].dx / er * Math.min(er, cooling);
               nodes[i].y += nodes[i].dy / er * Math.min(er, cooling);
             }
+            
+            //base node to center
+            nodes[0].x = canvas.width/2;
+            nodes[0].y = canvas.height/2;
+            
             cooling = cooling *.95;
             draw();
             window.requestAFrame(update);
