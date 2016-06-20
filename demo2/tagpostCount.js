@@ -1,4 +1,4 @@
-var tagpostCount = [[“bape",101],
+var tagpostCount = [["bape",101],
 ["brazil",101],
 ["case",101],
 ["dot",101],
