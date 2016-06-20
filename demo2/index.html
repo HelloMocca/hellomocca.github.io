@@ -115,7 +115,7 @@
             }
             context.fillStyle = "#5d5d5d";
             for (i = 0; i < nodes.length; i++) {
-               context.fillText(nodes[i].name,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*2);
+               context.fillText(nodes[i].name,nodes[i].posX+nodes[i].r, nodes[i].posY+nodes[i].r);
             }
         };
         update = function() {
