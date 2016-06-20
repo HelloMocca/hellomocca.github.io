@@ -49,8 +49,8 @@
            for (var i = 0; i < tagpostCount.length; i++) {
               if (tagpostCount[i][0] == query) {
                  var r = Math.floor(tagpostCount[i][1] / 100);
-                 if (r > 250) r = 250;
-                 return  r > 2 ? r : 2;
+                 if (r > 100) r = 100;
+                 return  r > 20 ? r : 20;
               }
            }
            console.log("해당 노드의 포스트카운트 정보를 찾을 수 없습니다.: "+query);
