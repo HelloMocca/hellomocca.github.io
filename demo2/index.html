@@ -117,6 +117,7 @@
             }
             context.fillStyle = "#5d5d5d";
             for (i = 0; i < nodes.length; i++) {
+               context.font = nodes[i].r+"px sans-serif";
                context.fillText(nodes[i].name,nodes[i].posX, nodes[i].posY);
             }
         };
