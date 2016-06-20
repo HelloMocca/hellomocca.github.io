@@ -93,6 +93,7 @@
         draw = function() {
             context.strokeStyle = "#F6F6F6";
             context.fillStyle = "#4BADB3";
+            context.lineWidth = .2;
             context.globalAlpha = 0.8;
             for (i = 0; i < nodes.length; i++) {
               nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
@@ -100,10 +101,10 @@
               context.beginPath();
               context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
               context.closePath();
+              context.stroke();
               context.fill();
             }
-            context.globalAlpha = 0.5;
-            context.lineWidth = .2;
+            context.globalAlpha = 1;
             for (i = 0; i < edges.length; i++) {
               nd1 = nodes[edges[i].origin];
               nd2 = nodes[edges[i].target];
