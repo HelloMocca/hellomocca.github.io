@@ -101,7 +101,7 @@
               nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
               nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
               context.beginPath();
-              context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
+              context.arc(nodes[i].posX + moveOffsetX + transitOffsetX, nodes[i].posY + moveOffsetY + transitOffsetY, nodes[i].r,0,Math.PI*2,false);
               context.closePath();
               context.stroke();
               context.fill();
@@ -111,15 +111,15 @@
               nd1 = nodes[edges[i].origin];
               nd2 = nodes[edges[i].target];
               context.beginPath();
-              context.moveTo(nd1.posX, nd1.posY);
-              context.lineTo(nd2.posX, nd2.posY);
+              context.moveTo(nd1.posX + moveOffsetX + transitOffsetX, nd1.posY + moveOffsetY + transitOffsetY);
+              context.lineTo(nd2.posX + moveOffsetX + transitOffsetX, nd2.posY + moveOffsetY + transitOffsetY);
               context.closePath();
               context.stroke();
             }
             context.fillStyle = "#5d5d5d";
             for (i = 0; i < nodes.length; i++) {
                context.font = nodes[i].r+"px sans-serif";
-               context.fillText(nodes[i].name,nodes[i].posX, nodes[i].posY);
+               context.fillText(nodes[i].name,nodes[i].posX + moveOffsetX + transitOffsetX, nodes[i].posY + moveOffsetY + transitOffsetY);
             }
         };
         update = function() {
@@ -217,6 +217,41 @@
            }
            return q;
         }
+        
+        var mDown = false;
+        var dragging = false;
+        var moveOffsetX = 0;
+        var moveOffsetY = 0;
+        var transitOffsetX = 0;
+        var transitOffsetY = 0;
+        document.addEventListener('mousedown', function(e){
+                    mDown = true;
+                    beginOffsetX = e.offsetX;
+                    beginOffsetY = e.offsetY;
+                },
+        false);
+        document.addEventListener('mousemove', function(e){
+                   if (mDown) {
+                       dragging = true;
+                       moveOffsetX = e.offsetX - beginOffsetX;
+                       moveOffsetY = e.offsetY - beginOffsetY;
+                       draw();
+                   }
+                },
+        false);
+        document.addEventListener('mouseup', function(e){
+                    if(dragging){
+                      mDown = false;
+                      dragging = false;
+                        transitOffsetX += moveOffsetX;
+                        transitOffsetY += moveOffsetY;
+                        moveOffsetX = 0;
+                        moveOffsetY = 0;
+                    } else {
+                        mDown = false;
+                    }
+                },
+        false);
 
 </script>
 </body>
