@@ -125,28 +125,7 @@
               nodes[i].dx = 0;
               nodes[i].dy = 0;
             }
-            //repulsive
-            for (i = 0; i < nodes.length-1; i++) {
-              nd1 = nodes[i];
-              for (r = i+1; r < nodes.length; r++){
-                nd2 = nodes[r];
-                ex = nd1.x - nd2.x;
-                ey = nd1.y - nd2.y;
-                er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
-                if(er === 0) er = 0.0001;
-                fr = rForce(er);
-                nd1.dx += ex/er*fr;
-                nd1.dy += ey/er*fr;
-                nd2.dx -= ex/er*fr;
-                nd2.dy -= ey/er*fr;
-                if (er < (nd1.r + nd2.r)+20) {
-                   nd1.dx += ex/er*fr;
-                   nd1.dy += ey/er*fr;
-                   nd2.dx -= ex/er*fr;
-                   nd2.dy -= ey/er*fr;
-                }
-              }
-            }
+            
             //attractive
             for(i = 0; i < edges.length; i++) {
               nd1 = nodes[edges[i].origin];
@@ -161,6 +140,34 @@
               nd2.dx += ex/er*fa;
               nd2.dy += ey/er*fa;
             }
+            
+            //repulsive
+            for (i = 0; i < nodes.length-1; i++) {
+              nd1 = nodes[i];
+              for (r = i+1; r < nodes.length; r++){
+                nd2 = nodes[r];
+                ex = nd1.x - nd2.x;
+                ey = nd1.y - nd2.y;
+                er = Math.sqrt(ex*ex + ey*ey); //euclidean distance
+                if(er === 0) er = 0.0001;
+                var erw = er - ((nd1.r+5) + (nd2.r+5));
+                if (erw < 0) {
+                   fr = rForce(er/(nd1.r+nd2.r));
+                   nd1.dx += ex/er*fr;
+                   nd1.dy += ey/er*fr;
+                   nd2.dx -= ex/er*fr;
+                   nd2.dy -= ey/er*fr;
+                }
+                if (er < d) {
+                   fr = rForce(er);
+                   nd1.dx += ex/er*fr;
+                   nd1.dy += ey/er*fr;
+                   nd2.dx -= ex/er*fr;
+                   nd2.dy -= ey/er*fr;
+                }
+              }
+            }
+            
             //Central
             for (i = 0; i < nodes.length; i++) {
               node = nodes[i];
