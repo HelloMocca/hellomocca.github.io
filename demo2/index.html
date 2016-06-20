@@ -23,6 +23,7 @@
   var edges = [];
         var canvas = document.querySelector("canvas");
         var context = canvas.getContext("2d");
+        context.lineWidth = .2;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
@@ -41,6 +42,12 @@
               this.posY = this.y;
               this.r = 2;
            });
+           addRelatedNodes(query, 0, 0);
+           update();
+        }
+        
+        function addRelatedNodes(query, originNodeNum, depth) {
+           if (depth > 2) return;
            for (var i = 0; i < taginfo.length; i++) {
               currTagEdge = taginfo[i];
               if (currTagEdge[0] == query) {
@@ -55,15 +62,13 @@
                     this.posY = 10;
                     this.r = 2;
                  });
-                 
                  edges.push({
-                    origin: 0,
+                    origin: originNodeNum,
                     target: totalNodeCount
                  });
-                 
+                 addRelatedNodes(currTagEdge[1], currNodeCount, depth+1);
               }
            }
-            update();
         }
         
         draw = function() {
