@@ -38,19 +38,25 @@
         var context = canvas.getContext("2d");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        for (var i = 0; i < 10; i++) {
-          nodes.push(new function() {
-            this.name = "node"+i;
-            this.x = i*20;
-            this.y = 10;
-            this.dx = 0;
-            this.dy = 0;
-            this.posX = i*20;
-            this.posY = 10;
-            this.r = 2;
-          });
-        }
+        
         var cooling = canvas.width*.1;
+        
+        init = function() {
+           for (var i = 0; i < 10; i++) {
+               nodes.push(new function() {
+                  this.name = "node"+i;
+                  this.x = i*20;
+                  this.y = 10;
+                  this.dx = 0;
+                  this.dy = 0;
+                  this.posX = i*20;
+                  this.posY = 10;
+                  this.r = 2;
+               });
+            }
+            update();
+        }
+        
         draw = function() {
             for (i = 0; i < nodes.length; i++) {
               nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
@@ -136,7 +142,8 @@
             draw();
             window.requestAFrame(update);
         };
-        update();
+        
+        init();
 
 </script>
 </body>
