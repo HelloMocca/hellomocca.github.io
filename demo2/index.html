@@ -23,7 +23,6 @@
   var edges = [];
         var canvas = document.querySelector("canvas");
         var context = canvas.getContext("2d");
-        context.lineWidth = .2;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
@@ -89,6 +88,7 @@
               context.closePath();
               context.fill();
             }
+            context.lineWidth = .2;
             for (i = 0; i < edges.length; i++) {
               nd1 = nodes[edges[i].origin];
               nd2 = nodes[edges[i].target];
