@@ -51,7 +51,7 @@
            for (var i = 0; i < taginfo.length; i++) {
               currTagEdge = taginfo[i];
               if (currTagEdge[0] == query) {
-                 if (isExistNode(currTagEdge[0])) continue;
+                 if (isExistNode(currTagEdge[1])) continue;
                  totalNodeCount++;
                  nodes.push(new function() {
                     this.name = currTagEdge[1];
