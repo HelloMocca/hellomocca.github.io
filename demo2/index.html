@@ -49,7 +49,7 @@
            for (var i = 0; i < tagpostCount.length; i++) {
               if (tagpostCount[i][0] == query) {
                  var r = Math.floor(tagpostCount[i][1] / 100);
-                 if (r > 500) r = 500;
+                 if (r > 250) r = 250;
                  return  r > 2 ? r : 2;
               }
            }
@@ -139,6 +139,12 @@
                 nd1.dy += ey/er*fr;
                 nd2.dx -= ex/er*fr;
                 nd2.dy -= ey/er*fr;
+                if (er < (nd1.r + nd2.r)+20) {
+                   nd1.dx += ex/er*fr;
+                   nd1.dy += ey/er*fr;
+                   nd2.dx -= ex/er*fr;
+                   nd2.dy -= ey/er*fr;
+                }
               }
             }
             //attractive
