@@ -127,6 +127,7 @@
         }
         
         draw = function() {
+           context.clearRect(0,0,canvas.width, canvas.height);
             context.textAlign = "center";
             context.strokeStyle = "#F6F6F6";
             context.fillStyle = "#4BADB3";
@@ -159,7 +160,6 @@
         };
         update = function() {
             if(cooling < 0.0001) return;
-            context.clearRect(0,0,canvas.width, canvas.height);
             var nd1, nd2;
             var i,r;
             //var k = Math.sqrt(canvas.width*canvas.height/nodes.length);
