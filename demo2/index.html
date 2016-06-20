@@ -39,10 +39,20 @@
               this.dy = 0;
               this.posX = this.x;
               this.posY = this.y;
-              this.r = 2;
+              this.r = getNodeRadius(query);
            });
            addRelatedNodes(query, 0, 0);
            update();
+        }
+        
+        function getNodeRadius(query) {
+           for (var i = 0; i < tagpostCount.length; i++) {
+              if (tagpostCount[i][0] == query) {
+                 return tagpostCount[i][1];
+              }
+           }
+           console.log("해당 노드의 포스트카운트 정보를 찾을 수 없습니다.: "+query);
+           return 2;
         }
         
         function addRelatedNodes(query, originNodeNum, depth) {
