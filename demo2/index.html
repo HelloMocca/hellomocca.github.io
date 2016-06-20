@@ -51,6 +51,7 @@
            for (var i = 0; i < taginfo.length; i++) {
               currTagEdge = taginfo[i];
               if (currTagEdge[0] == query) {
+                 if (isExistNode(currTagEdge[0])) continue;
                  totalNodeCount++;
                  nodes.push(new function() {
                     this.name = currTagEdge[1];
@@ -69,6 +70,13 @@
                  addRelatedNodes(currTagEdge[1], totalNodeCount, depth+1);
               }
            }
+        }
+        
+        function isExistNode(name) {
+           for (var i = 0; i < nodes.length; i++) {
+              if (nodes.name == name) return true;
+           }
+           return false;
         }
         
         draw = function() {
