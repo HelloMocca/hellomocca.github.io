@@ -70,7 +70,7 @@
                     this.dy = 0;
                     this.posX = totalNodeCount*20;
                     this.posY = 10;
-                    this.r = 2;
+                    this.r = getNodeRadius(this.name);
                  });
                  edges.push({
                     origin: originNodeNum,
