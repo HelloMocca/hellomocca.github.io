@@ -21,6 +21,13 @@
 <script type="text/javascript">
   var nodes = [];
   var edges = [];
+  var mDown = false;
+        var dragging = false;
+        var moveOffsetX = 0;
+        var moveOffsetY = 0;
+        var transitOffsetX = 0;
+        var transitOffsetY = 0;
+        
         var canvas = document.querySelector("canvas");
         var context = canvas.getContext("2d");
         context.textAlign = "center";
@@ -43,6 +50,34 @@
               this.r = getNodeRadius(query);
            });
            addRelatedNodes(query, 0, 0);
+           document.addEventListener('mousedown', function(e){
+                    mDown = true;
+                    beginOffsetX = e.offsetX;
+                    beginOffsetY = e.offsetY;
+                },
+        false);
+        document.addEventListener('mousemove', function(e){
+                   if (mDown) {
+                       dragging = true;
+                       moveOffsetX = e.offsetX - beginOffsetX;
+                       moveOffsetY = e.offsetY - beginOffsetY;
+                       draw();
+                   }
+                },
+        false);
+        document.addEventListener('mouseup', function(e){
+                    if(dragging){
+                      mDown = false;
+                      dragging = false;
+                        transitOffsetX += moveOffsetX;
+                        transitOffsetY += moveOffsetY;
+                        moveOffsetX = 0;
+                        moveOffsetY = 0;
+                    } else {
+                        mDown = false;
+                    }
+                },
+        false);
            update();
         }
         
@@ -218,40 +253,6 @@
            return q;
         }
         
-        var mDown = false;
-        var dragging = false;
-        var moveOffsetX = 0;
-        var moveOffsetY = 0;
-        var transitOffsetX = 0;
-        var transitOffsetY = 0;
-        document.addEventListener('mousedown', function(e){
-                    mDown = true;
-                    beginOffsetX = e.offsetX;
-                    beginOffsetY = e.offsetY;
-                },
-        false);
-        document.addEventListener('mousemove', function(e){
-                   if (mDown) {
-                       dragging = true;
-                       moveOffsetX = e.offsetX - beginOffsetX;
-                       moveOffsetY = e.offsetY - beginOffsetY;
-                       draw();
-                   }
-                },
-        false);
-        document.addEventListener('mouseup', function(e){
-                    if(dragging){
-                      mDown = false;
-                      dragging = false;
-                        transitOffsetX += moveOffsetX;
-                        transitOffsetY += moveOffsetY;
-                        moveOffsetX = 0;
-                        moveOffsetY = 0;
-                    } else {
-                        mDown = false;
-                    }
-                },
-        false);
 
 </script>
 </body>
