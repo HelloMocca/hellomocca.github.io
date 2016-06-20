@@ -91,15 +91,18 @@
         }
         
         draw = function() {
+            context.strokeStyle = "#F6F6F6";
+            context.fillStyle = "#4BADB3";
+            context.globalAlpha = 0.8;
             for (i = 0; i < nodes.length; i++) {
               nodes[i].posX += (nodes[i].x - nodes[i].posX) / 25;
               nodes[i].posY += (nodes[i].y - nodes[i].posY) / 25;
               context.beginPath();
               context.arc(nodes[i].posX,nodes[i].posY,nodes[i].r,0,Math.PI*2,false);
-              context.fillText(nodes[i].name,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*2);
               context.closePath();
               context.fill();
             }
+            context.globalAlpha = 0.5;
             context.lineWidth = .2;
             for (i = 0; i < edges.length; i++) {
               nd1 = nodes[edges[i].origin];
@@ -109,6 +112,10 @@
               context.lineTo(nd2.posX, nd2.posY);
               context.closePath();
               context.stroke();
+            }
+            context.fillStyle = "#5d5d5d";
+            for (i = 0; i < nodes.length; i++) {
+               context.fillText(nodes[i].name,nodes[i].posX - nodes[i].r, nodes[i].posY+nodes[i].r*2);
             }
         };
         update = function() {
