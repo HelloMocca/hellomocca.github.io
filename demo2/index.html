@@ -200,7 +200,15 @@
             window.requestAFrame(update);
         };
         
-        init("트와이스");
+        init(getSearchQuery());
+        
+        function getSearchQuery() {
+           var q = decodeURIComponent(window.location.search).split("q=")[1];
+           if (q == undefined || q == '') {
+              q = "폴라";
+           }
+           return q;
+        }
 
 </script>
 </body>
