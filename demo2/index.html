@@ -48,7 +48,8 @@
         function getNodeRadius(query) {
            for (var i = 0; i < tagpostCount.length; i++) {
               if (tagpostCount[i][0] == query) {
-                 var r = Math.floor(tagpostCount[i][1] / 1000);
+                 var r = Math.floor(tagpostCount[i][1] / 100);
+                 if (r > 500) r = 500;
                  return  r > 2 ? r : 2;
               }
            }
