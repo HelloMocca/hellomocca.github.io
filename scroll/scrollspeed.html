@@ -51,7 +51,7 @@ body {
       if (currDelta > 60) currDelta = 60;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       
-      if (currDelta <= 1) {
+      if (currDelta <= 30) {
         panel.style.background="red";
       } else if (currDelta < 60) {
         panel.style.background="yellow";
