@@ -29,6 +29,7 @@ body {
     function stopScroll() {
       lastY = currY;
       currDelta = Math.abs(currY - lastY);
+      if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       lastDelta = currDelta;
       clearTimeout(scrollTimer);
@@ -36,9 +37,8 @@ body {
     
     function checkScrollSpeed() {
       currY = window.scrollY;
-      if (currY > 45) curr = 45;
-      if (currY < -45) curr = -45;
       currDelta = Math.abs(currY - lastY);
+      if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       lastDelta = currDelta;
       
