@@ -20,21 +20,25 @@ body {
   <script>
     var currY = 0;
     var lastY = 0;
-    var delta = 0;
+    
+    var currDelta = 0;
+    var lastDelta = 0;
     var scrollTimer = null;
     var panel = document.querySelector('.speed-checker');
     
     function stopScroll() {
       lastY = currY;
-      delta = Math.abs(currY - lastY);
-      panel.innerHTML = delta;
+      currDelta = Math.abs(currY - lastY);
+      panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
+      lastDelta = currDelta;
       clearTimeout(scrollTimer);
     }
     
     function checkScrollSpeed() {
       currY = window.scrollY;
-      delta = Math.abs(currY - lastY);
-      panel.innerHTML = delta;
+      currDelta = Math.abs(currY - lastY);
+      panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
+      lastDelta = currDelta;
       
       lastY = currY;
       
