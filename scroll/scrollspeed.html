@@ -28,10 +28,11 @@ body {
     var fireTimer = null;
     
     function load() {
-      console.log('load');
+      //console.log('load');
     }
     
     function stopScroll() {
+      console.log('stop');
       lastY = currY;
       currDelta = Math.abs(currY - lastY);
       if (currDelta > 45) currDelta = 45;
