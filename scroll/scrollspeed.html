@@ -41,6 +41,11 @@ body {
       if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       lastDelta = currDelta;
+      if (currDelta - lastDelta < 0) {
+        panel.style.backgroundColor="red";
+      } else {
+        panel.style.backgroundColor="green";
+      }
       
       lastY = currY;
       
