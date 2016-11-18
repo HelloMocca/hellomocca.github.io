@@ -38,7 +38,7 @@ body {
       if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       
-      if (fireTimer != null) {
+      if (fireTimer == null) {
         fireTimer = setTimeout(load, 30);
       }
       lastDelta = currDelta;
@@ -55,8 +55,9 @@ body {
         panel.style.background="red";
       } else if (currDelta < 45) {
         panel.style.background="yellow";
-        fireTimer && clearTimeout(fireTimer);
-        fireTimer = setTimeout(load, 30);
+        if (fireTimer == null) {
+          fireTimer = setTimeout(load, 30);
+        }
       } else {
         panel.style.background="green";
         clearTimeout(fireTimer);
