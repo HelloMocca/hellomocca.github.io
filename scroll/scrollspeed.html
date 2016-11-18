@@ -32,7 +32,7 @@ body {
       if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       
-      if (currDelta < 1) {
+      if (currDelta <= 1) {
         panel.style.background="red";
       } else if (currDelta < 10) {
         panel.style.background="yellow";
@@ -51,7 +51,7 @@ body {
       if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       
-      if (currDelta < 1) {
+      if (currDelta <= 1) {
         panel.style.background="red";
       } else if (currDelta < 10) {
         panel.style.background="yellow";
