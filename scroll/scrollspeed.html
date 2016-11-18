@@ -60,7 +60,8 @@ body {
         }
       } else {
         panel.style.background="green";
-        clearTimeout(fireTimer);
+        fireTimer && clearTimeout(fireTimer);
+        fireTimer = setTimeout(load, 30);
       }
       
       
