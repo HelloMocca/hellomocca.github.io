@@ -26,14 +26,14 @@ body {
     
     function stopScroll() {
       lastY = currY;
-      delta = currY - lastY;
+      delta = Math.abs(currY - lastY);
       panel.innerHTML = delta;
       clearTimeout(scrollTimer);
     }
     
     function checkScrollSpeed() {
       currY = window.scrollY;
-      delta = currY - lastY;
+      delta = Math.abs(currY - lastY);
       panel.innerHTML = delta;
       
       lastY = currY;
