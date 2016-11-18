@@ -40,13 +40,13 @@ body {
       currDelta = Math.abs(currY - lastY);
       if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
-      lastDelta = currDelta;
-      if ((currDelta - lastDelta) <= -10) {
-        panel.style.backgroundColor="red";
-      } else {
-        panel.style.backgroundColor="green";
+      
+      if (currDelta < 5 && currDelta > 4) {
+        panel.style.background="red";
       }
       
+      
+      lastDelta = currDelta;
       lastY = currY;
       
       scrollTimer = setTimeout(stopScroll, 250);
