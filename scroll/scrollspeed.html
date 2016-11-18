@@ -26,6 +26,8 @@ body {
       currY = window.scrollY;
       delta = currY - lastY;
       panel.innerHTML = delta;
+      
+      lastY = currY;
     }
     
     
