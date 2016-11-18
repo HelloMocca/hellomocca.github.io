@@ -52,8 +52,6 @@ body {
       
       if (currDelta <= 1) {
         panel.style.background="red";
-        fireTimer && clearTimeout(fireTimer);
-        fireTimer = setTimeout(load, 30);
       } else if (currDelta < 10) {
         panel.style.background="yellow";
         fireTimer && clearTimeout(fireTimer);
