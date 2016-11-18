@@ -17,5 +17,19 @@ body {
 </head>
 <body>
 <div class="speed-checker">0</div>
+  <script>
+    var currY = 0;
+    var lastY = 0;
+    var delta = 0;
+    var panel = document.querySelector('.speed-checker');
+    function checkScrollSpeed() {
+      currY = window.scrollY;
+      delta = currY - lastY;
+      panel.innerHTML(delta);
+    }
+    
+    
+    window.onscroll = checkScrollSpeed;
+  </script>
 </body>
 </html>
