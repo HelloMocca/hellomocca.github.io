@@ -25,6 +25,11 @@ body {
     var lastDelta = 0;
     var scrollTimer = null;
     var panel = document.querySelector('.speed-checker');
+    var fireTimer = null;
+    
+    function load() {
+      console.log('load');
+    }
     
     function stopScroll() {
       lastY = currY;
@@ -38,10 +43,11 @@ body {
         panel.style.background="red";
       } else if (currDelta < 10) {
         panel.style.background="yellow";
+        fireTimer = setTimeout(load, 250);
       } else {
         panel.style.background="green";
+        clearTimeout(fireTimer);
       }
-      
       
       lastDelta = currDelta;
       clearTimeout(scrollTimer);
@@ -53,27 +59,22 @@ body {
       if (currDelta > 45) currDelta = 45;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       
-      if ((currDelta - lastDelta) > 0) {
-        panel.style.background="green";
-      } else {
+      if (currDelta <= 1) {
         panel.style.background="red";
+      } else if (currDelta < 10) {
+        panel.style.background="yellow";
+        fireTimer = setTimeout(load, 250);
+      } else {
+        panel.style.background="green";
+        clearTimeout(fireTimer);
       }
-      
-      
-//       else if (currDelta <= 1) {
-//         panel.style.background="red";
-//       } else if (currDelta < 10) {
-//         panel.style.background="yellow";
-//       } else {
-//         panel.style.background="green";
-//       }
       
       
       
       lastDelta = currDelta;
       lastY = currY;
       
-      scrollTimer = setTimeout(stopScroll, 2000);
+      scrollTimer = setTimeout(stopScroll, 250);
     }
     
     window.onscroll = checkScrollSpeed;
