@@ -21,17 +21,28 @@ body {
     var currY = 0;
     var lastY = 0;
     var delta = 0;
+    var scrollTimer = null;
     var panel = document.querySelector('.speed-checker');
+    
+    function stopScroll() {
+      lastY = currY;
+      delta = currY - lastY;
+      panel.innerHTML = delta;
+      clearTimeout(scrollTimer);
+    }
+    
     function checkScrollSpeed() {
       currY = window.scrollY;
       delta = currY - lastY;
       panel.innerHTML = delta;
       
       lastY = currY;
+      
+      scrollTimer = setTimeout(stopScroll, 30);
     }
     
-    
     window.onscroll = checkScrollSpeed;
+    
   </script>
 </body>
 </html>
