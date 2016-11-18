@@ -48,12 +48,12 @@ body {
     function checkScrollSpeed() {
       currY = window.scrollY;
       currDelta = Math.abs(currY - lastY);
-      if (currDelta > 45) currDelta = 45;
+      if (currDelta > 60) currDelta = 60;
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       
       if (currDelta <= 1) {
         panel.style.background="red";
-      } else if (currDelta < 45) {
+      } else if (currDelta < 60) {
         panel.style.background="yellow";
       } else {
         panel.style.background="green";
