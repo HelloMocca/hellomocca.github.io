@@ -68,7 +68,7 @@ body {
       
       lastDelta = currDelta;
       lastY = currY;
-      
+      scrollTimer && clearTimeout(scrollTimer);
       scrollTimer = setTimeout(stopScroll, 250);
     }
     
