@@ -36,6 +36,8 @@ body {
     
     function checkScrollSpeed() {
       currY = window.scrollY;
+      if (currY > 45) curr = 45;
+      if (currY < -45) curr = -45;
       currDelta = Math.abs(currY - lastY);
       panel.innerHTML = currDelta+"|"+(currDelta - lastDelta);
       lastDelta = currDelta;
