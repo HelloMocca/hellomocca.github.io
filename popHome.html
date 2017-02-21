@@ -10,7 +10,7 @@
     var MARKET = "market://details?id=com.linecorp.LGRGS";
     var ITUNES = "https://itunes.apple.com/jp/app/id767265270";
     var PC = "http://line.me";
-    var ANDROID_INTENT_URI = "intent://com.linecorp.LGRGS/#Intent;scheme=com.linecorp.LGRGS;package=com.linecorp.LGRGS;end;";
+    var ANDROID_INTENT_URI = "intent://goHome?version=1#Intent;scheme=pholar;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.naver.android.pholar;end;";
 
     function getIframe(){
         var iframe = document.createElement("iframe");
@@ -33,7 +33,7 @@
                 setTimeout(function() {
                     if (!document.webkitHidden)
                     // window.location = MARKET;
-                        window.location = "https://play.google.com/store/apps/details?id=com.linecorp.LGRGS";
+                        window.location = "https://play.google.com/store/apps/details?id=com.naver.android.pholar";
                 }, 1000);
 
                 // window.location = ANDROID_URL;
