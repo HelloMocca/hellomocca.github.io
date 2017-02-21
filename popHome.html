@@ -5,11 +5,11 @@
 </head>
 <body>
 <script type="text/javascript">
-    var URL = "line3rdp.com.linecorp.LGRGS://";
-    var ANDROID_URL = "com.linecorp.LGRGS://";
-    var MARKET = "market://details?id=com.linecorp.LGRGS";
-    var ITUNES = "https://itunes.apple.com/jp/app/id767265270";
-    var PC = "http://line.me";
+    var URL = "pholar://";
+    var ANDROID_URL = "com.naver.android.pholar://";
+    var MARKET = "market://details?id=com.naver.android.pholar";
+    var ITUNES = "https://itunes.apple.com/app/id981379926";
+    var PC = "http://campaign.navercorp.com/allnewpholar/";
     var ANDROID_INTENT_URI = "intent://goHome?version=1#Intent;scheme=pholar;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.naver.android.pholar;end;";
 
     function getIframe(){
@@ -82,11 +82,6 @@
     }
 
     launchOrInstall();
-
-    setTimeout(function() {
-        //window.history.go(-1);
-        window.location = PC;
-    }, 3000);
 </script>
 </body>
 </html>
