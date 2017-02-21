@@ -1,13 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Line Rangers</title>
 </head>
 <body>
-<script>
-    window.location = 'intent://goHome?version=1#Intent;scheme=pholar;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end';
-   
+<script type="text/javascript">
+    var URL = "line3rdp.com.linecorp.LGRGS://";
+    var ANDROID_URL = "com.linecorp.LGRGS://";
+    var MARKET = "market://details?id=com.linecorp.LGRGS";
+    var ITUNES = "https://itunes.apple.com/jp/app/id767265270";
+    var PC = "http://line.me";
+    var ANDROID_INTENT_URI = "intent://com.linecorp.LGRGS/#Intent;scheme=com.linecorp.LGRGS;package=com.linecorp.LGRGS;end;";
+
+    function getIframe(){
+        var iframe = document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "1px";
+        iframe.style.height = "1px";
+        return iframe;
+
+    }
+
+    function launchOrInstall() {
+
+        var oDate = new Date();
+
+        if (navigator.userAgent.match(/Android/)) {
+
+            if (navigator.userAgent.match(/Chrome/)) {
+
+                // Jelly Bean with Chrome browser
+                setTimeout(function() {
+                    if (!document.webkitHidden)
+                    // window.location = MARKET;
+                        window.location = "https://play.google.com/store/apps/details?id=com.linecorp.LGRGS";
+                }, 1000);
+
+                // window.location = ANDROID_URL;
+                window.location = ANDROID_INTENT_URI;
+
+            } else {
+                // Older Android browser
+                var iframe1 = getIframe();
+                var t = setTimeout(function() {
+                    if (new Date() - oDate < 2000){
+                        var iframe2 = getIframe();
+                        iframe2.src = ANDROID_URL;
+                        document.body.appendChild(iframe2);
+                        document.body.removeChild(iframe2);
+                        iframe2 = null;
+                        var t2 = setTimeout(function() {
+                            if (new Date() - oDate < 2500){
+                                window.location = MARKET;
+                            }
+                        }, 500);
+                    }
+                }, 1000);
+
+                //iframe.onload = function () { clearTimeout(t) };
+                iframe1.src = ANDROID_INTENT_URI;
+                document.body.appendChild(iframe1);
+                document.body.removeChild(iframe1);
+                iframe1 = null;
+            }
+
+        } else if (navigator.userAgent.match(/iPhone|iPad|iPod/)) {
+
+            // IOS
+            setTimeout(function() {
+                if (!document.webkitHidden && new Date() - oDate < 2000)
+                    window.location = ITUNES;
+            }, 25);
+
+            window.location = URL;
+
+        } else {
+
+            // Not mobile
+            window.location = PC;
+        }
+    }
+
+    launchOrInstall();
+
+    setTimeout(function() {
+        //window.history.go(-1);
+        window.location = PC;
+    }, 3000);
 </script>
 </body>
 </html>
